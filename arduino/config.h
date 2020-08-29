@@ -1,5 +1,5 @@
 const char* ssid     = "No Molestar_5G";
-const char* password = "Carlosolrac306011";
+const char* password = "";
 const char* hostname = "ESP8266_1";
 
 IPAddress ip(192, 168, 150, 75);

@@ -7,12 +7,12 @@
             ],
             "includePath": [
                 "${workspaceRoot}",
-                "C:\\Users\\camog\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
-                "C:\\Users\\camog\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
+                "C:\\Users\\User\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
+                "C:\\Users\\User\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                "D:\\Documents\\Arduino\\hardware\\tools\\**",
-                "D:\\Documents\\Arduino\\libraries\\**"
+                "C:\\Users\\User\\Documents\\Arduino\\hardware\\tools\\**",
+                "C:\\Users\\User\\Documents\\Arduino\\libraries\\**"
             ],
             "forcedInclude": [],
             "intelliSenseMode": "clang-x64",
