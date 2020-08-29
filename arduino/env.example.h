@@ -1,3 +1,3 @@
-const char* ssid     = "ANONIMO";
-const char* password = "@ANONIMO1@";
+const char* ssid     = "";
+const char* password = "";
 const char* hostname = "ESP8266_1";
