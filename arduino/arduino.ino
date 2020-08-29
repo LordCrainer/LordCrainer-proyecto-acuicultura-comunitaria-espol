@@ -3,6 +3,7 @@
 #include <FS.h>
 #include <ArduinoJson.h>
 
+#include "env.h"
 #include "config.h"  // Sustituir con datos de vuestra red
 #include "API.hpp"
 #include "Server.hpp"
