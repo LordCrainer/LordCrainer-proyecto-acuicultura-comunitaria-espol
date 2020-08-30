@@ -1,14 +1,8 @@
 AsyncWebServer server(port);
 
+#include "../api/utils/api.utils.hpp"
 #include "../api/components/measurement/measurement.controller.hpp"
 
-void homeRequest(AsyncWebServerRequest *request) {
-  request->send(200, "text/plain", "Hello, world");
-}
-
-void notFound(AsyncWebServerRequest *request) {
-	request->send(404, "text/plain", "Not found");
-}
 
 void InitServer()
 {
