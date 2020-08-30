@@ -4,10 +4,11 @@
 #include <ArduinoJson.h>
 
 #include "env.h"
-#include "config.h"  // Sustituir con datos de vuestra red
-#include "API.hpp"
-#include "Server.hpp"
-#include "ESP8266_Utils.hpp"
+#include "configuration/wifi-config.h"  // Sustituir con datos de vuestra red
+#include "configuration/API.hpp"
+#include "configuration/Server.hpp"
+
+#include "api/utils/ESP8266_Utils.hpp"
 
 void setup() 
 {
