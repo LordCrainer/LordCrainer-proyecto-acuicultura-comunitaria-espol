@@ -1,5 +1,7 @@
 AsyncWebServer server(80);
 
+#include "../api/components/measurement/measurement.controller.hpp"
+
 void homeRequest(AsyncWebServerRequest *request) {
   request->send(200, "text/plain", "Hello, world");
 }

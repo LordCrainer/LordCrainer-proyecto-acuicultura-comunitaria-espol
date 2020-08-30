@@ -5,10 +5,7 @@
 
 #include "env.h"
 #include "configuration/wifi-config.h"  // Sustituir con datos de vuestra red
-#include "configuration/API.hpp"
 #include "configuration/Server.hpp"
-
-#include "api/utils/ESP8266_Utils.hpp"
 
 void setup() 
 {
