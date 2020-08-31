@@ -11,7 +11,7 @@ void setup()
 {
   Serial.begin(115200);
 
-  ConnectWiFi_STA();
+  ConnectWiFi_AP();
 
   InitServer();
 }
