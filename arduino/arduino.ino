@@ -1,25 +1,20 @@
-#include "sensor.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
 #include <Arduino.h>
+#include "env.h"
+#include "configuration/Server.hpp"
 
-
-
-
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   // Iniciamos la comunicación serie
-    
-    Serial.begin(9600);
-    setup_prog();
+
+  Serial.begin(115200);
+  setup_prog();
 }
 
-void loop() 
+void loop()
 {
-  
-    
+
   sensorTEMPE();
   resultadoPH();
   oxigenoD();
-  
 }

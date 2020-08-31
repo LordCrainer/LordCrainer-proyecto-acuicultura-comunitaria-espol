@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "sensor.variable.c"
 #include <OneWire.h>
 #include <DallasTemperature.h>
 // Definimos los pines para los sensores 
