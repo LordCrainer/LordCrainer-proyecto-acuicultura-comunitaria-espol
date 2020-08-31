@@ -1,4 +1,4 @@
-AsyncWebServer server(port);
+AsyncWebServer server(80);
 
 #include "../api/utils/api.utils.hpp"
 #include "../api/utils/json.utils.hpp"
