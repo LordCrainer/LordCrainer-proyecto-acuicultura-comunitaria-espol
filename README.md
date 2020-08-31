@@ -1,6 +1,6 @@
 PASOS PARA USAR EL PROGRAMA
 
-Para probar el archivo, existen algunos pasos previos y librerías que se deben de instalar
+NOTA: Para probar el proyecto, existen algunos pasos previos y librerías que se deben de instalar
 
 PASO 1)
 INSTALAR EL ESP8266 EN ARDUINO IDE
@@ -21,17 +21,17 @@ CARPETA: .vscode
     Cambiar las propiedades a las rutas de su sistema
         => Aplastar f1
         => En el recuadro escribir: Arduino
-        => Buscar el que dice: Examples
+        => Buscar el que dice: Arduino: Examples
         => Abrir cualquier Examples mostrado: blink.ino
-        => Copiar el archivo y pegar    
+        => Copiar el mismo archivo y pegar (c_cpp_properties.json)
 
 - ARCHIVO: arduino.json
     Si no está el siguiente comando, colocarlo: "output": "./build"
 
 CARPETA: Arduino
-=> Crear el archivo env.h
+=> Crear el archivo env.h (variables de entorno)
 => Copiar exactamente el archivo env.example.h
-=> Editar las información respectiva a la información que le piden
+=> Editar las variables de entorno acorde a su preferencia.
 
 
 LIBRERÍAS
