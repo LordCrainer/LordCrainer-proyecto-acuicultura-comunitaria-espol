@@ -1,12 +1,20 @@
+#include <ArduinoJson.h>
 
-string dinamicSerializeJson(int sizeDoc, const char *key)
+typedef void (*someFunction)(void);
+
+String toJsonDynamic(char *key, char *value, int sizeDoc = 1024)
 {
+    String json;
     DynamicJsonDocument doc(sizeDoc);
-    doc["sensor"] = "gps";
-
-    doc["time"] = 1351824120;
-    doc["data"][0] = 48.756080;
-    doc["data"][1] = 2.302038;
-
-    serializeJson(doc, Serial);
+    doc[key] = value;
+    serializeJson(doc, json);
+    return json;
+}
+String toJsonStatic(char *key, char *value, int sizeDoc = 256)
+{
+    String json;
+    StaticJsonDocument<sizeDoc> doc;
+    doc[key] = value;
+    serializeJson(doc, json);
+    return json;
 }
