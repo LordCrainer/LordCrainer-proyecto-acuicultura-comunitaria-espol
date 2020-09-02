@@ -1,8 +1,11 @@
 #include <ArduinoJson.h>
 
-typedef void (*someFunction)(void);
+// callFunction: Función como parámetro en otra función.
 
-String toJsonDynamic(char *key, char *value, int sizeDoc = 1024)
+typedef void (*callFunction)(void);
+
+// Convertir un 
+String objectToJsonDynamic(String key, String value, int sizeDoc = 1024)
 {
     String json;
     DynamicJsonDocument doc(sizeDoc);
@@ -10,11 +13,10 @@ String toJsonDynamic(char *key, char *value, int sizeDoc = 1024)
     serializeJson(doc, json);
     return json;
 }
-String toJsonStatic(char *key, char *value, int sizeDoc = 256)
+
+String JsonToTextDynamic(String json, int sizeDoc = 1024)
 {
-    String json;
-    StaticJsonDocument<sizeDoc> doc;
-    doc[key] = value;
-    serializeJson(doc, json);
+    DynamicJsonDocument doc(sizeDoc);
+    deserializeJson(doc, json);
     return json;
 }
