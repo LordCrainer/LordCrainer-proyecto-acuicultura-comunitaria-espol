@@ -4,9 +4,9 @@ const char* PARAM_FILTER = "filter";
 
 void getAll(AsyncWebServerRequest *request)
 {
-  String message = "Get All";
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+  String data = objectToJsonDynamic("message", "Hello World!");
+  Serial.println(data);
+  request->send(200, "application/json", json);
 }
 
 void getFiltered(AsyncWebServerRequest *request)

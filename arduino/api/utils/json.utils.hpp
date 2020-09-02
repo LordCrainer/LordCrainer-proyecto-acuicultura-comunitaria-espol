@@ -1,5 +1,3 @@
-#include <ArduinoJson.h>
-
 // callFunction: Función como parámetro en otra función.
 
 typedef void (*callFunction)(void);
