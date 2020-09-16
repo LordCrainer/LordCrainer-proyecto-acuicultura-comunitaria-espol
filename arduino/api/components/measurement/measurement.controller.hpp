@@ -6,7 +6,7 @@ void getAll(AsyncWebServerRequest *request)
 {
   String data = objectToJsonDynamic("message", "Hello World!");
   Serial.println(data);
-  request->send(200, "application/json", json);
+  request->send(200, "application/json", data);
 }
 
 void getFiltered(AsyncWebServerRequest *request)
