@@ -17,6 +17,7 @@ void InitServer()
 
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest);
+	server.on("/measurement", HTTP_DELETE, deleteRequest);
 	// ERROR
 	server.onNotFound(notFound);
 
