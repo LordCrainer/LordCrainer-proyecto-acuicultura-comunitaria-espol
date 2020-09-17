@@ -18,13 +18,15 @@ void getFiltered(AsyncWebServerRequest *request)
 
 void getById(AsyncWebServerRequest *request, String path)
 {
-  String data;
+  String data = testAllMeasurement();
   int id = GetIdFromURL(request, path);
+  
   if (id == 1)
     data = testPoolId1();
   if (id == 2)
     data = testPoolId2();
   // String message = String("Get by Id ") + id;
+  
   Serial.println(data);
   request->send(200, "application/json", data);
 }
