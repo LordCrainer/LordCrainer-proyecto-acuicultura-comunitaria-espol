@@ -13,7 +13,7 @@ void getFiltered(AsyncWebServerRequest *request)
 {
   String message = "Get filtered by " + request->getParam(PARAM_FILTER)->value();
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
 void getById(AsyncWebServerRequest *request, String path)
@@ -61,7 +61,7 @@ void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size
   String string_data = doc["data"];
   String message = "Create " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
 void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
@@ -80,7 +80,7 @@ void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, siz
   String string_data = doc["data"];
   String message = String("Update ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
 void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
@@ -99,14 +99,14 @@ void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_
   String string_data = doc["data"];
   String message = String("Replace ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
 void deleteRequest(AsyncWebServerRequest *request)
 {
   int id = GetIdFromURL(request, "/item/");
-
-  String message = String("Delete ") + id;
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+  String json;
+  json = objectToJsonDynamic("message", "DELETED" + id + "SUCESSFULLY ", 50);
+  Serial.println(json);
+  request->send(200, "application/json", json);
 }
