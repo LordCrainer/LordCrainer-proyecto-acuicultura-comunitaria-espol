@@ -106,7 +106,7 @@ void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_
 
 void deleteRequest(AsyncWebServerRequest *request)
 {
-  int id = GetIdFromURL(request, "/item/");
+  int id = GetIdFromURL(request, "/measurement/");
   String json;
   String message = String("DELETED ") + id + " SUCESSFULLY";
   json = objectToJsonDynamic("message", message, 50);
