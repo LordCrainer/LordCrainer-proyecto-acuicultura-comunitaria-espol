@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ESPAsyncWebServer.h>
 #include <FS.h>
+#define ARDUINOJSON_USE_LONG_LONG 1
 #include <ArduinoJson.h>
 
 #include "env.h" // Variable de entorno

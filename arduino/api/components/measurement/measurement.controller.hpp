@@ -16,25 +16,29 @@ void getFiltered(AsyncWebServerRequest *request)
   request->send(200, "text/plain", message);
 }
 
-void getById(AsyncWebServerRequest *request)
+void getById(AsyncWebServerRequest *request, String path)
 {
-  int id = GetIdFromURL(request, "/item/");
-
-  String message = String("Get by Id ") + id;
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+  String data;
+  int id = GetIdFromURL(request, path);
+  if (id == 1)
+    data = testPoolId1();
+  if (id == 2)
+    data = testPoolId2();
+  // String message = String("Get by Id ") + id;
+  Serial.println(data);
+  request->send(200, "application/json", data);
 }
 
 void getRequest(AsyncWebServerRequest *request)
 {
-
+  String path = "/measurement/";
   if (request->hasParam(PARAM_FILTER))
   {
     getFiltered(request);
   }
-  else if (request->url().indexOf("/item/") != -1)
+  else if (request->url().indexOf(path) != -1)
   {
-    getById(request);
+    getById(request, path);
   }
   else
   {
