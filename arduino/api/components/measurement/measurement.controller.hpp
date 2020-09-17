@@ -106,7 +106,10 @@ void deleteRequest(AsyncWebServerRequest *request)
 {
   int id = GetIdFromURL(request, "/item/");
   String json;
-  json = objectToJsonDynamic("message", "DELETED" + id + "SUCESSFULLY ", 50);
+  String message = "DELETED" + id + "SUCESSFULLY";
+  json = objectToJsonDynamic("message", message, 50);
+  doc["message"] = "DELETED" + id + "SUCESSFULLY ";
+  serializeJson(doc, json);
   Serial.println(json);
   request->send(200, "application/json", json);
 }
