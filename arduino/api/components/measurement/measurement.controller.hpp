@@ -20,13 +20,13 @@ void getById(AsyncWebServerRequest *request, String path)
 {
   String data = testAllMeasurement();
   int id = GetIdFromURL(request, path);
-  
+
   if (id == 1)
     data = testPoolId1();
   if (id == 2)
     data = testPoolId2();
   // String message = String("Get by Id ") + id;
-  
+
   Serial.println(data);
   request->send(200, "application/json", data);
 }
@@ -112,4 +112,15 @@ void deleteRequest(AsyncWebServerRequest *request)
   json = objectToJsonDynamic("message", message, 50);
   Serial.println(json);
   request->send(200, "application/json", json);
+}
+
+void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
+{
+  String json;
+  DynamicJsonDocument doc();
+  doc["url"] = request->url();
+  doc["host"] = request->host();
+  doc["method"] = request->method();
+  serializeJson(doc, json);
+  request->send(200, "application/json", json)
 }

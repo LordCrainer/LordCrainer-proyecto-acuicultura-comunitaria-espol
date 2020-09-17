@@ -14,6 +14,7 @@ void InitServer()
 	server.on("/item", HTTP_PUT, [](AsyncWebServerRequest * request){}, NULL, putRequest);
 	server.on("/item", HTTP_PATCH, [](AsyncWebServerRequest * request){}, NULL, patchRequest);
 	server.on("/item", HTTP_DELETE, deleteRequest);
+	server.on("/json", HTTP_GET, arduinoJsonCommonVariable);
 
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest);

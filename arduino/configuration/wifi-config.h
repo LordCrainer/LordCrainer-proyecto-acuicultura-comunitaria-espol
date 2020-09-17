@@ -1,5 +1,5 @@
-IPAddress ip(192, 168, 8, 75);
-IPAddress gateway(192, 168, 8, 1);
+IPAddress ip(192, 168, 1, 75);
+IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 void ConnectWiFi_STA(bool useStaticIP = false)

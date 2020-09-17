@@ -19,7 +19,7 @@ String JsonToTextDynamic(String json, int sizeDoc = 1024)
     return json;
 }
 
-String testAllMeasurement() 
+String testAllMeasurement()
 {
     String json;
     const size_t capacity = 4 * JSON_ARRAY_SIZE(3) + 9 * JSON_OBJECT_SIZE(3) + 3 * JSON_OBJECT_SIZE(4);
