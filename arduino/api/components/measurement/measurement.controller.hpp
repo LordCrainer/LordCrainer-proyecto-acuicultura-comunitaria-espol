@@ -122,5 +122,5 @@ void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
   doc["host"] = request->host();
   doc["method"] = request->method();
   serializeJson(doc, json);
-  request->send(200, "application/json", json)
+  request->send(200, "application/json", json);
 }
