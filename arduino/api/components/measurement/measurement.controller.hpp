@@ -117,7 +117,7 @@ void deleteRequest(AsyncWebServerRequest *request)
 void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
 {
   String json;
-  DynamicJsonDocument doc();
+  DynamicJsonDocument doc(250);
   doc["url"] = request->url();
   doc["host"] = request->host();
   doc["method"] = request->method();
