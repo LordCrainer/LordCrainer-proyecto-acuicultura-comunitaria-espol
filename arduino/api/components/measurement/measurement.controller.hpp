@@ -19,16 +19,34 @@ void getFiltered(AsyncWebServerRequest *request)
 void getById(AsyncWebServerRequest *request, String path)
 {
   String data = testAllMeasurement();
+  String json;
   int id = GetIdFromURL(request, path);
 
-  if (id == 1)
-    data = testPoolId1();
-  if (id == 2)
-    data = testPoolId2();
-  // String message = String("Get by Id ") + id;
+  DynamicJsonDocument doc(1024);
+  DynamicJsonDocument doc1(1024);
+  DynamicJsonDocument doc2(1024);
 
-  Serial.println(data);
-  request->send(200, "application/json", data);
+  deserializeJson(doc, data);
+  int elements = sizeof(doc)/sizeof(doc[0]);
+  //JsonObject doc1_0 = doc1.createNestedObject();
+  //JsonObject doc2_0 = doc2.createNestedObject();
+
+  for (int i=0; i<elements; i++)
+    {
+      JsonObject root_0 = doc[i];
+      if (int root_0_pool_id = root_0["pool_id"] == 1)
+        doc1.add(doc[i]);
+      if (int root_0_pool_id = root_0["pool_id"] == 2)
+        doc2.add(doc[i]);
+    }
+  if (id == 1)
+    serializeJson(doc1, json);
+    
+  if (id == 2)
+    serializeJson(doc2, json);
+  
+  Serial.println(json);
+  request->send(200, "application/json", json);
 }
 
 void getRequest(AsyncWebServerRequest *request)
