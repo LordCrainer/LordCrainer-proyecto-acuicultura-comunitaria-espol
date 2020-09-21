@@ -1,5 +1,4 @@
 // callFunction: Función como parámetro en otra función.
-
 typedef void (*callFunction)(void);
 
 // Convertir un
@@ -177,5 +176,26 @@ String testPoolId2()
     doc_0["created_at"] = 1600362938917;
 
     serializeJson(doc, json);
+    return json;
+}
+
+String findById(int id)
+{
+    String data = testAllMeasurement();
+    String json;
+    
+    DynamicJsonDocument doc(1024);
+    DynamicJsonDocument doc1(1024);
+
+    deserializeJson(doc, data);
+    int elements = sizeof(doc)/sizeof(doc[0]);
+
+    for (int i=0; i<elements; i++)
+        {
+        JsonObject root_0 = doc[i];
+        if (int root_0_pool_id = root_0["pool_id"] == id)
+            doc1.add(doc[i]);
+        }
+    serializeJson(doc1, json);
     return json;
 }

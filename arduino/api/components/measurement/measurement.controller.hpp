@@ -18,25 +18,10 @@ void getFiltered(AsyncWebServerRequest *request)
 
 void getById(AsyncWebServerRequest *request, String path)
 {
-  String data = testAllMeasurement();
-  String json;
   int id = GetIdFromURL(request, path);
-
-  DynamicJsonDocument doc(1024);
-  DynamicJsonDocument doc1(1024);
-
-  deserializeJson(doc, data);
-  int elements = sizeof(doc)/sizeof(doc[0]);
-
-  for (int i=0; i<elements; i++)
-    {
-      JsonObject root_0 = doc[i];
-      if (int root_0_pool_id = root_0["pool_id"] == id)
-        doc1.add(doc[i]);
-    }
-  serializeJson(doc1, json);
-  Serial.println(json);
-  request->send(200, "application/json", json);
+  String data = findById(id);
+  Serial.println(data);
+  request->send(200, "application/json", data);
 }
 
 void getRequest(AsyncWebServerRequest *request)
