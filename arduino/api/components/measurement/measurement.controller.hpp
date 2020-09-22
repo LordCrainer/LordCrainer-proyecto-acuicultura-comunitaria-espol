@@ -12,7 +12,7 @@ void getFiltered(AsyncWebServerRequest *request)
 {
   String message = "Get filtered by " + request->getParam(PARAM_FILTER)->value();
   Serial.println(message);
-  request->send(200, "application/json", message);
+  request->send(200, "text/plain", message);
 }
 
 void getById(AsyncWebServerRequest *request, String path)

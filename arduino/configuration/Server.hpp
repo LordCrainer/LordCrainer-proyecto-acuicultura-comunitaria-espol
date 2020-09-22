@@ -20,7 +20,7 @@ void InitServer()
 	server.on("/parameters", HTTP_GET, getAllParameters); // /parameters?pool_id=1 /parameters/12 
 
 	// MEASUREMENT
-	server.on("/measurement", HTTP_GET, getRequest);
+	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
 
 	// ERROR
