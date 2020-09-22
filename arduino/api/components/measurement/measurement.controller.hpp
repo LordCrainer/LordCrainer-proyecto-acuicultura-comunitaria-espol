@@ -32,7 +32,7 @@ void getRequest(AsyncWebServerRequest *request)
   }
   else if (request->url().indexOf(path) != -1)
   {
-    getById(request);
+    getById(request, path);
   }
   else
   {
