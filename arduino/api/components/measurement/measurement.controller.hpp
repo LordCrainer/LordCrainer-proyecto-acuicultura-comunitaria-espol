@@ -4,8 +4,7 @@ const char *PARAM_FILTER = "filter";
 
 void getAll(AsyncWebServerRequest *request)
 {
-  String data = testAllMeasurement();
-  Serial.println(data);
+  String data = readDataFromSD();
   request->send(200, "application/json", data);
 }
 
@@ -19,9 +18,9 @@ void getFiltered(AsyncWebServerRequest *request)
 void getById(AsyncWebServerRequest *request, String path)
 {
   int id = GetIdFromURL(request, path);
-  String data = findById(id);
-  Serial.println(data);
-  request->send(200, "application/json", data);
+  String data = readDataFromSD();
+  String filteredData = findById(data, id);
+  request->send(200, "application/json", filteredData);
 }
 
 void getRequest(AsyncWebServerRequest *request)
@@ -33,7 +32,7 @@ void getRequest(AsyncWebServerRequest *request)
   }
   else if (request->url().indexOf(path) != -1)
   {
-    getById(request, path);
+    getById(request);
   }
   else
   {
@@ -104,16 +103,5 @@ void deleteRequest(AsyncWebServerRequest *request)
   String message = String("DELETED ") + id + " SUCESSFULLY";
   json = objectToJsonDynamic("message", message, 50);
   Serial.println(json);
-  request->send(200, "application/json", json);
-}
-
-void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
-{
-  String json;
-  DynamicJsonDocument doc(250);
-  doc["url"] = request->url();
-  doc["host"] = request->host();
-  doc["method"] = request->method();
-  serializeJson(doc, json);
   request->send(200, "application/json", json);
 }
