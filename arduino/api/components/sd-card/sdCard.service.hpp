@@ -1,22 +1,23 @@
 #include <SD.h>
 
 File myFile;
-int pool = 1;
-int temp = 30;
-int oxi = 1000;
-int ph = 5;
-bool alertaTemp = true;
-bool alertaOxi = true;
-bool alertaPh = false;
-// String cadena="";
+struct Config {
+  int pool = 1;
+  int temp = 30;
+  int oxi = 1000;
+  int ph = 5;
+  bool alertaTemp = true;
+  bool alertaOxi = true;
+  bool alertaPh = false;
+  String cadena="";
+};
+Config config;  
 
-void initSdCard()
+void initSD()
 {
   Serial.begin(9600);
-  Wire.begin();
   Serial.print("Iniciando SD ...");
-  if (!SD.begin(9))
-  {
+  if (!SD.begin(9)) {
     Serial.println("No se pudo inicializar");
     return;
   }
@@ -25,94 +26,122 @@ void initSdCard()
 
 void escribirSD()
 {
-  myFile = SD.open("datalog.txt", FILE_WRITE);
-  if (myFile)
+    myFile=SD.open("datalog.txt",FILE_WRITE);
+  if(myFile)
   {
-    String json;
-    DynamicJsonDocument doc(sizeDoc);
-    doc["Pool_id"] = pool;
-    doc["Pool_id"] = pool;
-    doc["Pool_id"] = pool;
-    doc["Parametros"]["Temperatura"] = pool;
-    serializeJson(doc, json);
-    println(json);
     Serial.println("Escribiendo en SD: ");
     myFile.println();
-    doc[key] = value;
     myFile.print("{\"Pool_id\":");
-    myFile.print(pool);
+    myFile.print(config.pool);
     myFile.print(", \"Parametros\":");
-    myFile.print(" \"Temperatura\":");
+    myFile.print("{ \"Temperatura\":");
     myFile.print("{\"valor\":");
-    myFile.print(temp);
+    myFile.print(config.temp);
     myFile.print(", \"alerta\":");
-    myFile.print(alertaTemp);
+    myFile.print(config.alertaTemp);
     myFile.print("}");
     myFile.print(", \"Oxigeno\":");
     myFile.print("{ \"valor\":");
-    myFile.print(oxi);
+    myFile.print(config.oxi);
     myFile.print(", \"alerta\":");
-    myFile.print(alertaOxi);
+    myFile.print(config.alertaOxi);
     myFile.print("}");
     myFile.print(", \"Ph\":");
     myFile.print("{ \"valor\":");
-    myFile.print(ph);
+    myFile.print(config.ph);
     myFile.print(", \"alerta\":");
-    myFile.print(alertaPh);
+    myFile.print(config.alertaPh);
     myFile.print("}");
     myFile.print("}");
     myFile.print("} ");
+   
 
     myFile.close();
   }
+
 }
 
-String leerSD(String origin)
+void leerSD()
 {
-  File myFile;
-  String cadena = "";
-  myFile = SD.open(origin, FILE_READ); //abrimos  el archivo
+  myFile = SD.open("datalog.txt",FILE_READ);//abrimos  el archivo 
 
-  if (myFile)
+  if (myFile) 
   {
-    bool line = false;
-    myFile.seek(myFile.size() - 1); //Ubicacion en posicion anterior a ultimo caracter
-
-    while (myFile.available())
+    bool line=false;
+    myFile.seek(myFile.size()-1); //Ubicacion en posicion anterior a ultimo caracter
+   
+    while (myFile.available()) 
     {
-      if (line == false) //Primero leer en reversa para buscar salto de linea
+      if(line==false) //Primero leer en reversa para buscar salto de linea
       {
-        char caracter = myFile.read();
+        char caracter=myFile.read();
         //Serial.println(caracter);
-        myFile.seek(myFile.position() - 2);
-
-        if (caracter == '\n') //Cuando encuentra salto de linea cambia estado
-        {
-          line = true;
-        }
+        myFile.seek(myFile.position()-2);   
+        
+          if(caracter=='\n') //Cuando encuentra salto de linea cambia estado
+          {
+            line=true;
+          }   
       }
 
-      if (line == true) //Empieza a leer normalmente de izquierda a derecha
+      if(line==true) //Empieza a leer normalmente de izquierda a derecha
       {
-        char caracter = myFile.read();
-        //Serial.println(caracter);
-        cadena = cadena + caracter;
-
-        if (caracter == ']}') //La cadena termina en este caracter para formato JSON
-        {
-          break;
-        }
+          char caracter=myFile.read();
+         //Serial.println(caracter);
+          config.cadena=config.cadena+caracter;
+        
+          if(caracter=="} ") //La cadena termina en este caracter para formato JSON
+          {
+            break;
+          }      
       }
     }
-
+    
     myFile.close(); //cerramos el archivo
-    delay(300);
-    return cadena
-  }
-  else
+    delay(300);  
+    
+  } 
+  else 
   {
     Serial.println("Error al abrir el archivo");
   }
 
-  return ""
+  //cadena="";
+}
+
+void mostrar()
+{
+  StaticJsonDocument<200> doc;
+    DeserializationError error = deserializeJson(doc,config.cadena);
+    String Pool = doc["Pool_id"];
+    String Parametros = doc["Parametros"];
+    String Temperatura = doc["Parametros"]["Temperatura"]["valor"];
+    String alertTemp = doc["Parametros"]["Temperatura"]["alerta"];
+    String Oxigeno = doc["Parametros"]["Oxigeno"]["valor"];
+    String alertOxi = doc["Parametros"]["Oxigeno"]["alerta"];
+    String Ph = doc["Parametros"]["Ph"]["valor"];
+    String alertPh = doc["Parametros"]["Ph"]["alerta"];
+     
+     
+      Serial.println("*****************");
+      Serial.println("datalog.txt: ");
+      Serial.print("cadena Leida: ");
+      Serial.print(config.cadena);
+      Serial.println("");
+      Serial.print("Pool_id: ");
+      Serial.println(Pool);
+      //Serial.print("Parametros: ");
+      //Serial.println(Parametros);
+      Serial.print("Temperatura:");
+      Serial.println(Temperatura);
+      Serial.print("Alerta de Temperatura:");
+      Serial.println(alertTemp);
+      Serial.print("Oxigeno:");
+      Serial.println(Oxigeno);
+      Serial.print("Alerta de Oxigeno:");
+      Serial.println(alertOxi);
+      Serial.print("Ph:");
+      Serial.println(Ph);
+      Serial.print("Alerta de Ph:");
+      Serial.println(alertPh);
 }

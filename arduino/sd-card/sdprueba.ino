@@ -2,8 +2,6 @@
 #include<SPI.h>
 int ss=4;
 File Archivo;
-#include <ArduinoJson.h>
-
 
 //String json="{"sensor":"gps","time":1351824120,"data":[48.756080,2.302038]}";
 String json2;
