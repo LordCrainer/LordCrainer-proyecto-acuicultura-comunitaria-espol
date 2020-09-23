@@ -1,8 +1,15 @@
-// Iniciar mi codigo desde aqui
-// Hola soy Carlos y este es mi código
+void setup_lcd();
 
+void flechaArriba();
 
+void flechaAbajo();
 
-void setup() {
-  lcd.welcomeMessage()
-}
+void cancelMenu();
+
+void configTiempo();
+
+void piscId();
+
+void controlBoton();
+
+void menuPrin();
