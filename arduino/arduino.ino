@@ -13,11 +13,11 @@
 
 void setup()
 {
-    initSD();
-    escribirSD();
-    leerSD();
-    mostrar();
-    
+  initSD();
+  escribirSD("datalog.txt");
+  String readedData = leerSD("datalog.txt");
+  mostrar(readedData);
+
   // Serial.begin(115200);
   // ConnectWiFi_STA();
   // InitServer();
@@ -25,5 +25,5 @@ void setup()
 
 void loop()
 {
-    delay(1000);
+  delay(1000);
 }
