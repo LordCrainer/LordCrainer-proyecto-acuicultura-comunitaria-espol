@@ -1,12 +1,11 @@
 #include "measurement.service.hpp"
 
-const char* PARAM_FILTER = "filter";
+const char *PARAM_FILTER = "filter";
 
 void getAll(AsyncWebServerRequest *request)
 {
-  String message = "Get All";
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+  String data = readDataFromSD();
+  request->send(200, "application/json", data);
 }
 
 void getFiltered(AsyncWebServerRequest *request)
@@ -16,77 +15,93 @@ void getFiltered(AsyncWebServerRequest *request)
   request->send(200, "text/plain", message);
 }
 
-void getById(AsyncWebServerRequest *request)
+void getById(AsyncWebServerRequest *request, String path)
 {
-  int id = GetIdFromURL(request, "/item/");
-
-  String message = String("Get by Id ") + id;
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+  int id = GetIdFromURL(request, path);
+  String data = readDataFromSD();
+  String filteredData = findById(data, id);
+  request->send(200, "application/json", filteredData);
 }
 
-void getRequest(AsyncWebServerRequest *request) {
-  
-  if (request->hasParam(PARAM_FILTER)) {
+void getRequest(AsyncWebServerRequest *request)
+{
+  String path = "/measurement/";
+  if (request->hasParam(PARAM_FILTER))
+  {
     getFiltered(request);
   }
-  else if(request->url().indexOf("/item/") != -1)
+  else if (request->url().indexOf(path) != -1)
   {
-    getById(request);
+    getById(request, path);
   }
-  else {
+  else
+  {
     getAll(request);
   }
 }
 
-void postRequest(AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total)
-{ 
+void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
+{
   String bodyContent = GetBodyContent(data, len);
-  
+
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
-  if (error) { request->send(400); return;}
+  if (error)
+  {
+    request->send(400);
+    return;
+  }
 
   String string_data = doc["data"];
   String message = "Create " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
-void patchRequest(AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total)
+void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
 {
   int id = GetIdFromURL(request, "/item/");
   String bodyContent = GetBodyContent(data, len);
-  
+
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
-  if (error) { request->send(400); return;}
+  if (error)
+  {
+    request->send(400);
+    return;
+  }
 
   String string_data = doc["data"];
   String message = String("Update ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
-void putRequest(AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total)
+void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
 {
   int id = GetIdFromURL(request, "/item/");
   String bodyContent = GetBodyContent(data, len);
-   
+
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
-  if (error) { request->send(400); return;}
+  if (error)
+  {
+    request->send(400);
+    return;
+  }
 
   String string_data = doc["data"];
   String message = String("Replace ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "text/plain", message);
+  request->send(200, "application/json", message);
 }
 
-void deleteRequest(AsyncWebServerRequest *request) {
-  int id = GetIdFromURL(request, "/item/");
-
-  String message = String("Delete ") + id;
-  Serial.println(message);
-  request->send(200, "text/plain", message);
+void deleteRequest(AsyncWebServerRequest *request)
+{
+  int id = GetIdFromURL(request, "/measurement/");
+  String json;
+  String message = String("DELETED ") + id + " SUCESSFULLY";
+  json = objectToJsonDynamic("message", message, 50);
+  Serial.println(json);
+  request->send(200, "application/json", json);
 }
