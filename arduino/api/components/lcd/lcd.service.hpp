@@ -1,37 +1,4 @@
-#include <Arduino.h>
-#include <LiquidCrystal.h>
-//Asignacion de pines lcd 20x4
-LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
-
-
-
-  //Asignacion de pines para botones
-int BOT_ARRIBA=7;
-int BOT_ABAJO=6;
-int BOT_OK=5;
-int BOT_CANCELAR=4;
-
-// Caracteres especiales direccion arriba y abajo
-byte CARACTER_ARRIBA[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00100,
-  B01010,
-  B10001,
-  B00000
-};
-byte CARACTER_ABAJO[8] = {
-  B10001,
-  B01010,
-  B00100,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000
-};
+#include "lcd.model.hpp"
 //Variables para menu y submenu
 int menuCont = 1; 
 int submenuCont=1;

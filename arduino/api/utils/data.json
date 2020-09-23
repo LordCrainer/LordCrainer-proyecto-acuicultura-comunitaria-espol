@@ -1,0 +1,68 @@
+[
+  {
+    "pool_id": 1,
+    "device_id": "PC001",
+    "params": [
+      {
+        "name": "temparature",
+        "value": 25.43,
+        "alert": "OK"
+      },
+      {
+        "name": "oxygen",
+        "value": 12.05,
+        "alert": "OVER"
+      },
+      {
+        "name": "ph",
+        "value": 6.50,
+        "alert": "UNDER"
+      }
+    ],
+    "created_at": 1600362938050
+  },
+  {
+    "pool_id": 2,
+    "device_id": "PC001",
+    "params": [
+      {
+        "name": "temparature",
+        "value": 25.45,
+        "alert": "OK"
+      },
+      {
+        "name": "oxygen",
+        "value": 11.25,
+        "alert": "OVER"
+      },
+      {
+        "name": "ph",
+        "value": 6.52,
+        "alert": "UNDER"
+      }
+    ],
+    "created_at": 1600362938917
+  },
+  {
+    "pool_id": 1,
+    "device_id": "PC001",
+    "params": [
+      {
+        "name": "temparature",
+        "value": 25.47,
+        "alert": "OK"
+      },
+      {
+        "name": "oxygen",
+        "value": 11.25,
+        "alert": "OVER"
+      },
+      {
+        "name": "ph",
+        "value": 6.52,
+        "alert": "UNDER"
+      }
+    ],
+    "created_at": 1600362939773
+  }
+]
