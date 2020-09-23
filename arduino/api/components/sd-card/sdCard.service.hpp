@@ -64,7 +64,7 @@ void escribirSD(String nameFile)
   }
 }
 
-void leerSD(String nameFile)
+String leerSD(String nameFile)
 {
   // Tratar de siempre retornar las funciones
 
