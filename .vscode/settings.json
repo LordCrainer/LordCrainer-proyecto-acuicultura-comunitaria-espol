@@ -12,7 +12,9 @@
         "*.tcc": "cpp",
         "optional": "cpp",
         "istream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     },
 >>>>>>> api-rest-integration-json
     "C_Cpp.errorSquiggles": "Disabled"

@@ -4,7 +4,7 @@ const char *PARAM_FILTER = "filter";
 
 void getAll(AsyncWebServerRequest *request)
 {
-  String data = readDataFromSD();
+  String data = readDataFromSD("filename.txt");
   request->send(200, "application/json", data);
 }
 
@@ -18,7 +18,7 @@ void getFiltered(AsyncWebServerRequest *request)
 void getById(AsyncWebServerRequest *request, String path)
 {
   int id = GetIdFromURL(request, path);
-  String data = readDataFromSD();
+  String data = readDataFromSD("filename.txt");
   String filteredData = findById(data, id);
   request->send(200, "application/json", filteredData);
 }
