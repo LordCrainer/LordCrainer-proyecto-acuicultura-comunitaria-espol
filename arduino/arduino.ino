@@ -8,14 +8,19 @@
 
 #include "env.h" // Variable de entorno
 
-#include "configuration/Server.hpp"
+// CONFIGURACIÓN DEL SERVIDOR
+#include "configuration/Server.hpp" 
+#include "configuration/wifi-config.h"  // Sustituir con datos de vuestra red
+
+// COMPONENTES DEL API REST
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
 #include "api/components/sd-card/2.service.hpp"
 #include "api/components/measurement/measurement.controller.hpp"
 #include "api/components/device/1.controller.hpp"
-#include "configuration/wifi-config.h"  // Sustituir con datos de vuestra red
-#include "router/router.hpp"
+
+// RUTAS DEL API-REST
+#include "router/router.hpp" 
 
 void setup()
 {
