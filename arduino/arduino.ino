@@ -9,8 +9,8 @@
 #include "env.h" // Variable de entorno
 
 // CONFIGURACIÓN DEL SERVIDOR
-#include "configuration/Server.hpp" 
-#include "configuration/wifi-config.h"  // Sustituir con datos de vuestra red
+#include "config/Server.hpp" 
+#include "config/wifi-config.h"  // Sustituir con datos de vuestra red
 
 // COMPONENTES DEL API REST
 #include "api/utils/api.utils.hpp"
