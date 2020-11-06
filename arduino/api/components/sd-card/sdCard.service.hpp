@@ -96,8 +96,8 @@ String leerSD(String nameFile)
         char caracter = myFile.read();
         //Serial.println(caracter);
         cadena = cadena + caracter;
-
-        if (caracter == "} ") //La cadena termina en este caracter para formato JSON
+        //La cadena termina en este caracter para formato JSON
+        if (caracter == "} ")
         {
           break;
         }
