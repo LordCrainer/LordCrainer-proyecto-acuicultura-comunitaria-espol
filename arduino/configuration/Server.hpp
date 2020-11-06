@@ -2,9 +2,9 @@ AsyncWebServer server(port);
 
 #include "../api/utils/api.utils.hpp"
 #include "../api/utils/json.utils.hpp"
-#include "../api/components/sd-card/sdCard.service.hpp"
+#include "../api/components/sd-card/2.service.hpp"
 #include "../api/components/measurement/measurement.controller.hpp"
-#include "../api/components/device/controller.hpp"
+#include "../api/components/device/1.controller.hpp"
 
 void InitServer()
 {
@@ -28,11 +28,6 @@ void InitServer()
 	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
 	
-	// DEVICE
-	server.on("/device/configuration", HTTP_GET, allConfiguration);
-	server.on("/device/start", HTTP_GET, initMeasurement);
-
-
 	// DEVICE
 	server.on("/device/start", HTTP_GET, startMeasurement);
 	server.on("/device/configuration", HTTP_GET, allConfiguration);
