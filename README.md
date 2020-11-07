@@ -64,3 +64,22 @@ https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_S
     - router (rutas del api)
     
 
+## FUNCIONAMIENTO DEL API REST
+
+#### ¿Qué es una API?
+API es el acrónimo de Application Programming Interfaces, en español sería Interfaz de programación de aplicaciones. Es la agrupación de diferentes funciones ,bibliotecas, procesos y subrutinas que pueden ser utilizados por otro software. Para la comunicación hacia otros programas, este puede aplicar una variedad de protocolos a través de un conjunto de reglas específicas. 
+
+#### Para que sirve
+Permite usar algún tipo de servicio de una manera sencilla sin tener que volver a hacer todo el programa. En este caso, la API nos ayuda en la comunicación entre los diferentes periféricos del dispositivo (NodeMCU) a otros dispositivo conectado en la red (celular).
+
+#### REST
+REST es un estilo de arquitectura  basados en el protocolo HTTP que permite conectar vraios sistemas, como un servidor con un cliente. Para obtener o enviar los datos se puede usar cualquier formato, siendo los más usados XML, JSON. 
+
+#### API REST
+Es cuando una API usa como arquitectura REST para comunicar entre el cliente y servidor.  El cliente envía una petición hacia el servidor mediante algún verbo del http (get, post, put, patch, delete, etc), el servidor recoge esta peitición, realiza la acción correspondiente a la petición y luego devuelve una respuesta hacia el cliente, en el formato, en este caso, JSON.
+
+
+
+El Api Rest funciona de manera asíncrona y por eventos. Eso significa que toda petición hecha por el cliente será continuamente escuchada por servidor y luego verificada si coincide con la ruta y acción que permite el servidor, caso contrario deberá de responder con un mensaje de "No encontrado"
+
+arduino.ino => Es el archivo principal donde ejecutará únicamente 
