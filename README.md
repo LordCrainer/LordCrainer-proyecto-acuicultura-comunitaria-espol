@@ -1,19 +1,14 @@
-PASOS PARA USAR EL PROGRAMA
+### HERRAMIENTAS A USAR
+- [IDE ARDUINO](https://www.arduino.cc/en/software)
+- [VISUAL CODE](https://code.visualstudio.com/)
 
-NOTA: Para probar el proyecto, existen algunos pasos previos y librerías que se deben de instalar
+### INSTALAR LAS LIBRERÍAS
+##### - LIBRERÍA ESP8266 EN ARDUINO
+- [Video Tutorial](https://www.youtube.com/watch?v=0g7sazWXfEI)
+- [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)
+- [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)
 
-PASO 1)
-INSTALAR EL ESP8266 EN ARDUINO IDE
-    https://www.youtube.com/watch?v=0g7sazWXfEI
-
-PASO 2) 
-INSTALAR LAS SIGUIENTES LIBRERÍAS EN EL ARDUINO IDE
-    https://github.com/me-no-dev/ESPAsyncWebServer
-    https://github.com/me-no-dev/ESPAsyncTCP
-
-
-PASO 3)
-
+##### PASOS PARA USAR EL PROGRAMA
 En la carpeta: 
 
 CARPETA: .vscode
