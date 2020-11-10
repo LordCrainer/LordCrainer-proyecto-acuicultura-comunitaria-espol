@@ -2,40 +2,45 @@
 - [IDE ARDUINO](https://www.arduino.cc/en/software)
 - [VISUAL CODE](https://code.visualstudio.com/)
 
+### CONFIGURAR EL VISUAL CODE
+- INSTALAR LAS SIGUIENTES EXTENSIONES
+    * Arduino
+    * C/C++
+- CONFIGURAR EL LA RUTA DEL ARDUINO
+    * Archivo => Preferencias => Settings (Configuración)
+    * Escribir: Arduino
+    * En Arduino:Path => Copiar la ruta por default del Arduino (C:\Program Files (x86)\Arduino)
+   
+- REALIZAR LAS PRUEBAS
+    * Presionar F1 dentro del Visual Code
+    * Escribir Arduino en el menú que aparece en la parte de arriba (>)
+    * Observar que estén los comandos del Arduino (Verificar, subir, Serial port)
+
 ### INSTALAR LAS LIBRERÍAS
 ##### - LIBRERÍA ESP8266 EN ARDUINO
 - [Video Tutorial](https://www.youtube.com/watch?v=0g7sazWXfEI)
 - [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)
 - [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)
 
-##### PASOS PARA USAR EL PROGRAMA
-En la carpeta: 
+###### NOTA: Si falta algún otra librería el Visual Code o el IDE de Arduino les mostrará el error
 
-CARPETA: .vscode
-- ARCHIVO: c_cpp_properties.json
-    Cambiar las propiedades a las rutas de su sistema
-        => Aplastar f1
-        => En el recuadro escribir: Arduino
-        => Buscar el que dice: Arduino: Examples
-        => Abrir cualquier Examples mostrado: blink.ino
-        => Copiar el mismo archivo y pegar (c_cpp_properties.json)
+#### PASOS PARA USAR EL PROGRAMA
 
-- ARCHIVO: arduino.json
-    Si no está el siguiente comando, colocarlo: "output": "./build"
+- SE DEBE DE INSERTAR EL ARCHIVO DE CONFIGURACIÓN: c_cpp_properties.json. 
+    * Aplastar F1 dentro del Visual Code
+    * Escribir Arduino en el menú que aparece en la parte de arriba (>)
+    * Seleccionar la opción que dice: "Arduino: Examples"
+    * Elegir cualquier proyecto
+    * Copiar el archivo "c_cpp_properties.json" de la carpeta ./vscode en la misma del proyecto
 
-CARPETA: Arduino
-=> Crear el archivo env.h (variables de entorno)
-=> Copiar exactamente el archivo env.example.h
-=> Editar las variables de entorno acorde a su preferencia.
+- CREANDO EL ARCHIVO QUE CONTIENE LAS VARIABLES DE ENTORNO
+    * Copiar el archivo llamado: env.example.h
+    * Renombrarlo a: .env
+    * Editar las variables acorde a sus preferencias
 
 
-LIBRERÍAS
-
-INSTALAR EL ESP8266 EN ARDUINO IDE
-https://www.youtube.com/watch?v=0g7sazWXfEI
-
-EJEMPLOS USANDO ESP8266
-https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_Server
+- EJEMPLOS USANDO ESP8266
+    https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_Server
 
 
 # ESTRUCTURA DEL PROGRAMA
