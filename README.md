@@ -89,50 +89,50 @@ Las capas generales son:
 - Controlador
 - Dominio
 
-- Infraestructura: Servidor y configuraciones
-   La infraestructura es todo el proceso encargado de los programas que realizan una actividad general o global del sistema, en este caso, el Server.hpp o wifi-  config.hpp ejecutan el servidor, o activan el modo AP o Station del módulo de Wifi. 
-   - Wifi
-   - Server
-   - Iniciar SD
-   - Calibración
-   - Inciar LCD
+   Infraestructura: Servidor y configuraciones
+      La infraestructura es todo el proceso encargado de los programas que realizan una actividad general o global del sistema, en este caso, el Server.hpp o wifi-  config.hpp ejecutan el servidor, o activan el modo AP o Station del módulo de Wifi. 
+      - Wifi
+      - Server
+      - Iniciar SD
+      - Calibración
+      - Inciar LCD
 
-- Controlador: Router y Controlador
-   El router es el que da las reglas de como el cliente debe de comunicarse al API.
-   - /device/start  GET  startMeasurement
-   - /measurement   GET  getALL
-   - /measurement/1 GET getByID
+   Controlador: Router y Controlador
+      El router es el que da las reglas de como el cliente debe de comunicarse al API.
+      - /device/start  GET  startMeasurement
+      - /measurement   GET  getALL
+      - /measurement/1 GET getByID
 
-   El controlador únicamente debería ser responsable de recibir la petición del cliente, realizar una única acción (Service) y enviar una respuesta al cliente. Para este proyecto no se ha dado el caso de esa manera, sino que el controlador realiza diferentes acciones para lograr su objetivo.
-
-- Dominio: Service
-   Se le denomina a todo el código que realiza la lógica del negocio o todas las actividades que el api va a realizar. 
+      El controlador únicamente debería ser responsable de recibir la petición del cliente, realizar una única acción (Service) y enviar una respuesta al cliente. Para este proyecto no se ha dado el caso de esa manera, sino que el controlador realiza diferentes acciones para lograr su objetivo.
+   
+   Dominio: Service
+      Se le denomina a todo el código que realiza la lógica del negocio o todas las actividades que el api va a realizar. 
    Se recomienda que los services añadan a otros services para lograr su cometido. 
 
-   SD_CARD
-   - Leerá la SD
-   - Guardará datos en los ficheros
-   - Borrará ficheros 
-   - Creará un nuevo fichero
+      SD_CARD
+      - Leerá la SD
+      - Guardará datos en los ficheros
+      - Borrará ficheros 
+      - Creará un nuevo fichero
 
-   Measurement
-   - Recibe el Id de la piscina que se desea obtener
-   - Busca en la SD Card los datos de la piscina deseada.
-   - returna el valor
+      Measurement
+      - Recibe el Id de la piscina que se desea obtener
+      - Busca en la SD Card los datos de la piscina deseada.
+      - returna el valor
 
-   DEVICE
-   - start (opcional)
-      * Muestra el temporizador del tiempo antes de comenzar a sensar en la LCD
-      * Activa el sensado de todos los sensores
-      * Guarda los datos en la SD (tener cuidado del tiempo de sensado y el grabado de los datos)
-      * Envía una respuesta indicando que todo ha funcionado correctamente
+      DEVICE
+      - start (opcional)
+         * Muestra el temporizador del tiempo antes de comenzar a sensar en la LCD
+         * Activa el sensado de todos los sensores
+         * Guarda los datos en la SD (tener cuidado del tiempo de sensado y el grabado de los datos)
+         * Envía una respuesta indicando que todo ha funcionado correctamente
 
 
 
-##### FLUJO DE LA PETICIÓN
+### FLUJO DE LA PETICIÓN
 Cliente => Servidor (API REST) => Router => Controller => Service
 
-##### DESCRIPCIÓN DE CADA CARPETA
+### DESCRIPCIÓN DE CADA CARPETA
 En la carpeta principal: Arduino
 - Estará todas carpetas y archivos principales
    - arduino.ino => Es el archivo principal donde se llamará a todo el programa y librerías.
