@@ -6,7 +6,7 @@
 - INSTALAR LAS SIGUIENTES EXTENSIONES
     * Arduino
     * C/C++
-- CONFIGURAR EL LA RUTA DEL ARDUINO
+- CONFIGURAR LA RUTA DEL ARDUINO
     * Archivo => Preferencias => Settings (Configuración)
     * Escribir: Arduino
     * En Arduino:Path => Copiar la ruta por default del Arduino (C:\Program Files (x86)\Arduino)
@@ -80,6 +80,72 @@ Es cuando una API usa como arquitectura REST para comunicar entre el cliente y s
 
 
 
-El Api Rest funciona de manera asíncrona y por eventos. Eso significa que toda petición hecha por el cliente será continuamente escuchada por servidor y luego verificada si coincide con la ruta y acción que permite el servidor, caso contrario deberá de responder con un mensaje de "No encontrado"
+El Api Rest funciona de manera asíncrona y por eventos. Eso significa que toda petición hecha por el cliente será continuamente escuchada por servidor y luego verificada si coincide con la ruta o acción que permite el servidor, caso contrario deberá de responder con un mensaje de error o que no ha sido encontrada la petición del cliente. 
 
-arduino.ino => Es el archivo principal donde ejecutará únicamente 
+### ARQUITECTURA
+El proyecto presenta una arquitectura en capas de manera jerárquica, la cuales van accediendo de un grado mayor a menor.
+Las capas generales son: 
+- Infraestructura
+- Controlador
+- Dominio
+
+En cada capa tiene un fin específico y están ordenados de la capa superior a la inferior. Cada capa sólo puede comunicarse estríctamente con sus adyacentes e inferiores, nunca una capa inferior debe de comunicarse con una superior.
+
+Infraestructura: Servidor y configuraciones
+La infraestructura es todo el proceso encargado de los programas que realizan una actividad general o global del sistema, en este caso, el Server.hpp o wifi-config.hpp ejecutan el servidor, o activan el modo AP o Station del módulo de Wifi. 
+- Wifi
+- Server
+- Iniciar SD
+- Calibración
+- Inciar LCD
+
+Controlador: Router y Controlador
+El router es el que da las reglas de como el cliente debe de comunicarse al API.
+- /device/start  GET  startMeasurement
+- /measurement   GET  getALL
+- /measurement/1 GET getByID
+
+El controlador únicamente debería ser responsable de recibir la petición del cliente, realizar una única acción (Service) y enviar una respuesta al cliente. Para este proyecto no se ha dado el caso de esa manera, sino que el controlador realiza diferentes acciones para lograr su objetivo.
+
+Dominio: Service
+Se le denomina a todo el código que realiza la lógica del negocio o todas las actividades que el api va a realizar. 
+Se recomienda que los services añadan a otros services para lograr su cometido. 
+
+SD_CARD
+- Leerá la SD
+- Guardará datos en los ficheros
+- Borrará ficheros 
+- Creará un nuevo fichero
+
+Measurement
+- Recibe el Id de la piscina que se desea obtener
+- Busca en la SD Card los datos de la piscina deseada.
+- returna el valor
+
+DEVICE
+- start (opcional)
+   * Muestra el temporizador del tiempo antes de comenzar a sensar en la LCD
+   * Activa el sensado de todos los sensores
+   * Guarda los datos en la SD (tener cuidado del tiempo de sensado y el grabado de los datos)
+   * Envía una respuesta indicando que todo ha funcionado correctamente
+
+
+
+###### FLUJO DE LA PETICIÓN
+Cliente => Servidor (API REST) => Router => Controller => Service
+
+##### DESCRIPCIÓN DE CADA CARPETA
+En la carpeta principal: Arduino
+- Estará todas carpetas y archivos principales
+   - arduino.ino => Es el archivo principal donde se llamará a todo el programa y librerías.
+   - env.example.h => Un ejemplo a seguir para usar las variables de entorno
+   - .env => Es el archivo donde se encuentran las variables propias de todo el sistema y son de caracter confidencial
+
+- Subcarpeta: API
+   * En esta carpeta se encuentra el código responsable de toda la API, manejo de librerías y periféricos.
+      * components: Está el código responsable de la actividad principal del proyecto: medición, sensado, sd card, lcd
+      * utils: Es la carpeta de utilidades que ayuda de manera general a la carpeta de componentes.
+- Subcarpeta: config
+   * Código responsable de la configuración del Wifi y Servidor
+- Subcarpeta: router
+   * Todas las rutas del api rest se encuentran alojadas en esta carpeta, junto a la funciones(controlador) que debe de ejecutar)
