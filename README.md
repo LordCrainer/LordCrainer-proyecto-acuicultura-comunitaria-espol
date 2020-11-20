@@ -33,7 +33,7 @@
     * Elegir el proyecto dedicado a NodeMCU o ESP8266
     * Copiar el archivo "c_cpp_properties.json" de la carpeta ./vscode en la misma del proyecto
 
-    NOTA: El archivo c_cpp_properties.json, tiene que tener una configuración parecida al sigueinte formato.
+    NOTA: El archivo c_cpp_properties.json, tiene que tener una configuración parecida al siguiente formato.
     ```{
         "configurations": [
             {
