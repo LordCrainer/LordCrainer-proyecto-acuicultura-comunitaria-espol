@@ -30,8 +30,35 @@
     * Aplastar F1 dentro del Visual Code
     * Escribir Arduino en el menú que aparece en la parte de arriba (>)
     * Seleccionar la opción que dice: "Arduino: Examples"
-    * Elegir cualquier proyecto
+    * Elegir el proyecto dedicado a NodeMCU o ESP8266
     * Copiar el archivo "c_cpp_properties.json" de la carpeta ./vscode en la misma del proyecto
+
+    NOTA: El archivo c_cpp_properties.json, tiene que tener una configuración parecida al sigueinte formato.
+    ```{
+        "configurations": [
+            {
+                "name": "Win32",
+                "defines": [
+                    "ARDUINO=10800"
+                ],
+                "includePath": [
+                    "${workspaceRoot}",
+                    "C:\\Users\\camog\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
+                    "C:\\Users\\camog\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
+                    "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                    "D:\\Documents\\Arduino\\libraries\\**"
+                ],
+                "forcedInclude": [],
+                "intelliSenseMode": "clang-x64",
+                "cStandard": "c11",
+                "cppStandard": "c++17",
+                "compilerPath": "/usr/bin/gcc"
+            }
+        ],
+        "version": 4
+    }```
+
 
 - CREANDO EL ARCHIVO QUE CONTIENE LAS VARIABLES DE ENTORNO
     * Copiar el archivo llamado: env.example.h
