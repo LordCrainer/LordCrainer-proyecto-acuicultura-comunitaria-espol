@@ -17,7 +17,7 @@
 #include "api/utils/json.utils.hpp"
 #include "api/components/sd-card/2.service.hpp"
 #include "api/components/measurement/measurement.controller.hpp"
-#include "api/components/device/interface/controller.hpp"
+#include "api/components/device/1.interface/controller.hpp"
 
 // RUTAS DEL API-REST
 #include "router/router.hpp" 

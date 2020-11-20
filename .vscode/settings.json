@@ -1,6 +1,4 @@
 {
-<<<<<<< HEAD
-=======
     "files.associations": {
         "system_error": "cpp",
         "functional": "cpp",
@@ -16,6 +14,5 @@
         "string": "cpp",
         "string_view": "cpp"
     },
->>>>>>> api-rest-integration-json
     "C_Cpp.errorSquiggles": "Disabled"
 }
