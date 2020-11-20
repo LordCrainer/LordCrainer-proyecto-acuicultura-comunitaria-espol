@@ -175,3 +175,13 @@ En la carpeta principal: Arduino
    * Código responsable de la configuración del Wifi y Servidor
 - Subcarpeta: router
    * Todas las rutas del api rest se encuentran alojadas en esta carpeta, junto a la funciones(controlador) que debe de ejecutar)
+
+
+### BIBLIOGRAFÍA
+http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/
+
+http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/
+
+https://medium.com/@BryanSBarrios/arquitectura-limpia-para-el-resto-de-nosotros-440a4fba4d92
+
+https://github.com/jbuget/nodejs-clean-architecture-app
