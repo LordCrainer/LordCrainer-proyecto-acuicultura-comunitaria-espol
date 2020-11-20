@@ -47,7 +47,8 @@
                     "C:\\Users\\camog\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
                     "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                    "D:\\Documents\\Arduino\\libraries\\**"
+                    "C:\\Documents\\Arduino\\hardware\\tools\\**",
+                    "C:\\Documents\\Arduino\\libraries\\**"
                 ],
                 "forcedInclude": [],
                 "intelliSenseMode": "clang-x64",
