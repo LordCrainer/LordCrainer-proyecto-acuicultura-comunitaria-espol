@@ -2,42 +2,24 @@
 
 const char *PARAM_FILTER = "filter";
 
-void getAll(AsyncWebServerRequest *request)
-{
-  String data = readDataFromSD("filename.txt");
-  request->send(200, "application/json", data);
-}
-
-void getFiltered(AsyncWebServerRequest *request)
-{
-  String message = "Get filtered by " + request->getParam(PARAM_FILTER)->value();
-  Serial.println(message);
-  request->send(200, "text/plain", message);
-}
-
-void getById(AsyncWebServerRequest *request, String path)
-{
-  int id = GetIdFromURL(request, path);
-  String data = readDataFromSD("filename.txt");
-  String filteredData = findById(data, id);
-  request->send(200, "application/json", filteredData);
-}
-
 void getRequest(AsyncWebServerRequest *request)
 {
   String path = "/measurement/";
-  if (request->hasParam(PARAM_FILTER))
+  String response;
+  // /measurement/12 => 12
+  if (request->url().indexOf(path) != -1)
   {
-    getFiltered(request);
+    response = getMeasurementById(request, path);
   }
-  else if (request->url().indexOf(path) != -1)
+  /* else if (request->hasParam(PARAM_FILTER))
   {
-    getById(request, path);
-  }
+    response = getFiltered(request);
+  } */
   else
   {
-    getAll(request);
+    response = getMeasurementtAll(request);
   }
+  request->send(200, "application/json", response);
 }
 
 void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)

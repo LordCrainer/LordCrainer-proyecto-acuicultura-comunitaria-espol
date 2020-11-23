@@ -6,6 +6,14 @@ int GetIdFromURL(AsyncWebServerRequest *request, String root)
   return id;
 }
 
+String getMeasurementById(AsyncWebServerRequest *request, String path)
+{
+  int id = GetIdFromURL(request, path);
+  String data = readDataFromSD("filename.txt");
+  String filteredData = findById(data, id);
+  return filteredData;
+}
+
 String GetBodyContent(uint8_t *data, size_t len)
 {
   String content = "";
@@ -14,4 +22,17 @@ String GetBodyContent(uint8_t *data, size_t len)
     content.concat((char)data[i]);
   }
   return content;
+}
+
+
+String getMeasurementtAll(AsyncWebServerRequest *request)
+{
+  String data = readDataFromSD("filename.txt");
+  return data;
+}
+
+String getFiltered(AsyncWebServerRequest *request)
+{
+  String data = readDataFromSD("filename.txt");
+  return data;
 }
