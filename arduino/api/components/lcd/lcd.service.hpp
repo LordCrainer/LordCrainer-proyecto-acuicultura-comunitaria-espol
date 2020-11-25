@@ -6,15 +6,7 @@ int submenu1Cont=1;
 //Definicion tipo de dato variables banderas
 boolean flagArriba, flagAbajo, flagOk, flagCancelar;   
 
-void setup_lcd()
-{
-  lcd.begin(20, 4);
-  pinMode(BOT_ARRIBA,INPUT_PULLUP);
-  pinMode(BOT_ABAJO,INPUT_PULLUP);
-  pinMode(BOT_OK,INPUT_PULLUP);
-  pinMode(BOT_CANCELAR,INPUT_PULLUP);
 
-}
 
 void flechaArriba(){
   lcd.createChar(1, CARACTER_ARRIBA);
