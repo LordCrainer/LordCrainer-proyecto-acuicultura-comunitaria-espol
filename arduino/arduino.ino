@@ -8,12 +8,7 @@
 #define ARDUINOJSON_USE_LONG_LONG 1
 #include <ArduinoJson.h>
 
-LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
-//Asignacion de pines para botones
-int BOT_ARRIBA = 7;
-int BOT_ABAJO = 6;
-int BOT_OK = 5;
-int BOT_CANCELAR = 4;
+
 
 #include "env.h" // Variable de entorno
 
@@ -36,14 +31,14 @@ int BOT_CANCELAR = 4;
 void setup()
 {
   Serial.begin(115200);
-  ConnectWiFi_STA();
-  InitServer();
+  //ConnectWiFi_STA();
+  //InitServer();
   initSD();
-  setup_lcd();
+  //setup_lcd();
 }
 
 void loop()
 {
-  controlBoton();
-  menuPrin();
+  //controlBoton();
+  //menuPrin();
 }
