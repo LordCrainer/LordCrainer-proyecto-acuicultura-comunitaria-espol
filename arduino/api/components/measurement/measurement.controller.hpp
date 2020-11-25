@@ -7,6 +7,7 @@ void getRequest(AsyncWebServerRequest *request)
   String path = "/measurement/";
   String response;
   // /measurement/12 => 12
+  // response = request->url().indexOf(path) != -1 ? getMeasurementById(request, path) : getMeasurementtAll(request);
   if (request->url().indexOf(path) != -1)
   {
     response = getMeasurementById(request, path);
