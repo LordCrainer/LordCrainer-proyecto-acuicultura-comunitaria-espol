@@ -1,5 +1,3 @@
-#include <SD.h>
-
 struct Config
 {
   int pool = 1;
@@ -13,18 +11,26 @@ struct Config
 };
 Config config;
 
+String readDataFromSD(String filename)
+{
+  String data = filename;
+  // Abrir el archivo -> SD.open(filename)
+  // Validar si existe el archivo
+  // Leer el archivo
+  // guardar la data en una variable (data)
+  return data;
+}
 
-
-void escribirSD(String nameFile)
+void writeSD(String nameFile, String data)
 {
   // Tratar de dinamizar las funciones usando argumentos
   // Evitar las variables con alcance global. Instanciar o declarar dentro de la función
   File myFile;
-  Config measurement;
   myFile = SD.open(nameFile, FILE_WRITE);
   if (myFile)
   {
-    Serial.println("Escribiendo en SD: ");
+    myFile.print(data);
+    /*     Serial.println("Escribiendo en SD: ");
     myFile.println();
     myFile.print("{\"Pool_id\":");
     myFile.print(measurement.pool);
@@ -48,13 +54,13 @@ void escribirSD(String nameFile)
     myFile.print(measurement.alertaPh);
     myFile.print("}");
     myFile.print("}");
-    myFile.print("} ");
+    myFile.print("} "); */
 
     myFile.close();
   }
 }
 
-String leerSD(String nameFile)
+String readSD(String nameFile)
 {
   // Tratar de siempre retornar las funciones
 
@@ -69,7 +75,7 @@ String leerSD(String nameFile)
 
     while (myFile.available())
     {
-      if (line == false) //Primero leer en reversa para buscar salto de linea
+      /*       if (line == false) //Primero leer en reversa para buscar salto de linea
       {
         char caracter = myFile.read();
         //Serial.println(caracter);
@@ -87,11 +93,11 @@ String leerSD(String nameFile)
         //Serial.println(caracter);
         cadena = cadena + caracter;
         //La cadena termina en este caracter para formato JSON
-        if (caracter == "} ")
+        if (caracter == "")
         {
           break;
         }
-      }
+      } */
     }
 
     myFile.close(); //cerramos el archivo
@@ -219,4 +225,14 @@ String readDataFromSD()
 
   serializeJson(doc, json);
   return json;
+}
+
+String testSD()
+{
+  writeSD("data.txt", "\n Prueba SD");
+  String readedData = readSD("data.txt");
+  Serial.println(readedData);
+  String read2Data = readSD("data.txt");
+  Serial.println(read2Data);
+  return read2Data;
 }

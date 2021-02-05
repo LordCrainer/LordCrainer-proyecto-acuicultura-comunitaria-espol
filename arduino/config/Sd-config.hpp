@@ -1,11 +1,8 @@
-void initSD()
+boolean initSD()
 {
-    Serial.begin(9600);
-    Serial.print("Iniciando SD ...");
-    if (!SD.begin(9))
+    if (SD.begin(PIN_SD))
     {
-        Serial.println("No se pudo inicializar");
-        return;
+        return true;
     }
-    Serial.println("inicializacion exitosa");
+    return false;
 }

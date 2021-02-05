@@ -12,7 +12,6 @@ void InitServer()
 	server.on("/item", HTTP_DELETE, deleteRequest);
 
 	// TESTING LIBRARY
-	server.on("/json", HTTP_GET, arduinoJsonCommonVariable);
 	server.on("/headers", HTTP_GET, getHeaders);		  // /headers/12  /headers?pool_id=1
 	server.on("/parameters", HTTP_GET, getAllParameters); // /parameters?pool_id=1 /parameters/12
 
