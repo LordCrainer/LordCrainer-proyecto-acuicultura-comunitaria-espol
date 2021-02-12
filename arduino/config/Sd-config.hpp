@@ -1,8 +1,8 @@
-boolean initSD()
+byte initSD()
 {
     if (SD.begin(PIN_SD))
     {
-        return true;
+        return 1;
     }
-    return false;
+    return 0;
 }

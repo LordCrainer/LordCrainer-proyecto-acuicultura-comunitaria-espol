@@ -15,6 +15,9 @@ void InitServer()
 	server.on("/headers", HTTP_GET, getHeaders);		  // /headers/12  /headers?pool_id=1
 	server.on("/parameters", HTTP_GET, getAllParameters); // /parameters?pool_id=1 /parameters/12
 
+	// TESTING FS
+	server.on("/writefs", HTTP_GET, writingFS);
+	server.on("/readfs", HTTP_GET, readingFS);
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
