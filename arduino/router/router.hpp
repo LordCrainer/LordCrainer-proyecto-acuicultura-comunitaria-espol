@@ -18,6 +18,7 @@ void InitServer()
 	// TESTING FS
 	server.on("/writefs", HTTP_GET, writingFS);
 	server.on("/readfs", HTTP_GET, readingFS);
+	server.on("/appendfs", HTTP_GET, appendFS);
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);

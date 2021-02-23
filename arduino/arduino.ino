@@ -37,7 +37,7 @@ void setup()
 {
   Serial.begin(115200);
   delay(1000);
-  ConnectWiFi_AP();
+  ConnectWiFi_STA();
   InitServer();
   initFS();
   //boolean isActived = initSD();

@@ -2,11 +2,15 @@
 
 void readingFS(AsyncWebServerRequest *request)
 {
-    String response = readFS("data.txt");
+    String response = readFS("data.json");
     request->send(200, "application/json", response);
 }
 void writingFS(AsyncWebServerRequest *request)
 {
-    String response = writeFS("data.txt", "Solo es una prueba");
-    request->send(200, "application/json", response);
+    String json;
+    DynamicJsonDocument doc(250);
+    doc["data"] = "Prueba SD exitosa";
+    serializeJson(doc, json);
+    String response = writeFS("data.json", json);
+    request->send(200, "application/json", json);
 }
