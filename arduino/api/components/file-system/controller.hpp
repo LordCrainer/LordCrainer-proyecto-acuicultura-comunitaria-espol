@@ -14,3 +14,13 @@ void writingFS(AsyncWebServerRequest *request)
     String response = writeFS("data.json", json);
     request->send(200, "application/json", json);
 }
+
+void appendFS(AsyncWebServerRequest *request)
+{
+    String json;
+    DynamicJsonDocument doc(250);
+    doc["data"] = "Prueba APPEND FILE";
+    serializeJson(doc, json);
+    String response = appendFile("data.json", json);
+    request->send(200, "application/json", json);
+}

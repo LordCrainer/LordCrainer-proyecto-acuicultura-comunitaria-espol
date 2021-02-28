@@ -2,7 +2,7 @@ struct IParams
 {
     String name;
     float value;
-    char[3] alert;
+    char alert[3];
 };
 
 struct IMeasurement

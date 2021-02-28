@@ -27,7 +27,7 @@
 #include "api/components/file-system/controller.hpp"
 #include "api/components/sd-card/sd.service.hpp"
 #include "api/components/lcd/lcd.service.hpp"
-#include "api/components/measurement/measurement.controller.hpp"
+#include "api/components/measurement/2.adapter/controller.hpp"
 #include "api/components/device/1.interface/controller.hpp"
 
 // RUTAS DEL API-REST
@@ -42,10 +42,10 @@ void setup()
   initFS();
   //boolean isActived = initSD();
   //String initializeSD = "\nINICIANDO SD: " + (String)isActived;
-/*   String serverOn = "ESCUCHANDO EN EL PUERTO: " + (String)port;
+  // String serverOn = "ESCUCHANDO EN EL PUERTO: " + (String)port;
 
   //Serial.println(initializeSD);
-  Serial.println(serverOn);
+/*   Serial.println(serverOn);
   setupLCD("BIENVENIDO");
   delay(1000);
   using namespace sdfat;
@@ -67,7 +67,6 @@ void loop()
   //controlBoton();
   //menuPrin();
 }
-
 
 /*
   SD card read/write

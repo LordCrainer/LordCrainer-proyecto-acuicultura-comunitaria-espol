@@ -27,18 +27,20 @@ String readFS(String dirname)
     return readed;
 }
 
-void appendFile(const char * path, const char * message){
-    Serial.printf("Appending to file: %s\r\n", path);
+String appendFile(String path, String message){
+    // Serial.printf("Appending to file: %s\r\n", path);
 
-    File file = LittleFS.open(path, FILE_APPEND);
+    File file = LittleFS.open(path.c_str(), "a");
     if(!file){
         Serial.println("- failed to open file for appending");
-        return;
+        return "BAD";
     }
-    if(file.print(message)){
+    if(file.print(message.c_str())){
         Serial.println("- message appended");
     } else {
         Serial.println("- append failed");
+        return "BAD";
     }
     file.close();
+    return "OK";
 }
