@@ -53,22 +53,6 @@ void loop()
   //menuPrin();
 }
 
-String writeOnSD()
-{
-  String json;
-  DynamicJsonDocument doc(250);
-  doc["data"] = "1000";
-  doc["name"] = "Comunitarias";
-  serializeJson(doc, json);
-  return json;
-}
-String justShowName(String data, String key)
-{
-  DynamicJsonDocument doc(250);
-  deserializeJson(doc, data);
-  return doc[key];
-}
-
 /*
   SD card read/write
 
