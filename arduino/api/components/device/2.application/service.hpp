@@ -1,7 +1,7 @@
 #include "../3.domain/example.hpp" //Este módulo se puede borrar
 String getAllConfig()
 {
-    String configuration = readDataFromSD("configuration.txt");
+    String configuration = readSD("configuration.txt");
     configuration = configurationModel();
     return configuration;
 }
@@ -9,6 +9,6 @@ String getAllConfig()
 String startDevice()
 {
     //
-    String data = readDataFromSD("measurement.txt");
+    String data = readSD("measurement.txt");
     return data;
 }
