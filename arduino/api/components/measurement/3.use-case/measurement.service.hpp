@@ -3,7 +3,7 @@
 String getMeasurementById(AsyncWebServerRequest *request, String path)
 {
   int id = GetIdFromURL(request, path);
-  String data = readDataFromSD("filename.txt");
+  String data = readDataFromSD("nameFile.txt");
   String filteredData = findById(data, id);
   return filteredData;
 }
@@ -12,13 +12,13 @@ String getMeasurementById(AsyncWebServerRequest *request, String path)
 
 String getMeasurementtAll(AsyncWebServerRequest *request)
 {
-  String data = readDataFromSD("filename.txt");
+  String data = readDataFromSD("nameFile.txt");
   return data;
 }
 
 String getFiltered(AsyncWebServerRequest *request)
 {
-  String data = readDataFromSD("filename.txt");
+  String data = readDataFromSD("nameFile.txt");
   return data;
 }
 

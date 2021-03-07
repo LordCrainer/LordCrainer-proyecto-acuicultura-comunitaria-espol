@@ -24,8 +24,8 @@
 // COMPONENTES DEL API REST
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
-#include "api/components/file-system/controller.hpp"
-#include "api/components/sd-card/sd.service.hpp"
+#include "api/components/file-system/2.adapter/controller.hpp"
+#include "api/components/sd-card/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
 #include "api/components/measurement/2.adapter/controller.hpp"
 #include "api/components/device/1.interface/controller.hpp"
@@ -39,33 +39,34 @@ void setup()
   delay(1000);
   ConnectWiFi_STA();
   InitServer();
-  initFS();
-  //boolean isActived = initSD();
-  //String initializeSD = "\nINICIANDO SD: " + (String)isActived;
+  ;
+  byte isActived = initSD();
+  String initializedSD = "\nINICIANDO SD: " + (String)isActived;
+  Serial.println(initializedSD);
   // String serverOn = "ESCUCHANDO EN EL PUERTO: " + (String)port;
-
-  //Serial.println(initializeSD);
-/*   Serial.println(serverOn);
-  setupLCD("BIENVENIDO");
-  delay(1000);
-  using namespace sdfat;
-  SdFat SD;
-  if (!SD.begin(PIN_SD))
-  {
-    Serial.println("initialization failed!");
-    return;
-  }
-  Serial.println("initialization done."); */
 }
 
 void loop()
 {
-  /* Serial.println("SERVIDOR ESTABLECIDO...");
-  String readedData = testSD();
-  Serial.println(readedData);
-  delay(3000); */
+
   //controlBoton();
   //menuPrin();
+}
+
+String writeOnSD()
+{
+  String json;
+  DynamicJsonDocument doc(250);
+  doc["data"] = "1000";
+  doc["name"] = "Comunitarias";
+  serializeJson(doc, json);
+  return json;
+}
+String justShowName(String data, String key)
+{
+  DynamicJsonDocument doc(250);
+  deserializeJson(doc, data);
+  return doc[key];
 }
 
 /*

@@ -15,10 +15,11 @@ void InitServer()
 	server.on("/headers", HTTP_GET, getHeaders);		  // /headers/12  /headers?pool_id=1
 	server.on("/parameters", HTTP_GET, getAllParameters); // /parameters?pool_id=1 /parameters/12
 
-	// TESTING FS
-	server.on("/writefs", HTTP_GET, writingFS);
-	server.on("/readfs", HTTP_GET, readingFS);
-	server.on("/appendfs", HTTP_GET, appendFS);
+	// TESTING SD
+	server.on("/write_sd", HTTP_GET, writingSD);
+	server.on("/read_sd", HTTP_GET, readingSD);
+	server.on("/append_sd", HTTP_GET, appendSD);
+	server.on("/directory_sd", HTTP_GET, directorySD);
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
