@@ -20,6 +20,7 @@ void InitServer()
 	server.on("/read_sd", HTTP_GET, readingSD);
 	server.on("/append_sd", HTTP_GET, appendSD);
 	server.on("/directory_sd", HTTP_GET, directorySD);
+	server.on("/test/measurement", HTTP_GET, testingMeasurementStruct);
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, getRequest); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);

@@ -22,6 +22,11 @@ void readingSD(AsyncWebServerRequest *request)
 
 void appendSD(AsyncWebServerRequest *request)
 {
+    String json;
+    StaticJsonDocument<24> doc;
+    doc["status"] = "OK";
+    serializeJson(doc, json);
+    request->send(200, "application/json", json);
 }
 
 void directorySD(AsyncWebServerRequest *request)

@@ -2,6 +2,17 @@
 
 const char *PARAM_FILTER = "filter";
 
+void testingMeasurementStruct(AsyncWebServerRequest *request)
+{
+  IMeasurement mes;
+  mes.params[0].value = 10;
+  String json;
+  DynamicJsonDocument doc(90);
+  doc[mes.status].as<const char[3]>() = "10";
+  serializeJson(doc, json);
+  request->send(200, "application/json", json);
+}
+
 void getRequest(AsyncWebServerRequest *request)
 {
   String path = "/measurement/";

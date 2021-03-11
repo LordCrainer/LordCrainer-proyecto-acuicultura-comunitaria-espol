@@ -1,9 +1,19 @@
-void homeRequest(AsyncWebServerRequest *request) {
+void merge(JsonObject dest, JsonObjectConst src)
+{
+  for (auto kvp : src)
+  {
+    dest[kvp.key()] = kvp.value();
+  }
+}
+
+void homeRequest(AsyncWebServerRequest *request)
+{
   request->send(200, "text/plain", "Hello, world");
 }
 
-void notFound(AsyncWebServerRequest *request) {
-	request->send(404, "text/plain", "Not found");
+void notFound(AsyncWebServerRequest *request)
+{
+  request->send(404, "text/plain", "Not found");
 }
 
 String GetBodyContent(uint8_t *data, size_t len)

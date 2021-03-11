@@ -1,16 +1,3 @@
-struct Config
-{
-  int pool = 1;
-  int temp = 30;
-  int oxi = 1000;
-  int ph = 5;
-  bool alertaTemp = true;
-  bool alertaOxi = true;
-  bool alertaPh = false;
-  String cadena = "";
-};
-Config config;
-
 byte writeSD(String nameFile, String data)
 {
   File file;

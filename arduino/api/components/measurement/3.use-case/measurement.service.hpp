@@ -27,7 +27,6 @@ String measurementData()
   String output;
   IMeasurement measurement;
   StaticJsonDocument<384> root;
-
   root["pool_id"] = "1";
   root["device_id"] = "aa";
 
