@@ -2,18 +2,7 @@
 
 const char *PARAM_FILTER = "filter";
 
-void testingMeasurementStruct(AsyncWebServerRequest *request)
-{
-  IMeasurement mes;
-  mes.params[0].value = 10;
-  String json;
-  DynamicJsonDocument doc(90);
-  doc[mes.status].as<const char[3]>() = "10";
-  serializeJson(doc, json);
-  request->send(200, "application/json", json);
-}
-
-void getRequest(AsyncWebServerRequest *request)
+void Measurement(AsyncWebServerRequest *request)
 {
   String path = "/measurement/";
   String response;
@@ -21,7 +10,7 @@ void getRequest(AsyncWebServerRequest *request)
   // response = request->url().indexOf(path) != -1 ? getMeasurementById(request, path) : getMeasurementtAll(request);
   if (request->url().indexOf(path) != -1)
   {
-    response = getMeasurementById(request, path);
+    response = getOneMeasurement(request, path);
   }
   /* else if (request->hasParam(PARAM_FILTER))
   {
@@ -29,7 +18,7 @@ void getRequest(AsyncWebServerRequest *request)
   } */
   else
   {
-    response = getMeasurementtAll(request);
+    response = getAllMeasurementt(request);
   }
   request->send(200, "application/json", response);
 }
@@ -46,10 +35,10 @@ void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size
     return;
   }
 
-  String string_data = doc["data"];
-  String message = "Create " + string_data;
+  String json = doc["data"];
+  String message = "Create " + json;
   Serial.println(message);
-  request->send(200, "application/json", message);
+  request->send(200, "application/json", json);
 }
 
 void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)

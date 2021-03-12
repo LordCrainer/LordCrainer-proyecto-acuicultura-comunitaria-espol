@@ -13,7 +13,11 @@
         "ostream": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "vector": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "typeinfo": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

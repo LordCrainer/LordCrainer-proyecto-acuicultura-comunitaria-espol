@@ -1,19 +1,20 @@
 #include "../4.domain/measurement.interface.hpp"
 
-String getMeasurementById(AsyncWebServerRequest *request, String path)
-{
-  int id = GetIdFromURL(request, path);
-  String data = readSD("nameFile.txt");
-  String filteredData = findById(data, id);
-  return filteredData;
-}
-
-
-
-String getMeasurementtAll(AsyncWebServerRequest *request)
+String getAllMeasurementt(AsyncWebServerRequest *request)
 {
   String data = readSD("nameFile.txt");
   return data;
+}
+String getOneMeasurement(AsyncWebServerRequest *request, String path)
+{
+  int id = GetIdFromURL(request, path);
+  String data = readSD("data_p1_20210312_0432.json");
+  if (data == "NO")
+  {
+    return "";
+  }
+  String filteredData = findById(data, id);
+  return filteredData;
 }
 
 String getFiltered(AsyncWebServerRequest *request)

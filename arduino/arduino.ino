@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
+#define ARDUINOJSON_USE_LONG_LONG 1
 #include <SPI.h>
 #include "SD.h"
 // #include <SD.h>
@@ -6,7 +8,6 @@
 #include <ESP8266WiFi.h>
 #include <ESPAsyncWebServer.h>
 #include <FS.h>
-#define ARDUINOJSON_USE_LONG_LONG 1
 #include <ArduinoJson.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>

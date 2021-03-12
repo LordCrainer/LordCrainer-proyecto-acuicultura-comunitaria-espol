@@ -29,6 +29,7 @@ String readSD(String nameFile)
   else
   {
     Serial.println("Error al abrir el archivo");
+    return "NO";
   }
   return data;
 }

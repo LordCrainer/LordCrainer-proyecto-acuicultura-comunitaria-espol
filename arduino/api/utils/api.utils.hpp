@@ -70,23 +70,24 @@ void getHeaders(AsyncWebServerRequest *request)
 
 void getAllParameters(AsyncWebServerRequest *request)
 {
-  int params = request->params();
-  for (int i = 0; i < params; i++)
+  const size_t capacity = JSON_ARRAY_SIZE(3) + 4 * JSON_OBJECT_SIZE(1) + 25;
+  //String json;
+  //DynamicJsonDocument doc(capacity);
+  int nParams = request->params();
+  for (int i = 0; i < nParams; i++)
   {
     AsyncWebParameter *p = request->getParam(i);
+    //JsonArray paramsList = doc.to<JsonArray>();
+    //paramsList["pool_id"] = p->value().~String();
+
     if (p->isFile())
     { //p->isPost() is also true
       Serial.printf("FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
-    }
-    else if (p->isPost())
-    {
-      Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-    }
-    else
-    {
-      Serial.printf("GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      //paramsList["size"] = p->size();
     }
   }
+  //serialize(doc, paramsList);
+  //return paramsList;
 }
 
 void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
