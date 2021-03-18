@@ -11,6 +11,18 @@ byte writeSD(String nameFile, String data)
   return 0;
 }
 
+byte createSD(String filename)
+{
+  File file;
+  file = SD.open(nameFile, FILE_WRITE);
+  if (file)
+  {
+    file.close();
+    return 1;
+  }
+  return 0;
+}
+
 String readSD(String nameFile)
 {
   File file;
