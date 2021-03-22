@@ -10,6 +10,8 @@
 #include <FS.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include <LiquidCrystal_I2C.h>
 #include "LittleFS.h"
 

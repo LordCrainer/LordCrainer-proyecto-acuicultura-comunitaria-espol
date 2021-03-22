@@ -8,10 +8,6 @@ void allConfiguration(AsyncWebServerRequest *request)
 
 void startMeasurement(AsyncWebServerRequest *request)
 {
-  // Capturar el tiempo actual
-  // Verificar si existe un archivo parecido
-  // Crear el archivo
-  // 
   String response = startDevice();
   request->send(200, "application/json", response);
 }

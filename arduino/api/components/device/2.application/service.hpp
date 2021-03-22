@@ -8,6 +8,9 @@ String getAllConfig()
 
 String startDevice()
 {
+    // Capturar el tiempo actual
+    // Verificar si existe un archivo parecido
+    // Crear el archivo
     //
     String data = readSD("measurement.txt");
     return data;
