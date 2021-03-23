@@ -10,8 +10,9 @@ String startDevice()
 {
     // Capturar el tiempo actual
     // Verificar si existe un archivo parecido
-    // Crear el archivo
-    //
+    // Crear el archivo P1_Fecha
+    // Añadir el nombre el archivo de registro
+    // 
     String data = readSD("measurement.txt");
     return data;
 }
