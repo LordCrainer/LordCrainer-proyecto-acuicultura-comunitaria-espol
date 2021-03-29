@@ -39,18 +39,22 @@ void setup_prog()
 }
 
 // Toma de Temperatura
-float getTemp()
+IParams getTemp()
 {
-  sensorTemp.requestTemperatures();
-  return sensorTemp.getTempCByIndex(0);
+  IParams params;
+  params.name = "Temperature";
+  params.value = sensorTemp.requestTemperatures();
+  return params;
   // Serial.print("\tTemperatura= ");
   // Serial.print(temp);
   // Serial.println(" C");
 }
 
 // Medicion PH
-float getPh()
+IParams getPh()
 {
+  IParams params;
+  params.name = "PH";
   int ph = 0;
   int prom = 0;
   for (int i = 0; i < 20; i++)
@@ -60,20 +64,24 @@ float getPh()
   }
 
   prom = prom / 20;
-  return (7 + ((prom - 605) * 3 / (-18))) / 10;
+  params.value = (7 + ((prom - 605) * 3 / (-18))) / 10;
+  return params;
   // Serial.print("\tPH = ");
   // Serial.println(ph, 2);
 }
 
 //Medicion Oxigeno Disuelto
-void getDOxygen()
+IParams getDOxygen()
 {
+  IParams params;
+  params.name = "DO";
   uint8_t temperature = (uint8_t)READ_TEMP;
   uint16_t oxyD = analogRead(D_OXY_PIN);
   uint32_t voltage = uint32_t(VOLT_REF) * oxyD / ADC_RES;
   //Serial.print("\tOxigeno Disuelto = ");
   //Serial.print();
   //Serial.println(" mg/L ");
-  return float(readingOxygen(voltage, temperature) / 1000);
+  params.value = float(readingOxygen(voltage, temperature) / 1000);
+  return params;
   // delay(10000);
 }

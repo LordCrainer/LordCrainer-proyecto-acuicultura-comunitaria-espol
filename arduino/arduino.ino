@@ -19,8 +19,9 @@
 
 // CONFIGURACIONES GENERALES
 #include "config/Server.hpp"
-#include "config/wifi-config.h" // Sustituir con datos de vuestra red
-#include "config/Sd-config.hpp" // Sustituir con datos de vuestra red
+#include "config/wifi-config.h"     // Sustituir con datos de vuestra red
+#include "config/Sd-config.hpp"     // Sustituir con datos de vuestra red
+#include "config/sensor-config.hpp" // Sustituir con datos de vuestra red
 #include "config/lcd-config.hpp"
 // UTILS
 #include "api/utils/api.utils.hpp"
@@ -40,7 +41,7 @@ void setup()
 {
   Serial.begin(115200);
   delay(1000);
-  ConnectWiFi_STA();
+  ConnectWiFi_AP();
   InitServer();
   ;
   byte isActived = initSD();
