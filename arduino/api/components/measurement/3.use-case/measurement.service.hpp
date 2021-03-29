@@ -2,7 +2,7 @@
 
 String getAllMeasurementt(AsyncWebServerRequest *request)
 {
-  String data = readSD("nameFile.txt");
+  String data = readSD("filename.txt");
   return data;
 }
 String getOneMeasurement(AsyncWebServerRequest *request, String path)
@@ -19,7 +19,7 @@ String getOneMeasurement(AsyncWebServerRequest *request, String path)
 
 String getFiltered(AsyncWebServerRequest *request)
 {
-  String data = readSD("nameFile.txt");
+  String data = readSD("filename.txt");
   return data;
 }
 

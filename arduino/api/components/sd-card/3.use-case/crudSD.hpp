@@ -1,7 +1,7 @@
-byte writeSD(String nameFile, String data)
+byte writeSD(String filename, String data)
 {
   File file;
-  file = SD.open(nameFile, FILE_WRITE);
+  file = SD.open(filename, FILE_WRITE);
   if (file)
   {
     file.print(data);
@@ -14,7 +14,7 @@ byte writeSD(String nameFile, String data)
 byte createSD(String filename)
 {
   File file;
-  file = SD.open(nameFile, FILE_WRITE);
+  file = SD.open(filename, FILE_WRITE);
   if (file)
   {
     file.close();
@@ -23,12 +23,12 @@ byte createSD(String filename)
   return 0;
 }
 
-String readSD(String nameFile)
+String readSD(String filename)
 {
   File file;
   String data;
   char readedCharacter;
-  file = SD.open(nameFile, FILE_READ);
+  file = SD.open(filename, FILE_READ);
   if (file)
   {
     while (file.available())

@@ -3,15 +3,14 @@
 #define ARDUINOJSON_USE_LONG_LONG 1
 #include <SPI.h>
 #include "SD.h"
-// #include <SD.h>
 #include <SoftwareSerial.h>
 #include <ESP8266WiFi.h>
 #include <ESPAsyncWebServer.h>
 #include <FS.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
+// #include <OneWire.h>
+// #include <DallasTemperature.h>
 #include <LiquidCrystal_I2C.h>
 #include "LittleFS.h"
 
@@ -23,13 +22,14 @@
 #include "config/wifi-config.h" // Sustituir con datos de vuestra red
 #include "config/Sd-config.hpp" // Sustituir con datos de vuestra red
 #include "config/lcd-config.hpp"
-
-// COMPONENTES DEL API REST
+// UTILS
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
+// COMPONENTES DEL API REST
 #include "api/components/file-system/2.adapter/controller.hpp"
 #include "api/components/sd-card/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
+// #include "api/components/sensor/3.application/service.hpp"
 #include "api/components/measurement/2.adapter/controller.hpp"
 #include "api/components/device/1.interface/controller.hpp"
 
