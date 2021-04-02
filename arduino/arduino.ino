@@ -9,8 +9,8 @@
 #include <FS.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
-// #include <OneWire.h>
-// #include <DallasTemperature.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include <LiquidCrystal_I2C.h>
 #include "LittleFS.h"
 
@@ -30,7 +30,7 @@
 #include "api/components/file-system/2.adapter/controller.hpp"
 #include "api/components/sd-card/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
-// #include "api/components/sensor/3.application/service.hpp"
+#include "api/components/sensor/3.application/service.hpp"
 #include "api/components/measurement/2.adapter/controller.hpp"
 #include "api/components/device/1.interface/controller.hpp"
 
@@ -41,7 +41,7 @@ void setup()
 {
   Serial.begin(115200);
   delay(1000);
-  ConnectWiFi_AP();
+  ConnectWiFi_STA();
   InitServer();
   ;
   byte isActived = initSD();

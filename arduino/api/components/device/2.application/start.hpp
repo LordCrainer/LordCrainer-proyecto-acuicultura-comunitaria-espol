@@ -1,10 +1,12 @@
 String startDevice()
 {
-    // Obtener el dato de la piscina a medir
-    String pool = "p1";
+    // Obtener el dato de la piscina a medir pool_id
+    String pool = "1";
     // Capturar el tiempo actual: 2021-03-01-13-01
     String time = "20210301-1301";
-    String filename = pool + time;
+    String filename = "P" + pool + "_" + time + ".json"; // P1_20210301-1301.json
+    // Leer los datos de los sensores
+    // const byte temp = getTemp();
     // Verificar si existe un archivo parecido
     // const existFile = verifyFile(filename);
     const byte existFile = 1;
@@ -17,7 +19,6 @@ String startDevice()
     const byte isCreated = createSD(filename);
     // Añadir el nombre al archivo de registro
 
-    // Leer los datos de los sensores
     // JsonDocument arr = JsonArray<String>;
     // arr.add();
     // Almacenarlos en una variable
