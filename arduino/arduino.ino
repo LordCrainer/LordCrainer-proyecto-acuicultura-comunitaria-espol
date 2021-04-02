@@ -20,8 +20,9 @@
 // CONFIGURACIONES GENERALES
 #include "config/Server.hpp"
 #include "config/wifi-config.h"     // Sustituir con datos de vuestra red
-#include "config/Sd-config.hpp"     // Sustituir con datos de vuestra red
-#include "config/sensor-config.hpp" // Sustituir con datos de vuestra red
+#include "config/Sd-config.hpp"     
+#include "config/sensor-config.hpp" 
+#include "config/measurement-config.hpp" 
 #include "config/lcd-config.hpp"
 // UTILS
 #include "api/utils/api.utils.hpp"
