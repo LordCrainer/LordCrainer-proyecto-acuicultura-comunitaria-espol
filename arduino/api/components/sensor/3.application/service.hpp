@@ -1,5 +1,5 @@
 // Definimos los pines para los sensores
-#include "../4.model/model.hpp"
+#include "../4.domain/model.hpp"
 
 #define PH_PIN A0
 
