@@ -1,7 +1,9 @@
 // Definimos los pines para los sensores
-#define PH_PIN A2
+#include "../4.model/model.hpp"
 
-#define D_OXY_PIN A1
+#define PH_PIN A0
+
+#define D_OXY_PIN A0
 
 //Variables
 #define VOLT_REF 500  // mv
@@ -38,12 +40,13 @@ void setup_prog()
   sensorTemp.begin();
 }
 
-// Toma de Temperatura
+// Medición de Temperatura
 IParams getTemp()
 {
+  sensorTemp.requestTemperatures();
   IParams params;
   params.name = "Temperature";
-  params.value = sensorTemp.requestTemperatures();
+  params.value = sensorTemp.getTempCByIndex(0);
   return params;
   // Serial.print("\tTemperatura= ");
   // Serial.print(temp);
@@ -73,6 +76,7 @@ IParams getPh()
 //Medicion Oxigeno Disuelto
 IParams getDOxygen()
 {
+  uint8_t READ_TEMP;
   IParams params;
   params.name = "DO";
   uint8_t temperature = (uint8_t)READ_TEMP;
