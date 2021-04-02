@@ -8,6 +8,6 @@ const byte CALIBRATION_TEMP = 25;   //°C
 struct IParams
 {
     String name;
-    float value;
-    char alert[3];
+    double value;
+    char alert[4] = "OK";
 };
