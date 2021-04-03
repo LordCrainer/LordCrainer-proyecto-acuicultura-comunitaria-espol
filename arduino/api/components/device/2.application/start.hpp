@@ -18,13 +18,12 @@ String startDevice()
     // data.params = [ temp, ph ];
     
     // modelAllSensor(temp); // [{"name": "Temperature"}]
-
     temp.name = "Temperature";
     temp.value = 10.0;
     // // getPh();
     ph.value = 7.0;
     ph.name = "PH";
-
+    
     // Verificar si existe un archivo parecido
     // const existFile = verifyFile(filename);
     const byte existFile = 1;
