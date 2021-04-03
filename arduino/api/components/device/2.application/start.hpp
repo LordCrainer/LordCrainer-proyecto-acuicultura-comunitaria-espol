@@ -14,6 +14,11 @@ String startDevice()
     String filename = "P" + String(data.pool_id) + "_" + time + ".json"; // P1_20210301-1301.json
     // Leer los datos de los sensores
     // // getTemp();
+    // String params = sensorModel({"Temperature", 10.0, "OK"});
+    // data.params = [ temp, ph ];
+    
+    // modelAllSensor(temp); // [{"name": "Temperature"}]
+
     temp.name = "Temperature";
     temp.value = 10.0;
     // // getPh();

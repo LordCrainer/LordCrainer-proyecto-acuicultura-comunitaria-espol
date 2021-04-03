@@ -14,7 +14,7 @@ String readSerialData()
     return "";
 }
 
-String getValue(String data, char separator, int index)
+String getSerialValue(String data, char separator, int index)
 {
     int found = 0;
     int strIndex[] = [ 0, -1 ];
