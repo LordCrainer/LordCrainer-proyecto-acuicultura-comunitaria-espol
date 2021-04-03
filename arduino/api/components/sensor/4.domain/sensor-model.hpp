@@ -15,7 +15,9 @@ String modelAllSensor(IParams data1, IParams data2)
     StaticJsonDocument<150> doc;
     String Temp = sensorModel(data1);
     String PH = sensorModel(data2);
-
+    JsonArray array = doc.to<JsonArray>();
+    array.add(Temp);
+    array.add(PH);
     //arr.add(Temp);
     //arr.add(PH);
     serializeJson(doc, json);

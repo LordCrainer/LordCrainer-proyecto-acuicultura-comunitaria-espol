@@ -95,7 +95,7 @@ void getAllParameters(AsyncWebServerRequest *request)
 void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
 {
   String json;
-  DynamicJsonDocument doc(250);
+  StaticJsonDocument<150> doc;
   doc["url"] = request->url();
   doc["host"] = request->host();
   doc["method"] = request->method();

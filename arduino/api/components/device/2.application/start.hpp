@@ -1,29 +1,28 @@
-String startDevice()
+String getAllSensor()
 {
-    IMeasurement data;
     IParams temp;
     IParams ph;
-    // Obtener el dato de la piscina a medir pool_id
-
-    data.device_id = "ABCD";
-    data.created_at = "1517383146498";
-    data.status = "OK";
-    data.pool_id = 1;
-    // Capturar el tiempo actual: 2021-03-01-13-01
-    String time = "20210301-1301";
-    String filename = "P" + String(data.pool_id) + "_" + time + ".json"; // P1_20210301-1301.json
-    // Leer los datos de los sensores
-    // // getTemp();
-    // String params = sensorModel({"Temperature", 10.0, "OK"});
-    // data.params = [ temp, ph ];
-    
-    // modelAllSensor(temp); // [{"name": "Temperature"}]
     temp.name = "Temperature";
     temp.value = 10.0;
     // // getPh();
     ph.value = 7.0;
     ph.name = "PH";
-    
+    return modelAllSensor(temp, ph);
+}
+
+String startDevice()
+{
+    String time = "1517383146498";
+    IMeasurement measurement;
+    measurement.device_id = "ABCD";
+    measurement.created_at = time;
+    measurement.status = "OK";
+    measurement.pool_id = 1;
+    // Leer los datos de los sensores
+    measurement.params = getAllSensor();
+    const String data = measurementModel(measurement);
+    String filename = setFilename("P", measurement.pool_id, time, "json"); // P1_1517383146498.json
+
     // Verificar si existe un archivo parecido
     // const existFile = verifyFile(filename);
     const byte existFile = 1;

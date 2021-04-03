@@ -1,3 +1,5 @@
+#include "../4.domain/file-model.hpp"
+
 void initFS()
 {
     if (!LittleFS.begin())
