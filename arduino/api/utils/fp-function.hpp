@@ -8,10 +8,14 @@ typedef String (*callFunction)(String, byte);
 
 String repeatFunction(callFunction func, byte iteration, String time, byte pool_id)
 {
-    String allData;
-    for (i = 0; i < iteration; i++)
+    int capacity = 210 * iteration;
+    String json;
+    DynamicJsonDocument doc(capacity);
+    JsonArray arr = doc.as<JsonArray>();
+    for (byte i = 0; i < iteration; i++)
     {
-        allData = allData + func(time, pool_id);
+        arr.add(func(time, pool_id));
     }
-    return allData;
+    serializeJson(doc, json);
+    return json;
 }
