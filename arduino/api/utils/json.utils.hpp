@@ -1,5 +1,3 @@
-// callFunction: Función como parámetro en otra función.
-typedef void (*callFunction)(void);
 
 // Convertir un
 String objectToJsonDynamic(String key, String value, int sizeDoc = 1024)

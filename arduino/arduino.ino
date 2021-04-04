@@ -25,6 +25,7 @@
 #include "config/measurement-config.hpp" 
 #include "config/lcd-config.hpp"
 // UTILS
+#include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
 // COMPONENTES DEL API REST

@@ -1,4 +1,4 @@
-#include "../3.use-case/actions.hpp"
+#include "../3.use-case/index.hpp"
 
 const char *PARAM_FILTER = "filter";
 
@@ -10,7 +10,7 @@ void Measurement(AsyncWebServerRequest *request)
   // response = request->url().indexOf(path) != -1 ? getMeasurementById(request, path) : getMeasurementtAll(request);
   if (request->url().indexOf(path) != -1)
   {
-    response = getOneMeasurement(request, path);
+    response = readOneMeasurement(request, path);
   }
   /* else if (request->hasParam(PARAM_FILTER))
   {
@@ -18,7 +18,7 @@ void Measurement(AsyncWebServerRequest *request)
   } */
   else
   {
-    response = getAllMeasurementt(request);
+    response = readAllMeasurement(request);
   }
   request->send(200, "application/json", response);
 }
