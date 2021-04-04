@@ -33,6 +33,7 @@ String startDevice()
     }
     // Crear el archivo P1_2021-03-01-13-01
     const byte isCreated = createSD(filename);
+    const byte isWritten = writeSD(filename, data);
     // Añadir el nombre al archivo de registro
 
     // JsonDocument arr = JsonArray<String>;
