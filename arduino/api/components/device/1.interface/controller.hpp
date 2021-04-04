@@ -1,8 +1,8 @@
 #include "../2.application/index.hpp"
 
-void allConfiguration(AsyncWebServerRequest *request)
+void getAllConfig(AsyncWebServerRequest *request)
 {
-  String data = getAllConfig();
+  String data = allConfig();
   request->send(200, "application/json", data);
 }
 

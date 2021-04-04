@@ -2,7 +2,7 @@
 
 const char *PARAM_FILTER = "filter";
 
-void Measurement(AsyncWebServerRequest *request)
+void getMeasurement(AsyncWebServerRequest *request)
 {
   String path = "/measurement/";
   String response;

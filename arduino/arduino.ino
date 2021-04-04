@@ -30,7 +30,7 @@
 #include "api/utils/json.utils.hpp"
 // COMPONENTES DEL API REST
 #include "api/components/file-system/2.adapter/controller.hpp"
-#include "api/components/sd-card/controller.hpp"
+#include "api/components/sd-card/2.adapter/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
 #include "api/components/sensor/2.adapter/controller.hpp"
 #include "api/components/measurement/2.adapter/controller.hpp"
