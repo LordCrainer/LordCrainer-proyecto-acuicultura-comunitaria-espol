@@ -70,12 +70,14 @@ void getHeaders(AsyncWebServerRequest *request)
 
 void getAllParameters(AsyncWebServerRequest *request)
 {
-  const size_t capacity = JSON_ARRAY_SIZE(3) + 4 * JSON_OBJECT_SIZE(1) + 25;
-  String json;
-  StaticJsonDocument<capacity> doc;
+
+  // const size_t capacity = JSON_ARRAY_SIZE(3) + 4 * JSON_OBJECT_SIZE(1) + 25;
+  //String json;
+  //StaticJsonDocument<capacity> doc;
   int nParams = request->params();
-  JsonArray paramsList = doc.to<JsonArray>();
-  JsonObject param = doc.createNestedObject();
+  Serial.println(nParams);
+  //JsonArray paramsList = doc.to<JsonArray>();
+  //JsonObject param = doc.createNestedObject();
   for (int i = 0; i < nParams; i++)
   {
     AsyncWebParameter *p = request->getParam(i);
@@ -88,6 +90,7 @@ void getAllParameters(AsyncWebServerRequest *request)
       //paramsList["size"] = p->size();
     }
   }
+  request->send(200, "application/json", {});
   //serialize(doc, json);
   //return json;
 }
