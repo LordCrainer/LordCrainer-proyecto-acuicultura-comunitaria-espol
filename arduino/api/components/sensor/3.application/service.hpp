@@ -89,3 +89,16 @@ IParams getDOxygen()
   return params;
   // delay(10000);
 }
+
+// Sensor: Captura los datos de todos los sensores
+String getAllSensor()
+{
+  IParams temp;
+  IParams ph;
+  temp.name = "Temperature";
+  temp.value = 10.0;
+  // // getPh();
+  ph.value = 7.0;
+  ph.name = "PH";
+  return modelAllSensor(temp, ph);
+}

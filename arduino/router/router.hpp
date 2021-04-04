@@ -23,9 +23,9 @@ void InitServer()
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, Measurement); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
-	
+
 	// DEVICE
-	server.on("/device/start", HTTP_GET, startMeasurement);
+	server.on("/device/start", HTTP_GET, startDevice); // ?pool_id=1
 	server.on("/device/configuration", HTTP_GET, allConfiguration);
 
 	// ERROR
