@@ -1,4 +1,4 @@
-String readSerialData()
+/* String readSerialData()
 {
     String rdata;
     String myString;
@@ -12,12 +12,12 @@ String readSerialData()
         return String;
     }
     return "";
-}
+} */
 
-String getSerialValue(String data, char separator, int index)
+/* String getSerialValue(String data, char separator, int index)
 {
     int found = 0;
     int strIndex[] = [ 0, -1 ];
     int maxIndex = data.length() - 1;
     
-}
+} */

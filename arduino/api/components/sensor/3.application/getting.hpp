@@ -11,10 +11,6 @@
 #define CAL_VOLT 1600 //mv
 #define CAL_TEMP 25   //°C
 
-OneWire ourWire(4); // Se establece el pin 4
-
-DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
-
 const uint16_t DO_TABLE[41] = {
     14460, 14220, 13820, 13440, 13090, 12740, 12420, 12110, 11810, 11530,
     11260, 11010, 10770, 10530, 10300, 10080, 9860, 9660, 9460, 9270,
