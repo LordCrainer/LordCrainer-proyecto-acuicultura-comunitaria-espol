@@ -11,15 +11,32 @@ String repeatFunction(callFunction func, byte iteration, String time, byte pool_
     int capacity = 210 * iteration;
     String json;
     DynamicJsonDocument doc(capacity);
-    // deserializeJson(doc, func(time, pool_id));
-    
-    JsonArray arr = doc.as<JsonArray>();
+    String data;
+    /*     deserializeJson(doc, );
+    JsonObject root = doc.as<JsonObject>();
+    const char *value = root["pool_id"];
+    Serial.println(String(value)); */
+    // JsonArray arr = doc.as<JsonArray>();
+    JsonArray params = doc.createNestedArray("params");
     for (byte i = 0; i < iteration; i++)
     {
-        Serial.println(func(time, pool_id));
-        arr.add(func(time, pool_id));
+        data = func(time, pool_id);
+        data.replace("\\", "");
+        // Serial.println("[" + data + "]");
+        // arr[i] = "value";
+        params.add(data);
     }
+    Serial.println("Saliendo del for: ");
     serializeJson(doc, json);
-    serializeJson(doc, Serial);
+    Serial.println(json);
+    DynamicJsonDocument doc2(capacity);
+    deserializeJson(doc2, json);
+    JsonObject rep = doc2["params"];
+    const char *value = doc2["params"];
+    const char *value2 = doc2[0];
+    Serial.println("\n VALUE: ");
+    Serial.println(value);
+    Serial.println(value2);
+
     return json;
 }

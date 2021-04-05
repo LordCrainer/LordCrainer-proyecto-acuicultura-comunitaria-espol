@@ -89,6 +89,7 @@ void getAllParameters(AsyncWebServerRequest *request)
       Serial.printf("FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
       //paramsList["size"] = p->size();
     }
+    Serial.printf("FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
   }
   request->send(200, "application/json", {});
   //serialize(doc, json);
