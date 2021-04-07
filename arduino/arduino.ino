@@ -25,6 +25,7 @@
 #include "config/measurement-config.hpp" 
 #include "config/lcd-config.hpp"
 // UTILS
+#include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
@@ -34,7 +35,7 @@
 #include "api/components/lcd/lcd.service.hpp"
 #include "api/components/sensor/2.adapter/controller.hpp"
 #include "api/components/measurement/2.adapter/controller.hpp"
-#include "api/components/device/1.interface/controller.hpp"
+#include "api/components/device/2.adapter/controller.hpp"
 
 // RUTAS DEL API-REST
 #include "router/router.hpp"
