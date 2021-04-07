@@ -1,7 +1,7 @@
 // Inicia el proceso de medición y guardado de los datos
 String startMeasurement(AsyncWebServerRequest *request)
 {
-    String time = getTime() | "1517383146498"; //getTime();
+    String time = "1517383146498"; //getTime();
     byte iteration = getParameterByName(request, "iteration").toInt() | 10;
     byte pool_id = getParameterByName(request, "pool_id").toInt() | 1;
     String data = getAllMeasurement(time, pool_id, iteration);
