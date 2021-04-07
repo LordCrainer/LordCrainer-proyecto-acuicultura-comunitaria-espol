@@ -29,8 +29,5 @@ String getAllMeasurement(String time, byte pool_id, const byte numMed)
         }
         json = data + "," + json;
     }
-    json = "[" + json + "]";
-    json = serializedToArray(json, capacity);
-    Serial.println(json);
-    return json;
+    return serializedToArray(json, capacity);
 }

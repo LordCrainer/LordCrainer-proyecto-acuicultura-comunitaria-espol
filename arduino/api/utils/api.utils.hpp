@@ -68,7 +68,7 @@ void getHeaders(AsyncWebServerRequest *request)
   }
 }
 
-String getOneParameter(AsyncWebServerRequest *request, String param)
+String getParameterByName(AsyncWebServerRequest *request, const char *param)
 {
   if (request->hasArg(param))
   {
