@@ -1,4 +1,4 @@
-#include "../2.application/index.hpp"
+#include "../3.application/index.hpp"
 
 void getAllConfig(AsyncWebServerRequest *request)
 {
@@ -8,6 +8,6 @@ void getAllConfig(AsyncWebServerRequest *request)
 
 void startDevice(AsyncWebServerRequest *request)
 {
-  String response = startMeasurement();
+  String response = startMeasurement(request);
   request->send(200, "application/json", response);
 }
