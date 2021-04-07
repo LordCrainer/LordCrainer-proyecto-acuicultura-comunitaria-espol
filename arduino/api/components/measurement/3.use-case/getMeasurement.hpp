@@ -8,29 +8,29 @@ String getOneMeasurement(String time, byte pool_id)
     measurement.pool_id = pool_id;
     measurement.params = getAllSensor();
     measurement.status = "OK";
-    const String data = measurementModel(measurement);
-    return data;
+    return measurementModel(measurement);
+    ;
 }
 
-Sring getAllMeasurement(String time, byte pool_id, byte numMed)
+String getAllMeasurement(String time, byte pool_id, const byte numMed)
 {
-    int capacity = 210 * iteration;
-    DynamicJsonDocument doc(capacity);
+    int capacity = 210 * numMed;
     String data;
-    String temp;
-    byte lastIndex = numMed - 1;
+    String json;
+    const byte lastIndex = numMed - 1;
     for (byte i = 0; i < numMed; i++)
     {
         data = getOneMeasurement(time, pool_id);
         data.replace("\\", "");
         if (i == lastIndex)
         {
-            temp = temp + data;
+            json = json + data;
             break;
         }
-        temp = data + "," + temp;
-        // Serial.println("[" + data + "]");
-        // arr[i] = "value";
-        params.add(data);
+        json = data + "," + json;
     }
+    json = "[" + json + "]";
+    json = serializedToArray(json, capacity);
+    Serial.println(json);
+    return json;
 }
