@@ -16,7 +16,7 @@ void notFound(AsyncWebServerRequest *request)
   request->send(404, "text/plain", "Not found");
 }
 
-String GetBodyContent(uint8_t *data, size_t len)
+String getBodyContent(uint8_t *data, size_t len)
 {
   String content = "";
   for (size_t i = 0; i < len; i++)
@@ -26,7 +26,7 @@ String GetBodyContent(uint8_t *data, size_t len)
   return content;
 }
 
-int GetIdFromURL(AsyncWebServerRequest *request, String root)
+int getIdFromURL(AsyncWebServerRequest *request, String root)
 {
   String string_id = request->url(); // /measurement/1
   string_id.replace(root, "");       // "1"
@@ -68,21 +68,21 @@ void getHeaders(AsyncWebServerRequest *request)
   }
 }
 
+String getOneParameter(AsyncWebServerRequest *request, String param)
+{
+  if (request->hasArg(param))
+  {
+    return request->arg(param);
+  }
+  return "";
+}
+
 void getAllParameters(AsyncWebServerRequest *request)
 {
-
-  // const size_t capacity = JSON_ARRAY_SIZE(3) + 4 * JSON_OBJECT_SIZE(1) + 25;
-  //String json;
-  //StaticJsonDocument<capacity> doc;
   int nParams = request->params();
-  Serial.println(nParams);
-  //JsonArray paramsList = doc.to<JsonArray>();
-  //JsonObject param = doc.createNestedObject();
   for (int i = 0; i < nParams; i++)
   {
     AsyncWebParameter *p = request->getParam(i);
-    //param["pool_id"] = p->value().c_str();
-    //paramsList[i] = param["pool_id"];
 
     if (p->isFile())
     { //p->isPost() is also true
@@ -94,17 +94,4 @@ void getAllParameters(AsyncWebServerRequest *request)
   request->send(200, "application/json", {});
   //serialize(doc, json);
   //return json;
-}
-
-void arduinoJsonCommonVariable(AsyncWebServerRequest *request)
-{
-  String json;
-  StaticJsonDocument<150> doc;
-  doc["url"] = request->url();
-  doc["host"] = request->host();
-  doc["method"] = request->method();
-  doc["PARAMS"] = request->params();
-  doc["HEADERS"] = request->headers();
-  serializeJson(doc, json);
-  request->send(200, "application/json", json);
 }

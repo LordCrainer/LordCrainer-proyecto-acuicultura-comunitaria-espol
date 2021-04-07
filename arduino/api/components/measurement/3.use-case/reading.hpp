@@ -7,7 +7,7 @@ String readAllMeasurement(AsyncWebServerRequest *request)
 }
 String readOneMeasurement(AsyncWebServerRequest *request, String path)
 {
-  int id = GetIdFromURL(request, path); // 1
+  int id = getIdFromURL(request, path); // 1
   String data = readSD("data_p1_20210312_0432.json");
   if (data == "NO")
   {

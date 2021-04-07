@@ -25,7 +25,7 @@ void getMeasurement(AsyncWebServerRequest *request)
 
 void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
 {
-  String bodyContent = GetBodyContent(data, len);
+  String bodyContent = getBodyContent(data, len);
 
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
@@ -43,8 +43,8 @@ void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size
 
 void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
 {
-  int id = GetIdFromURL(request, "/item/");
-  String bodyContent = GetBodyContent(data, len);
+  int id = getIdFromURL(request, "/item/");
+  String bodyContent = getBodyContent(data, len);
 
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
@@ -62,8 +62,8 @@ void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, siz
 
 void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
 {
-  int id = GetIdFromURL(request, "/item/");
-  String bodyContent = GetBodyContent(data, len);
+  int id = getIdFromURL(request, "/item/");
+  String bodyContent = getBodyContent(data, len);
 
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
@@ -81,7 +81,7 @@ void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_
 
 void deleteRequest(AsyncWebServerRequest *request)
 {
-  int id = GetIdFromURL(request, "/measurement/");
+  int id = getIdFromURL(request, "/measurement/");
   String json;
   String message = String("DELETED ") + id + " SUCESSFULLY";
   json = objectToJsonDynamic("message", message, 50);
