@@ -2,8 +2,7 @@
 String startOneMeasurement(String time, byte pool_id)
 {
     IMeasurement measurement;
-    // getDeviceID
-    measurement.device_id = "ABCD";
+    measurement.device_id = "ABCD";     // getDeviceID
     measurement.created_at = time;
     measurement.pool_id = pool_id;
     measurement.params = getAllSensor();

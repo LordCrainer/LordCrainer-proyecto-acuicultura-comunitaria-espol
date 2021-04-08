@@ -11,7 +11,6 @@
 #define CAL_VOLT 1600 //mv
 #define CAL_TEMP 25   //°C
 
-
 OneWire ourWire(4); // Se establece el pin 4
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
@@ -101,5 +100,5 @@ String getAllSensor()
   // // getPh();
   ph.value = 7.0;
   ph.name = "PH";
-  return modelAllSensor(temp, ph);
+  return modelAllSensor(temp, ph);;
 }

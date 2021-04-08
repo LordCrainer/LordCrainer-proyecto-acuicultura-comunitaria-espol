@@ -7,7 +7,8 @@ String measurementModel(IMeasurement data)
     doc["device_id"] = data.device_id;
     doc["created_at"] = data.created_at;
     doc["status"] = data.status;
-    doc["data"] = data.params;
+    JsonArray params = doc.createNestedArray("params");
+    params.add(serialized(data.params));
     serializeJson(doc, json);
     return json;
 }

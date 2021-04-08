@@ -13,15 +13,7 @@ String sensorModel(IParams data)
 // Modela los datos de todos los sensores a json
 String modelAllSensor(IParams data1, IParams data2)
 {
-    String json;
-    StaticJsonDocument<150> doc;
     String Temp = sensorModel(data1);
     String PH = sensorModel(data2);
-    JsonArray array = doc.to<JsonArray>();
-    array.add(Temp);
-    array.add(PH);
-    //arr.add(Temp);
-    //arr.add(PH);
-    serializeJson(doc, json);
-    return json;
+    return Temp + "," + PH;
 }

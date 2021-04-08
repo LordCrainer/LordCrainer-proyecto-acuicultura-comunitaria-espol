@@ -10,16 +10,13 @@ void startingDevice(AsyncWebServerRequest *req)
 {
   String res;
   String iteration = getParameterByName(req, "iteration");
-  Serial.print("INTERATION IS: ");
-  Serial.println(iteration);
+  byte pool_id = getParameterByName(req, "pool_id").toInt();
   if (iteration == "")
   {
-    Serial.println("If IN");
-    res = startOneMeasurement("1517383146498", 25);
+    res = startOneMeasurement("1517383146500", pool_id);
   }
   else
   {
-    Serial.println("If OUT");
     res = startDevice(req);
   }
   req->send(200, "application/json", res);
