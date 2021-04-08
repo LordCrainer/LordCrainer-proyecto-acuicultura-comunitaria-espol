@@ -12,8 +12,6 @@ void readingSD(AsyncWebServerRequest *request)
 {
     String filename = getParameterByName(request, "filename");
     String readedData = readSD(filename);
-    Serial.println(String(readedData.length()));
-    Serial.println(readedData);
     request->send(200, "application/json", readedData);
 }
 

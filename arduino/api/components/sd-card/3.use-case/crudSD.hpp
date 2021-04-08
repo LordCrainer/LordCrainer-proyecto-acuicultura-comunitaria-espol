@@ -11,9 +11,13 @@ boolean writeSD(String filename, String data)
   return false;
 }
 
-boolean createSD(String filename)
+boolean createSD(String filename, String data)
 {
   File file;
+  const boolean existFile = SD.exists(filename);
+  if(existFile){
+    return false;
+  }
   file = SD.open(filename, FILE_WRITE);
   if (file)
   {
