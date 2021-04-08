@@ -20,12 +20,14 @@ void InitServer()
 	server.on("/read_sd", HTTP_GET, readingSD);
 	server.on("/append_sd", HTTP_GET, appendSD);
 	server.on("/directory_sd", HTTP_GET, directorySD);
+	server.on("/delete_sd", HTTP_GET, deletingSD);
 	// MEASUREMENT
-	server.on("/measurement", HTTP_GET, getMeasurement); //  /measurement?pool_id=1
+	server.on("/measurement", HTTP_GET, readingMeasurement); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
+	server.on("/measurement/start", HTTP_GET, deleteRequest); // ?pool_id=2&iteration=1
 
 	// DEVICE
-	server.on("/device/start", HTTP_GET, startDevice); // ?pool_id=1
+	server.on("/device/start", HTTP_GET, startingDevice); // ?pool_id=1
 	server.on("/device/configuration", HTTP_GET, getAllConfig);
 
 	// ERROR

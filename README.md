@@ -175,8 +175,8 @@ Las capas generales son: - INFRAESTRUCTURA - ADAPTADORES DE INTERFAZ - APLICACI�
     •	Controlador
         Esta subcapa se encarga de recibir las peticiones y datos del cliente, devolviendo siempre una respuesta al mismo, en esta respuesta puede ser un mensaje con el estado 200 OK, o un error 404, además que también se puede incluir el dato que el cliente ha solicitado. Aquí no debería de haber nada de la lógica del negocio o extensas funciones, por el contrario, su responsabilidad tiene que ser única.
         Ejemplo:
-            *	getMeasurement: Devuelve las mediciones y un estado 200 (OK)
-            *	startMeasurement: Devuelve solamente un estado 202 (aceptado)
+            *	readingMeasurement: Devuelve las mediciones y un estado 200 (OK)
+            *	startDevice: Devuelve solamente un estado 202 (aceptado)
             *	createdUser: devuelve sólo el estado 201 (creado)
 
 #### Aplicación o Servicio

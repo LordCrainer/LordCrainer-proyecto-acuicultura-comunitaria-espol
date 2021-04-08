@@ -1,11 +1,11 @@
 // Inicia el proceso de medición y guardado de los datos
-String startMeasurement(AsyncWebServerRequest *request)
+String startDevice(AsyncWebServerRequest *request)
 {
     String time = "1517383146498"; //getTime();
     byte iteration = getParameterByName(request, "iteration").toInt() | 10;
-    byte pool_id = getParameterByName(request, "pool_id").toInt() | 1;
-    String data = getAllMeasurement(time, pool_id, iteration);
-    // String data = getOneMeasurement(time, pool_id);
+    byte pool_id = getParameterByName(request, "pool_id").toInt() | 10;
+    String data = startAllMeasurement(time, pool_id, iteration);
+    // String data = startOneMeasurement(time, pool_id);
     String filename = setFilename("P", pool_id, time, "json"); // P1_1517383146498.json
     const byte existFile = 1;
     if (existFile == 1)

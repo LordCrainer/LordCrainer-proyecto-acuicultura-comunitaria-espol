@@ -2,28 +2,42 @@
 
 const char *PARAM_FILTER = "filter";
 
-void getMeasurement(AsyncWebServerRequest *request)
+void readingMeasurement(AsyncWebServerRequest *req)
 {
   String path = "/measurement/";
-  String response;
+  String res;
   // /measurement/12 => 12
-  // response = request->url().indexOf(path) != -1 ? getMeasurementById(request, path) : getMeasurementtAll(request);
-  if (request->url().indexOf(path) != -1)
+  // res = req->url().indexOf(path) != -1 ? getMeasurementById(req, path) : getMeasurementtAll(req);
+  if (req->url().indexOf(path) != -1)
   {
-    response = readOneMeasurement(request, path);
+    res = readOneMeasurement(req, path);
   }
-  /* else if (request->hasParam(PARAM_FILTER))
+  /* else if (req->hasParam(PARAM_FILTER))
   {
-    response = getFiltered(request);
+    res = getFiltered(req);
   } */
   else
   {
-    response = readAllMeasurement(request);
+    res = readAllMeasurement(req);
   }
-  request->send(200, "application/json", response);
+  req->send(200, "application/json", res);
 }
 
-void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
+void startingMeasurement(AsyncWebServerRequest *req)
+{
+  byte pool_id = getParameterByName(req, "pool_id").toInt() | 10;
+  String existIteration = getParameterByName(req, "iteration");
+  if (existIteration)
+  {
+    byte iteration = existIteration.toInt();
+    String res = startAllMeasurement("1517383146498", pool_id, iteration);
+    req->send(200, "application/json", res);
+  }
+  String res = startOneMeasurement("1517383146498", pool_id);
+  req->send(200, "application/json", res);
+}
+
+void postRequest(AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t index, size_t total)
 {
   String bodyContent = getBodyContent(data, len);
 
@@ -31,60 +45,60 @@ void postRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size
   DeserializationError error = deserializeJson(doc, bodyContent);
   if (error)
   {
-    request->send(400);
+    req->send(400);
     return;
   }
 
   String json = doc["data"];
   String message = "Create " + json;
   Serial.println(message);
-  request->send(200, "application/json", json);
+  req->send(200, "application/json", json);
 }
 
-void patchRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
+void patchRequest(AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t index, size_t total)
 {
-  int id = getIdFromURL(request, "/item/");
+  int id = getIdFromURL(req, "/item/");
   String bodyContent = getBodyContent(data, len);
 
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
   if (error)
   {
-    request->send(400);
+    req->send(400);
     return;
   }
 
   String string_data = doc["data"];
   String message = String("Update ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "application/json", message);
+  req->send(200, "application/json", message);
 }
 
-void putRequest(AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total)
+void putRequest(AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t index, size_t total)
 {
-  int id = getIdFromURL(request, "/item/");
+  int id = getIdFromURL(req, "/item/");
   String bodyContent = getBodyContent(data, len);
 
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, bodyContent);
   if (error)
   {
-    request->send(400);
+    req->send(400);
     return;
   }
 
   String string_data = doc["data"];
   String message = String("Replace ") + id + " with " + string_data;
   Serial.println(message);
-  request->send(200, "application/json", message);
+  req->send(200, "application/json", message);
 }
 
-void deleteRequest(AsyncWebServerRequest *request)
+void deleteRequest(AsyncWebServerRequest *req)
 {
-  int id = getIdFromURL(request, "/measurement/");
+  int id = getIdFromURL(req, "/measurement/");
   String json;
   String message = String("DELETED ") + id + " SUCESSFULLY";
   json = objectToJsonDynamic("message", message, 50);
   Serial.println(json);
-  request->send(200, "application/json", json);
+  req->send(200, "application/json", json);
 }

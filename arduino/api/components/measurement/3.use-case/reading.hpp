@@ -1,20 +1,18 @@
 #include "../4.domain/model-measurement.hpp"
 
+String readOneMeasurement(AsyncWebServerRequest *request, String path)
+{
+  int pool_id = getIdFromURL(request, path); // 1
+  // Recoger todos lo sarchivos que comiencen con P1
+
+  String data = readSD("data_p1_20210312_0432.json");
+  String filteredData = findById(data, pool_id);
+  return filteredData;
+}
 String readAllMeasurement(AsyncWebServerRequest *request)
 {
   String data = readSD("filename.txt");
   return data;
-}
-String readOneMeasurement(AsyncWebServerRequest *request, String path)
-{
-  int id = getIdFromURL(request, path); // 1
-  String data = readSD("data_p1_20210312_0432.json");
-  if (data == "NO")
-  {
-    return "";
-  }
-  String filteredData = findById(data, id);
-  return filteredData;
 }
 
 String getFiltered(AsyncWebServerRequest *request)

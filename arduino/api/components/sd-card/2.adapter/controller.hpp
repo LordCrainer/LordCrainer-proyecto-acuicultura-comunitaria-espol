@@ -13,7 +13,8 @@ void readingSD(AsyncWebServerRequest *request)
     String filename = getParameterByName(request, "filename");
     String readedData = readSD(filename);
     Serial.println(String(readedData.length()));
-    request->send(200, "application/json", {});
+    Serial.println(readedData);
+    request->send(200, "application/json", readedData);
 }
 
 void appendSD(AsyncWebServerRequest *request)
@@ -38,4 +39,11 @@ void directorySD(AsyncWebServerRequest *request)
 
 void deletingSD(AsyncWebServerRequest *request)
 {
+    String json;
+    StaticJsonDocument<24> doc;
+    String filename = getParameterByName(request, "filename");
+    boolean isDeleted = deleteSD(filename);
+    doc["status"] = isDeleted;
+    serializeJson(doc, json);
+    request->send(200, "application/json", json);
 }

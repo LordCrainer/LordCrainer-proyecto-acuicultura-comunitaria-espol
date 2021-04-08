@@ -6,8 +6,8 @@ void getAllConfig(AsyncWebServerRequest *request)
   request->send(200, "application/json", data);
 }
 
-void startDevice(AsyncWebServerRequest *request)
+void startingDevice(AsyncWebServerRequest *request)
 {
-  String response = startMeasurement(request);
+  String response = startDevice(request);
   request->send(200, "application/json", response);
 }

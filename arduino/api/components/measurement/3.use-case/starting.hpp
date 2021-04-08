@@ -1,5 +1,5 @@
 // Obtiene toda la metadata de una medición general.
-String getOneMeasurement(String time, byte pool_id)
+String startOneMeasurement(String time, byte pool_id)
 {
     IMeasurement measurement;
     // getDeviceID
@@ -9,10 +9,9 @@ String getOneMeasurement(String time, byte pool_id)
     measurement.params = getAllSensor();
     measurement.status = "OK";
     return measurementModel(measurement);
-    ;
 }
 
-String getAllMeasurement(String time, byte pool_id, const byte numMed)
+String startAllMeasurement(String time, byte pool_id, const byte numMed)
 {
     int capacity = 210 * numMed;
     String data;
@@ -20,7 +19,7 @@ String getAllMeasurement(String time, byte pool_id, const byte numMed)
     const byte lastIndex = numMed - 1;
     for (byte i = 0; i < numMed; i++)
     {
-        data = getOneMeasurement(time, pool_id);
+        data = startOneMeasurement(time, pool_id);
         data.replace("\\", "");
         if (i == lastIndex)
         {

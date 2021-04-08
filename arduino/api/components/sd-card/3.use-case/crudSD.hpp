@@ -76,3 +76,8 @@ void printDirectory(File dir, int numTabs)
     }
   }
 }
+
+boolean deleteSD(String filename)
+{
+  return SD.remove(filename);
+}
