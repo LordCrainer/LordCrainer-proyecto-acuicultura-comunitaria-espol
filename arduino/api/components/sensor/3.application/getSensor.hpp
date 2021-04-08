@@ -95,10 +95,13 @@ String getAllSensor()
 {
   IParams temp;
   IParams ph;
+  IParams DO;
   temp.name = "Temperature";
   temp.value = 10.0;
   // // getPh();
   ph.value = 7.0;
   ph.name = "PH";
-  return modelAllSensor(temp, ph);;
+  DO.value = 21;
+  DO.name = "DO";
+  return modelAllSensor(temp, ph, DO);
 }

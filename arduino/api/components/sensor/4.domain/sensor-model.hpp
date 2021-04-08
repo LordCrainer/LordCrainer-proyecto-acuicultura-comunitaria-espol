@@ -11,9 +11,10 @@ String sensorModel(IParams data)
 }
 
 // Modela los datos de todos los sensores a json
-String modelAllSensor(IParams data1, IParams data2)
+String modelAllSensor(IParams data1, IParams data2, IParams data3)
 {
     String Temp = sensorModel(data1);
     String PH = sensorModel(data2);
-    return Temp + "," + PH;
+    String DO = sensorModel(data3);
+    return Temp + "," + PH + "," + DO;
 }

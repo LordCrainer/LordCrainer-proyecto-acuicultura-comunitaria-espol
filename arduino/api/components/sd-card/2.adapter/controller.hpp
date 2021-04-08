@@ -4,7 +4,7 @@ void writingSD(AsyncWebServerRequest *request)
 {
     String filename = getParameterByName(request, "filename");
     String data = getParameterByName(request, "data");
-    byte isWritten = writeSD(filename, data);
+    const boolean isWritten = writeSD(filename, data);
     request->send(200, "application/json", data);
 }
 

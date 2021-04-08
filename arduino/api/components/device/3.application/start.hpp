@@ -11,8 +11,8 @@ String startDevice(AsyncWebServerRequest *request)
     {
         // const isDeleted = deleteFileSD(filename);
     }
-    const byte isCreated = createSD(filename);
-    const byte isWritten = writeSD(filename, data);
+    const boolean isCreated = createSD(filename);
+    const boolean isWritten = writeSD(filename, data);
 
     // String readedData = readSD("measurement.txt");
     return data;

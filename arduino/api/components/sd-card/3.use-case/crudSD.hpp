@@ -1,4 +1,4 @@
-byte writeSD(String filename, String data)
+boolean writeSD(String filename, String data)
 {
   File file;
   file = SD.open(filename, FILE_WRITE);
@@ -6,21 +6,21 @@ byte writeSD(String filename, String data)
   {
     file.print(data);
     file.close();
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
-byte createSD(String filename)
+boolean createSD(String filename)
 {
   File file;
   file = SD.open(filename, FILE_WRITE);
   if (file)
   {
     file.close();
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
 String readSD(String filename)
