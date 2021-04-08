@@ -5,8 +5,7 @@ String startDevice(AsyncWebServerRequest *request)
     byte iteration = getParameterByName(request, "iteration").toInt();
     byte pool_id = getParameterByName(request, "pool_id").toInt() | 10;
     String data = startAllMeasurement(time, pool_id, iteration);
-    // String data = startOneMeasurement(time, pool_id);
-    String filename = setFilename("P", pool_id, time, "json"); // P1_1517383146498.json
+    String filename = setFilename("P", pool_id, time, "json");
     const byte existFile = 1;
     if (existFile == 1)
     {
