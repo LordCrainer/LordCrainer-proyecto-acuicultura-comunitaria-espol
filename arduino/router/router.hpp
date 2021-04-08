@@ -24,7 +24,6 @@ void InitServer()
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, readingMeasurement); //  /measurement?pool_id=1
 	server.on("/measurement", HTTP_DELETE, deleteRequest);
-	server.on("/measurement/start", HTTP_GET, startingMeasurement); // ?pool_id=2&iteration=1
 
 	// DEVICE
 	server.on("/device/start", HTTP_GET, startingDevice); // ?pool_id=1

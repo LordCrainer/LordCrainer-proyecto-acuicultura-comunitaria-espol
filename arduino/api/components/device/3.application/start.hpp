@@ -2,7 +2,7 @@
 String startDevice(AsyncWebServerRequest *request)
 {
     String time = "1517383146498"; //getTime();
-    byte iteration = getParameterByName(request, "iteration").toInt() | 10;
+    byte iteration = getParameterByName(request, "iteration").toInt();
     byte pool_id = getParameterByName(request, "pool_id").toInt() | 10;
     String data = startAllMeasurement(time, pool_id, iteration);
     // String data = startOneMeasurement(time, pool_id);
@@ -16,5 +16,5 @@ String startDevice(AsyncWebServerRequest *request)
     const byte isWritten = writeSD(filename, data);
 
     // String readedData = readSD("measurement.txt");
-    return "OK";
+    return data;
 }
