@@ -16,12 +16,7 @@ String JsonToTextDynamic(String json, int sizeDoc = 1024)
     return json;
 }
 
-String serializedToArray(String data, const int capacity)
+String serializedToArray(String data)
 {
-    String json;
-    DynamicJsonDocument doc(capacity);
-    JsonArray array = doc.to<JsonArray>();
-    array.add(data);
-    serializeJson(doc, json);
-    return json;
+    return "[" + data + "]";
 }

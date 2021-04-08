@@ -1,7 +1,7 @@
 // Inicia el proceso de medición y guardado de los datos
 String startDevice(AsyncWebServerRequest *request)
 {
-    String time = "1517383146498"; //getTime();
+    const char *time = "1517383146498"; //getTime();
     byte iteration = getParameterByName(request, "iteration").toInt();
     byte pool_id = getParameterByName(request, "pool_id").toInt() | 10;
     String data = startAllMeasurement(time, pool_id, iteration);
