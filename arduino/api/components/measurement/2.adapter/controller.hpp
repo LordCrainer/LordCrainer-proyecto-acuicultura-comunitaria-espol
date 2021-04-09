@@ -23,20 +23,6 @@ void readingMeasurement(AsyncWebServerRequest *req)
   req->send(200, "application/json", res);
 }
 
-void startingMeasurement(AsyncWebServerRequest *req)
-{
-  byte pool_id = getParameterByName(req, "pool_id").toInt() | 10;
-  String existIteration = getParameterByName(req, "iteration");
-  if (existIteration)
-  {
-    byte iteration = existIteration.toInt();
-    String res = startAllMeasurement("1517383146498", pool_id, iteration);
-    req->send(200, "application/json", res);
-  }
-  String res = startOneMeasurement("1517383146498", pool_id);
-  req->send(200, "application/json", res);
-}
-
 void postRequest(AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t index, size_t total)
 {
   String bodyContent = getBodyContent(data, len);
