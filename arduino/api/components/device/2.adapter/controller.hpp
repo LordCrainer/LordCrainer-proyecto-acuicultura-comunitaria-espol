@@ -8,16 +8,17 @@ void getAllConfig(AsyncWebServerRequest *req)
 
 void startingDevice(AsyncWebServerRequest *req)
 {
-  String res;
-  String iteration = getParameterByName(req, "iteration");
-  byte pool_id = getParameterByName(req, "pool_id").toInt();
-  if (iteration == "")
+  const char *res;
+  // String iteration = getParameterByName(req, "iteration");
+  // byte pool_id = getParameterByName(req, "pool_id").toInt();
+  res = startDevice(req).c_str();
+  /*   if (iteration == "")
   {
     res = startOneMeasurement("1517383146500", pool_id);
   }
   else
   {
     res = startDevice(req);
-  }
+  } */
   req->send(200, "application/json", res);
 }

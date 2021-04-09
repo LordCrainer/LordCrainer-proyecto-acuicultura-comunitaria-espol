@@ -31,6 +31,7 @@ void directorySD(AsyncWebServerRequest *request)
     doc["status"] = "OK";
     serializeJson(doc, json);
     File root = SD.open("/");
+    findFileByName("/", "P19_");
     printDirectory(root, 0);
     request->send(200, "application/json", json);
 }

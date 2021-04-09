@@ -1,5 +1,4 @@
 String getTime()
 {
-
     return "";
 }
