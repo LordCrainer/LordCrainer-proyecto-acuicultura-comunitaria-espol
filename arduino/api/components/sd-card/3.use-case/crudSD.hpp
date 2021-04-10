@@ -89,19 +89,20 @@ boolean deleteSD(String filename)
 void findFileByName(String path, String name)
 {
   File file = SD.open(path);
-  File entry = file.openNextFile();
-  String filename = String(entry.name());
   while (true)
   {
-
+    File entry = file.openNextFile();
+    String filename = String(entry.name());
     if (!entry)
     {
       Serial.println("**nomorefiles**");
       break;
     }
-    Serial.print("COMPARANDO: ");
-    Serial.println(filename.compareTo(name));
-    Serial.print("START AT: ");
-    Serial.println(filename.startsWith(name));
+    Serial.print("FILENAME: ")
+    Serial.print(filename);
+    Serial.print("  COMPARANDO: ");
+    Serial.print(filename.compareTo(name));
+    Serial.print("  START AT: ");
+    Serial.print(filename.startsWith(name));
   }
 }

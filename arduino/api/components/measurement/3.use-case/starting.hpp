@@ -1,5 +1,5 @@
 // Obtiene toda la metadata de una medición general.
-String startOneMeasurement(const char *time, byte pool_id)
+String startOneMeasurement(String time, byte pool_id)
 {
     IMeasurement measurement;
     measurement.device_id = "ABCD"; // getDeviceID
@@ -10,11 +10,15 @@ String startOneMeasurement(const char *time, byte pool_id)
     return measurementModel(measurement);
 }
 
-String startAllMeasurement(const char *time, const byte pool_id, const byte numMed)
+String startAllMeasurement(String time, const byte pool_id, const byte numMed)
 {
     String data;
     String json;
     const byte lastIndex = numMed - 1;
+    if (numMed <= 1)
+    {
+        json = startOneMeasurement(time, pool_id);
+    }
     for (byte i = 0; i < numMed; i++)
     {
         data = startOneMeasurement(time, pool_id);
@@ -25,5 +29,6 @@ String startAllMeasurement(const char *time, const byte pool_id, const byte numM
         }
         json = data + "," + json;
     }
+
     return "[" + json + "]";
 }
