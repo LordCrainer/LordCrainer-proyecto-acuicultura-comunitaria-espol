@@ -5,7 +5,7 @@ String startOneMeasurement(String time, byte pool_id)
     measurement.device_id = "ABCD"; // getDeviceID
     measurement.created_at = time;
     measurement.pool_id = pool_id;
-    measurement.params = getAllSensor();
+    measurement.params = "[" + getAllSensor() + "]";
     measurement.status = "OK";
     return measurementModel(measurement);
 }
@@ -15,10 +15,11 @@ String startAllMeasurement(String time, const byte pool_id, const byte numMed)
     String data;
     String json;
     const byte lastIndex = numMed - 1;
-    if (numMed <= 1)
+    if (numMed <= 0)
     {
-        json = startOneMeasurement(time, pool_id);
+        return "";
     }
+
     for (byte i = 0; i < numMed; i++)
     {
         data = startOneMeasurement(time, pool_id);

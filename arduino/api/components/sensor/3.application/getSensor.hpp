@@ -11,7 +11,7 @@
 #define CAL_VOLT 1600 //mv
 #define CAL_TEMP 25   //°C
 
-OneWire ourWire(4); // Se establece el pin 4
+OneWire ourWire(TEMP_PIN);
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
 
@@ -47,10 +47,8 @@ IParams getTemp()
   IParams params;
   params.name = "Temperature";
   params.value = sensorTemp.getTempCByIndex(0);
+  Serial.println(params.value);
   return params;
-  // Serial.print("\tTemperatura= ");
-  // Serial.print(temp);
-  // Serial.println(" C");
 }
 
 // Medicion PH
@@ -93,11 +91,9 @@ IParams getDOxygen()
 // Sensor: Captura los datos de todos los sensores
 String getAllSensor()
 {
-  IParams temp;
+  IParams temp = getTemp();
   IParams ph;
   IParams DO;
-  temp.name = "Temperature";
-  temp.value = 10.0;
   // // getPh();
   ph.value = 7.0;
   ph.name = "PH";
