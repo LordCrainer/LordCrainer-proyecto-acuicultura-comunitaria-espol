@@ -86,9 +86,15 @@ boolean deleteSD(String filename)
   return SD.remove(filename);
 }
 
-void findFileByName(String path, String name)
+// Encontrar archivos por el nombre
+// path: Ruta
+// prefix: Prefijo o caracteres iniciales
+// numFile: Cantidad de archivos a buscar (default = 10)
+String *findFileByName(String path, String prefix, byte numFile = 10)
 {
   File file = SD.open(path);
+  String listFiles[numFile];
+  byte index = 0;
   while (true)
   {
     File entry = file.openNextFile();
@@ -98,11 +104,16 @@ void findFileByName(String path, String name)
       Serial.println("**nomorefiles**");
       break;
     }
-    Serial.print("FILENAME: ")
-    Serial.print(filename);
-    Serial.print("  COMPARANDO: ");
-    Serial.print(filename.compareTo(name));
-    Serial.print("  START AT: ");
-    Serial.print(filename.startsWith(name));
+    if (filename.startsWith(prefix))
+    {
+      listFiles[index] = filename;
+      Serial.println(listFiles[index]);
+      index++;
+    }
+    if (numFile == index + 1)
+    {
+      break;
+    }
   }
+  return listFiles;
 }
