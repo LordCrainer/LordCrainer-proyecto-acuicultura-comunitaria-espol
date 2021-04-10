@@ -47,7 +47,6 @@ IParams getTemp()
   IParams params;
   params.name = "Temperature";
   params.value = sensorTemp.getTempCByIndex(0);
-  Serial.println(params.value);
   return params;
 }
 
@@ -91,7 +90,7 @@ IParams getDOxygen()
 // Sensor: Captura los datos de todos los sensores
 String getAllSensor()
 {
-  IParams temp = getTemp();
+  IParams temp = global_temp;
   IParams ph;
   IParams DO;
   // // getPh();

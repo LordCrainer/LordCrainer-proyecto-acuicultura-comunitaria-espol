@@ -10,7 +10,7 @@ String startDevice(AsyncWebServerRequest *request)
     iteration = getParameterByName(request, "iteration").toInt();
     pool_id = getParameterByName(request, "pool_id").toInt();
     // ACTIONS
-    String data = startAllMeasurement(time, pool_id, iteration);
+    String data = "[" + startAllMeasurement(time, pool_id, iteration) + "]";
     String filename = setFilename("P", pool_id, time, "json");
     const boolean isCreated = createSD(filename, data);
     return data;

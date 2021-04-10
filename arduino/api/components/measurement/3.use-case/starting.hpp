@@ -31,5 +31,5 @@ String startAllMeasurement(String time, const byte pool_id, const byte numMed)
         json = data + "," + json;
     }
 
-    return "[" + json + "]";
+    return json;
 }

@@ -17,6 +17,7 @@
 // VARIABLES DE ENTORNO
 #include "env.h" // Variable de entorno
 
+
 // CONFIGURACIONES GENERALES
 #include "config/Server.hpp"
 #include "config/wifi-config.h"     // Sustituir con datos de vuestra red
@@ -40,6 +41,8 @@
 // RUTAS DEL API-REST
 #include "router/router.hpp"
 
+
+
 void setup()
 {
   Serial.begin(115200);
@@ -55,7 +58,7 @@ void setup()
 
 void loop()
 {
-
+  global_temp = getTemp();
   //controlBoton();
   //menuPrin();
 }

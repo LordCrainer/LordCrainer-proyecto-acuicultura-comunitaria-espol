@@ -13,3 +13,5 @@ struct IParams
     double value;
     char alert[4] = "OK";
 };
+
+IParams global_temp;
