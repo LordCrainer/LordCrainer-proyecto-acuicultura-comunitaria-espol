@@ -127,7 +127,7 @@ String findFileByName(String path, String prefix, byte numFile = 10)
 // Ejemplo: String anyName(callFunction theFunctionAsParameter)
 typedef String (*sdCallFuncion)(String);
 
-// Lee varios archivos
+// Lee una cadena continua de datos separados por ","
 String readManyFiles(String data, String separator = ",", int sizeMax = 10)
 {
   const int lengthData = data.length();
@@ -135,11 +135,12 @@ String readManyFiles(String data, String separator = ",", int sizeMax = 10)
   int index = 0;
   String input;
   String output = "";
-  position[0] = 0;
   if (lengthData <= 0)
   {
     return output;
   }
+  // INICIO DEL BUCLE
+  position[0] = 0;
   for (byte i = 0; i < sizeMax; i++)
   {
     position[i + 1] = data.indexOf(separator, index);
