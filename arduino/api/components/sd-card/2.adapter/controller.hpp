@@ -33,7 +33,9 @@ void directorySD(AsyncWebServerRequest *request)
     File root = SD.open("/");
     printDirectory(root, 0);
     String list = findFileByName("/", "P1_");
-    int *position = positionList(list, ",", 10);
+    String data = readManyFiles(list, ",", 10);
+    Serial.print("LIST: ");
+    Serial.println(list);
 
     request->send(200, "application/json", json);
 }

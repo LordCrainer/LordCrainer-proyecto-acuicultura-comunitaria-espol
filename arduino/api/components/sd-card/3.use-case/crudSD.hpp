@@ -118,27 +118,38 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   // listFiles.remove(0, 1);
   return listFiles;
 }
+// bool (*callback)(int)
+//typedef = Definición del tipo
+//String = return value, String = cadena void = none
+//callFunction = Nombre del tipo de función
+//String = argument
+//
+// Ejemplo: String anyName(callFunction theFunctionAsParameter)
+typedef String (*sdCallFuncion)(String);
 
-int *positionList(String data, String separator = ",", int sizeMax = 10)
+
+String readManyFiles(String data, String separator = ",", int sizeMax = 10)
 {
   const int lengthData = data.length();
   int position[sizeMax];
-  int indexInit = 0;
-  int indexEnd;
+  int index = 0;
+  String output = "";
   position[0] = 0;
   if (lengthData <= 0)
   {
-    return position;
+    return output;
   }
   for (byte i = 0; i < sizeMax; i++)
   {
-    position[i + 1] = data.indexOf(separator, indexInit);
+    position[i + 1] = data.indexOf(separator, index);
     if (position[i + 1] == -1)
     {
       break;
     }
-    indexInit = position[i + 1] + 1;
+    Serial.print("DATA ACTIONS: ");
+    Serial.println(readSD(data.substring(index, position[i + 1])));
+    index = position[i + 1] + 1;
   }
 
-  return position;
+  return output;
 }
