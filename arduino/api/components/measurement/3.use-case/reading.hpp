@@ -2,23 +2,17 @@
 
 String readOneMeasurement(AsyncWebServerRequest *request, String path)
 {
-  int pool_id = getIdFromURL(request, path); // 1
-  // Recoger todos lo sarchivos que comiencen con P1
-  String prefix = String("P") + String(pool_id) + String("_");
-
-  findFileByName("/", "P1_");
-  String data = readSD("P30_1517383146498.json");
-  // String filteredData = findById(data, pool_id);
+  int pool_id = getIdFromURL(request, path);
+  String prefix = "P" + String(pool_id) + "_";
+  String list = findFileByName("/", prefix);
+  String data = "[" + readManyFiles(list, ",", 10) + "]";
   return data;
 }
+
 String readAllMeasurement(AsyncWebServerRequest *request)
 {
-  String data = readSD("filename.txt");
-  return data;
-}
-
-String getFiltered(AsyncWebServerRequest *request)
-{
-  String data = readSD("filename.txt");
+  String prefix = "P";
+  String list = findFileByName("/", prefix);
+  String data = "[" + readManyFiles(list, ",", 10) + "]";
   return data;
 }

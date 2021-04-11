@@ -127,12 +127,13 @@ String findFileByName(String path, String prefix, byte numFile = 10)
 // Ejemplo: String anyName(callFunction theFunctionAsParameter)
 typedef String (*sdCallFuncion)(String);
 
-
+// Lee varios archivos
 String readManyFiles(String data, String separator = ",", int sizeMax = 10)
 {
   const int lengthData = data.length();
   int position[sizeMax];
   int index = 0;
+  String input;
   String output = "";
   position[0] = 0;
   if (lengthData <= 0)
@@ -146,10 +147,15 @@ String readManyFiles(String data, String separator = ",", int sizeMax = 10)
     {
       break;
     }
-    Serial.print("DATA ACTIONS: ");
-    Serial.println(readSD(data.substring(index, position[i + 1])));
+    input = readSD(data.substring(index, position[i + 1]));
+    if (input.startsWith("["))
+    {
+      input.remove(0, 1);
+      input.remove(input.length() - 1, 1);
+    }
+    output = output + "," + input;
     index = position[i + 1] + 1;
   }
-
+  output.remove(0, 1);
   return output;
 }

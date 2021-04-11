@@ -14,7 +14,7 @@ void readingMeasurement(AsyncWebServerRequest *req)
   }
   /* else if (req->hasParam(PARAM_FILTER))
   {
-    res = getFiltered(req);
+    
   } */
   else
   {

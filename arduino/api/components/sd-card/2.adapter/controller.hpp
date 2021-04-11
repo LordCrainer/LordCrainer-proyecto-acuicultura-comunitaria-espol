@@ -32,11 +32,6 @@ void directorySD(AsyncWebServerRequest *request)
     serializeJson(doc, json);
     File root = SD.open("/");
     printDirectory(root, 0);
-    String list = findFileByName("/", "P1_");
-    String data = readManyFiles(list, ",", 10);
-    Serial.print("LIST: ");
-    Serial.println(list);
-
     request->send(200, "application/json", json);
 }
 
