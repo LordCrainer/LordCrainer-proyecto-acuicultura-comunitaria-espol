@@ -23,6 +23,7 @@ String startAllMeasurement(String time, const byte pool_id, const byte numMed)
     for (byte i = 0; i < numMed; i++)
     {
         data = startOneMeasurement(time, pool_id);
+        Serial.println(data);
         if (i == lastIndex)
         {
             json = json + data;

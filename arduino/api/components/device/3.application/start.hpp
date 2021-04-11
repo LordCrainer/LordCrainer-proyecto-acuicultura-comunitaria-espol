@@ -8,6 +8,7 @@ String startDevice(AsyncWebServerRequest *request)
     // PARAMS
     time = getParameterByName(request, "time");
     iteration = getParameterByName(request, "iteration").toInt();
+    Serial.println(iteration);
     pool_id = getParameterByName(request, "pool_id").toInt();
     // ACTIONS
     String data = "[" + startAllMeasurement(time, pool_id, iteration) + "]";

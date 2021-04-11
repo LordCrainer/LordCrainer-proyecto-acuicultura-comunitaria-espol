@@ -31,10 +31,10 @@ void directorySD(AsyncWebServerRequest *request)
     doc["status"] = "OK";
     serializeJson(doc, json);
     File root = SD.open("/");
-    String *arr = findFileByName("/", "P1_");
-    Serial.println(arr[0]);
-    findFileByName("/", "P30_");
     printDirectory(root, 0);
+    String list = findFileByName("/", "P1_");
+    int *position = positionList(list, ",", 10);
+
     request->send(200, "application/json", json);
 }
 

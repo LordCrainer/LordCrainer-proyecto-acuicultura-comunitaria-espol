@@ -45,8 +45,9 @@
 
 void setup()
 {
+  global_temp = getTemp();
   Serial.begin(115200);
-  delay(1000);
+  Serial.flush();
   ConnectWiFi_STA();
   InitServer();
   ;
@@ -58,7 +59,7 @@ void setup()
 
 void loop()
 {
-  global_temp = getTemp();
+  getTempDelay(0,3000);
   //controlBoton();
   //menuPrin();
 }

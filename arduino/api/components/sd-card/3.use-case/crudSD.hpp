@@ -90,10 +90,10 @@ boolean deleteSD(String filename)
 // path: Ruta
 // prefix: Prefijo o caracteres iniciales
 // numFile: Cantidad de archivos a buscar (default = 10)
-String *findFileByName(String path, String prefix, byte numFile = 10)
+String findFileByName(String path, String prefix, byte numFile = 10)
 {
   File file = SD.open(path);
-  String listFiles[numFile];
+  String listFiles = "";
   byte index = 0;
   while (true)
   {
@@ -104,16 +104,41 @@ String *findFileByName(String path, String prefix, byte numFile = 10)
       Serial.println("**nomorefiles**");
       break;
     }
+    if (numFile == index + 1)
+    {
+      listFiles = filename + listFiles;
+      break;
+    }
     if (filename.startsWith(prefix))
     {
-      listFiles[index] = filename;
-      Serial.println(listFiles[index]);
+      listFiles = filename + "," + listFiles;
       index++;
     }
-    if (numFile == index + 1)
+  }
+  // listFiles.remove(0, 1);
+  return listFiles;
+}
+
+int *positionList(String data, String separator = ",", int sizeMax = 10)
+{
+  const int lengthData = data.length();
+  int position[sizeMax];
+  int indexInit = 0;
+  int indexEnd;
+  position[0] = 0;
+  if (lengthData <= 0)
+  {
+    return position;
+  }
+  for (byte i = 0; i < sizeMax; i++)
+  {
+    position[i + 1] = data.indexOf(separator, indexInit);
+    if (position[i + 1] == -1)
     {
       break;
     }
+    indexInit = position[i + 1] + 1;
   }
-  return listFiles;
+
+  return position;
 }

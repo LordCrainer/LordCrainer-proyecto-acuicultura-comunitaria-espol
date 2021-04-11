@@ -4,8 +4,9 @@ String readOneMeasurement(AsyncWebServerRequest *request, String path)
 {
   int pool_id = getIdFromURL(request, path); // 1
   // Recoger todos lo sarchivos que comiencen con P1
-  
-  findFileByName("/", "P1");
+  String prefix = String("P") + String(pool_id) + String("_");
+
+  findFileByName("/", "P1_");
   String data = readSD("P30_1517383146498.json");
   // String filteredData = findById(data, pool_id);
   return data;
