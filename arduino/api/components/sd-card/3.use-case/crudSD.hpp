@@ -52,35 +52,6 @@ String readSD(String filename)
   return data;
 }
 
-void printDirectory(File dir, int numTabs)
-{
-  while (true)
-  {
-    File entry = dir.openNextFile();
-    if (!entry)
-    {
-      Serial.println("**nomorefiles**");
-      break;
-    }
-
-    for (uint8_t i = 0; i < numTabs; i++)
-    {
-      Serial.print('\t');
-    }
-    Serial.print(entry.name());
-    if (entry.isDirectory())
-    {
-      Serial.println("/");
-      printDirectory(entry, numTabs + 1);
-    }
-    else
-    {
-      Serial.print("\t\t");
-      Serial.println(entry.size(), DEC);
-    }
-  }
-}
-
 boolean deleteSD(String filename)
 {
   return SD.remove(filename);
@@ -151,4 +122,98 @@ String readManyFiles(String data, String separator = ",", int sizeMax = 10)
   }
   output.remove(0, 1);
   return output;
+}
+
+struct IDirectory
+{
+  String name;
+  byte type;
+  String content;
+};
+
+struct IFiles
+{
+  String name;
+  byte type;
+  float size;
+};
+
+String fileModel(IFiles)
+{
+  IFiles file;
+  int capacity = 50 + file.name.length();
+  String json;
+  DynamicJsonDocument doc(capacity);
+  JsonObject obj = doc.as<JsonObject>();
+  doc["name"] = file.name;
+  doc["type"] = file.type;
+  doc["size"] = file.size;
+  serializeJson(doc, json);
+  return json;
+}
+
+String dirModel(IDirectory)
+{
+  IDirectory dir;
+  int capacity = 50 + dir.name.length() + dir.content.length();
+  String json;
+  DynamicJsonDocument doc(capacity);
+  JsonObject obj = doc.as<JsonObject>();
+  doc["name"] = dir.name;
+  doc["type"] = dir.type;
+  doc["content"] = dir.content;
+  serializeJson(doc, json);
+  return json;
+}
+
+String printDirectory(File dir, int numTabs)
+{
+  String json = "";
+  IDirectory folder;
+  IFiles file;
+
+  while (true)
+  {
+    File entry = dir.openNextFile();
+    if (!entry)
+    {
+      Serial.println("**nomorefiles**");
+      break;
+    }
+
+    for (uint8_t i = 0; i < numTabs; i++)
+    {
+      Serial.print('\t');
+    }
+    Serial.print(entry.name());
+    if (entry.isDirectory())
+    {
+      folder.name = entry.name();
+      folder.type = 1;
+      folder.content = "[" + printDirectory(entry, numTabs + 1) + "]";
+      json = json + "," + dirModel(folder);
+      /*       JsonObject dir = data.createNestedObject();
+      dir["name"] = entry.name();
+      dir["type"] = 1;
+      JsonArray content = dir.createNestedArray("content");
+      content.add(printDirectory(entry, numTabs + 1)) */
+      Serial.println("/");
+    }
+    else
+    {
+      file.name = entry.name();
+      file.size = entry.size();
+      file.type = 0;
+      json = json + "," + fileModel(file);
+      /*       JsonObject file = data.createNestedObject();
+      file["name"] = entry.name();
+      file["type"] = 0;
+      file["size"] = entry.size();
+      Serial.print("\t\t");
+      Serial.println(entry.size(), DEC); */
+    }
+  }
+  DynamicJsonDocument doc(json.length());
+  serializeJson(doc, json);
+  return json;
 }
