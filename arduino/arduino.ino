@@ -60,8 +60,8 @@ void setup()
 void loop()
 {
   getTempDelay(0,3000);
-  //controlBoton();
-  //menuPrin();
+  //lcdControlButton();
+  //lcdPrintMenu();
 }
 
 /*

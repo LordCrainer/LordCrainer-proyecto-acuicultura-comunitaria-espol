@@ -1,6 +1,6 @@
 struct LCD
 {
-    byte CARACTER_ARRIBA[8] = {
+    byte CHAR_UP[8] = {
         B00000,
         B00000,
         B00000,
@@ -9,7 +9,7 @@ struct LCD
         B01010,
         B10001,
         B00000};
-    byte CARACTER_ABAJO[8] = {
+    byte CHAR_DOWN[8] = {
         B10001,
         B01010,
         B00100,
@@ -29,7 +29,7 @@ struct LCD
 };
 
 // Caracteres especiales direccion arriba y abajo
-byte CARACTER_ARRIBA[8] = {
+byte CHAR_UP[8] = {
     B00000,
     B00000,
     B00000,
@@ -39,7 +39,7 @@ byte CARACTER_ARRIBA[8] = {
     B10001,
     B00000};
 
-byte CARACTER_ABAJO[8] = {
+byte CHAR_DOWN[8] = {
     B10001,
     B01010,
     B00100,

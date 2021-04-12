@@ -1,4 +1,4 @@
-// Inicia el proceso de medición y guardado de los datos
+// Device: Inicia el proceso de medición y guardado de los datos
 String startDevice(AsyncWebServerRequest *request)
 {
     // DECLARATION VARIABLE
@@ -8,7 +8,6 @@ String startDevice(AsyncWebServerRequest *request)
     // PARAMS
     time = getParameterByName(request, "time");
     iteration = getParameterByName(request, "iteration").toInt();
-    Serial.println(iteration);
     pool_id = getParameterByName(request, "pool_id").toInt();
     // ACTIONS
     String data = "[" + startAllMeasurement(time, pool_id, iteration) + "]";

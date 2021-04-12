@@ -28,10 +28,10 @@ const uint16_t DO_TABLE[41] = {
 // uint16_t V_saturation;
 // uint8_t READ_TEMP;
 
-int16_t readingOxygen(uint32_t voltage, uint8_t temperature)
+int16_t readingOxygen(uint32_t volt, uint8_t temp)
 {
-  uint16_t voltSaturation = (uint32_t)CAL_VOLT + (uint32_t)35 * temperature - (uint32_t)CAL_TEMP * 35;
-  return (voltage * DO_TABLE[temperature] / voltSaturation);
+  uint16_t volSalt = (uint32_t)CAL_VOLT + (uint32_t)35 * temp - (uint32_t)CAL_TEMP * 35;
+  return (volt * DO_TABLE[temp] / volSalt);
 }
 
 void setup_prog()
@@ -73,16 +73,15 @@ IParams getPh()
 //Medicion Oxigeno Disuelto
 IParams getDOxygen()
 {
-  uint8_t READ_TEMP;
   IParams params;
   params.name = "DO";
-  uint8_t temperature = (uint8_t)READ_TEMP;
+  uint8_t temp = (uint8_t)global_temp.value;
   uint16_t oxyD = analogRead(D_OXY_PIN);
-  uint32_t voltage = uint32_t(VOLT_REF) * oxyD / ADC_RES;
+  uint32_t volt = uint32_t(VOLT_REF) * oxyD / ADC_RES;
   //Serial.print("\tOxigeno Disuelto = ");
   //Serial.print();
   //Serial.println(" mg/L ");
-  params.value = float(readingOxygen(voltage, temperature) / 1000);
+  params.value = float(readingOxygen(volt, temp) / 1000);
   return params;
   // delay(10000);
 }

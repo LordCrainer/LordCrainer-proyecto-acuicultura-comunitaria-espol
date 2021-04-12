@@ -118,14 +118,6 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   // listFiles.remove(0, 1);
   return listFiles;
 }
-// bool (*callback)(int)
-//typedef = Definición del tipo
-//String = return value, String = cadena void = none
-//callFunction = Nombre del tipo de función
-//String = argument
-//
-// Ejemplo: String anyName(callFunction theFunctionAsParameter)
-typedef String (*sdCallFuncion)(String);
 
 // Lee una cadena continua de datos separados por ","
 String readManyFiles(String data, String separator = ",", int sizeMax = 10)
