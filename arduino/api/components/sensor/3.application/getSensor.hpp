@@ -100,11 +100,12 @@ String getAllSensor()
   return modelAllSensor(temp, ph, DO);
 }
 
-void getTempDelay(unsigned long lastTime, unsigned long timerDelay)
+unsigned long getTempDelay(unsigned long lastTime, unsigned long timerDelay)
 {
-    if ((millis() - lastTime) > timerDelay)
-    {
-        global_temp = getTemp();
-        lastTime = millis();
-    }
+  if ((millis() - lastTime) > timerDelay)
+  {
+    global_temp = getTemp();
+    lastTime = millis();
+  }
+  return lastTime;
 }

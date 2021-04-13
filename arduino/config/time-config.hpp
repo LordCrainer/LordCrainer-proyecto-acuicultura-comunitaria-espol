@@ -1,8 +1,10 @@
 RTC_DS1307 RTC;
-
-void initTime(){
-    Wire.begin();
+unsigned long lastTime = 0;
+void initTime()
+{
+    Wire.begin(4, 5, 0x02);
     RTC.begin();
+    RTC.adjust(DateTime(__DATE__, __TIME__));
     delay(500);
 }
 

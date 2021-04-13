@@ -4,7 +4,7 @@ String startDevice(AsyncWebServerRequest *request)
     // DECLARATION VARIABLE
     byte iteration = 10;
     byte pool_id = 1;
-    String time = "1517383146999";
+    String time = getTime().unixtime();
     // PARAMS
     time = getParameterByName(request, "time");
     iteration = getParameterByName(request, "iteration").toInt();

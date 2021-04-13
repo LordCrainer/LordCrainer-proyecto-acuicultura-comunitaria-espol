@@ -46,8 +46,9 @@ void setup()
 {
   // PRE
   global_temp = getTemp();
+  
   Serial.flush();
-
+  initTime();
   // SETUP
   Serial.begin(115200);
   ConnectWiFi_STA();
@@ -59,7 +60,7 @@ void setup()
 
 void loop()
 {
-  getTempDelay(0, 3000);
+  lastTime = getTempDelay(lastTime, 3000);
   //lcdControlButton();
   //lcdPrintMenu();
 }
