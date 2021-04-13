@@ -13,6 +13,7 @@
 #include <DallasTemperature.h>
 #include <LiquidCrystal_I2C.h>
 #include "LittleFS.h"
+#include "RTClib.h"
 
 // VARIABLES DE ENTORNO
 #include "env.h" // Variable de entorno
@@ -21,6 +22,7 @@
 #include "config/Server.hpp"
 #include "config/wifi-config.h" // Sustituir con datos de vuestra red
 #include "config/Sd-config.hpp"
+#include "config/time-config.hpp"
 #include "config/sensor-config.hpp"
 #include "config/measurement-config.hpp"
 #include "config/lcd-config.hpp"
@@ -42,9 +44,12 @@
 
 void setup()
 {
+  // PRE
   global_temp = getTemp();
-  Serial.begin(115200);
   Serial.flush();
+
+  // SETUP
+  Serial.begin(115200);
   ConnectWiFi_STA();
   InitServer();
   initLCD("INICIANDO...");
