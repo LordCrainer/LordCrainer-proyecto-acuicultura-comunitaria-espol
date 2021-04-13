@@ -165,7 +165,7 @@ String printDirectory(File dir, int numTabs)
       file.name = entry.name();
       file.size = entry.size();
       file.type = 0;
-      Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + String(file.size));
+      Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + ajustUnitSize(file.size));
       json = json + "," + fileModel(file);
       /*       JsonObject file = data.createNestedObject();
       file["name"] = entry.name();
