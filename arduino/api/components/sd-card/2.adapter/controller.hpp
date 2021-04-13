@@ -27,11 +27,7 @@ void appendSD(AsyncWebServerRequest *request)
 void directorySD(AsyncWebServerRequest *request)
 {
     String json;
-    StaticJsonDocument<24> doc;
-    doc["status"] = "OK";
-    serializeJson(doc, json);
-    File root = SD.open("/");
-    Serial.println(printDirectory(root, 0));
+    json = printDirectory(SD.open("/"), 0);
     request->send(200, "application/json", json);
 }
 

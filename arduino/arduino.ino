@@ -17,13 +17,12 @@
 // VARIABLES DE ENTORNO
 #include "env.h" // Variable de entorno
 
-
 // CONFIGURACIONES GENERALES
 #include "config/Server.hpp"
-#include "config/wifi-config.h"     // Sustituir con datos de vuestra red
-#include "config/Sd-config.hpp"     
-#include "config/sensor-config.hpp" 
-#include "config/measurement-config.hpp" 
+#include "config/wifi-config.h" // Sustituir con datos de vuestra red
+#include "config/Sd-config.hpp"
+#include "config/sensor-config.hpp"
+#include "config/measurement-config.hpp"
 #include "config/lcd-config.hpp"
 // UTILS
 #include "api/utils/time.utils.hpp"
@@ -41,8 +40,6 @@
 // RUTAS DEL API-REST
 #include "router/router.hpp"
 
-
-
 void setup()
 {
   global_temp = getTemp();
@@ -50,16 +47,14 @@ void setup()
   Serial.flush();
   ConnectWiFi_STA();
   InitServer();
-  ;
-  byte isActived = initSD();
-  String initializedSD = "\nINICIANDO SD: " + (String)isActived;
-  Serial.println(initializedSD);
-  // String serverOn = "ESCUCHANDO EN EL PUERTO: " + (String)port;
+  initLCD("INICIANDO...");
+  boolean isActived = initSD();
+  Serial.println("\nESTADO DEL SD: " + String(isActived));
 }
 
 void loop()
 {
-  getTempDelay(0,3000);
+  getTempDelay(0, 3000);
   //lcdControlButton();
   //lcdPrintMenu();
 }

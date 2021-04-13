@@ -124,48 +124,7 @@ String readManyFiles(String data, String separator = ",", int sizeMax = 10)
   return output;
 }
 
-struct IDirectory
-{
-  String name;
-  byte type;
-  String content;
-};
-
-struct IFiles
-{
-  String name;
-  byte type;
-  float size;
-};
-
-String fileModel(IFiles)
-{
-  IFiles file;
-  int capacity = 50 + file.name.length();
-  String json;
-  DynamicJsonDocument doc(capacity);
-  JsonObject obj = doc.as<JsonObject>();
-  doc["name"] = file.name;
-  doc["type"] = file.type;
-  doc["size"] = file.size;
-  serializeJson(doc, json);
-  return json;
-}
-
-String dirModel(IDirectory)
-{
-  IDirectory dir;
-  int capacity = 50 + dir.name.length() + dir.content.length();
-  String json;
-  DynamicJsonDocument doc(capacity);
-  JsonObject obj = doc.as<JsonObject>();
-  doc["name"] = dir.name;
-  doc["type"] = dir.type;
-  doc["content"] = dir.content;
-  serializeJson(doc, json);
-  return json;
-}
-
+// Obtiene e imprime todos los directorios, subdirectorios y archivos dentro del disposito de almacenamiento (SD CARD)
 String printDirectory(File dir, int numTabs)
 {
   String json = "";
@@ -177,19 +136,21 @@ String printDirectory(File dir, int numTabs)
     File entry = dir.openNextFile();
     if (!entry)
     {
-      Serial.println("**nomorefiles**");
+      Serial.println("**END DIR**");
       break;
     }
 
-    for (uint8_t i = 0; i < numTabs; i++)
+    /*     for (uint8_t i = 0; i < numTabs; i++)
     {
-      Serial.print('\t');
-    }
-    Serial.print(entry.name());
+      // Serial.print('\t');
+    } */
+    // Serial.print(entry.name());
     if (entry.isDirectory())
     {
+      Serial.println(entry.name());
       folder.name = entry.name();
       folder.type = 1;
+      Serial.println("DIR: " + folder.name);
       folder.content = "[" + printDirectory(entry, numTabs + 1) + "]";
       json = json + "," + dirModel(folder);
       /*       JsonObject dir = data.createNestedObject();
@@ -197,13 +158,14 @@ String printDirectory(File dir, int numTabs)
       dir["type"] = 1;
       JsonArray content = dir.createNestedArray("content");
       content.add(printDirectory(entry, numTabs + 1)) */
-      Serial.println("/");
+      // Serial.println("/");
     }
     else
     {
       file.name = entry.name();
       file.size = entry.size();
       file.type = 0;
+      Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + String(file.size));
       json = json + "," + fileModel(file);
       /*       JsonObject file = data.createNestedObject();
       file["name"] = entry.name();
@@ -213,7 +175,6 @@ String printDirectory(File dir, int numTabs)
       Serial.println(entry.size(), DEC); */
     }
   }
-  DynamicJsonDocument doc(json.length());
-  serializeJson(doc, json);
+  json.remove(0, 1);
   return json;
 }

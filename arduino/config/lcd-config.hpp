@@ -11,7 +11,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 /**
 	 * Set the LCD display in the correct begin state, must be called before anything else is done.
 	 */
-void setupLCD(String message = "")
+void initLCD(String message = "")
 {
   lcd.begin();
   // lcd.backlight();

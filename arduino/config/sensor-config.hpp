@@ -1,11 +1,11 @@
 // CALIBRATION DE LOS SENSORES
-const int REFERENCE_VOLT = 500;         // mv
-const int RESOLUTION_ADC = 1024;        // ADC Resolution
-const int CALIBRATION_VOLT = 1600;      //mv
-const byte CALIBRATION_TEMP = 25;       //°C
+const PROGMEM int REFERENCE_VOLT = 500;         // mv
+const PROGMEM int RESOLUTION_ADC = 1024;        // ADC Resolution
+const PROGMEM int CALIBRATION_VOLT = 1600;      //mv
+const PROGMEM byte CALIBRATION_TEMP = 25;       //°C
 
 // PIN
-const byte TEMP_PIN = 0; // D3
+const PROGMEM byte TEMP_PIN = 0; // D3
 
 struct IParams
 {
