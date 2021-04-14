@@ -9,6 +9,7 @@ String startDevice(AsyncWebServerRequest *request)
     time = time == "" ? String(getTime().unixtime()) : time;
     pool_id = pool_id == 0 ? 1 : pool_id;
     iteration = iteration == 0 ? 10 : iteration;
+    Serial.println("START DEVICE - ITERATION: " + String(iteration));
     // ACTIONS
     String data = "[" + startAllMeasurement(time, pool_id, iteration) + "]";
     String filename = setFilename("P", pool_id, time, "json");

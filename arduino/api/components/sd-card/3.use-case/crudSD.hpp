@@ -66,7 +66,6 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   File file = SD.open(path);
   String listFiles = "";
   byte index = 0;
-  Serial.println("Find File by name: " + String(numFile));
   while (true)
   {
     File entry = file.openNextFile();

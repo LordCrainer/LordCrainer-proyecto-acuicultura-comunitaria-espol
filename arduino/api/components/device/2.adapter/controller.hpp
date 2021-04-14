@@ -8,10 +8,10 @@ void getAllConfig(AsyncWebServerRequest *req)
 
 void startingDevice(AsyncWebServerRequest *req)
 {
-  const char *res;
+  String res;
   // String iteration = getParameterByName(req, "iteration");
   // byte pool_id = getParameterByName(req, "pool_id").toInt();
-  res = startDevice(req).c_str();
+  res = startDevice(req);
   /*   if (iteration == "")
   {
     res = startOneMeasurement("1517383146500", pool_id);
