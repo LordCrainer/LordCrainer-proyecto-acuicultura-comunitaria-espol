@@ -4,13 +4,13 @@ const char *PARAM_FILTER = "filter";
 
 void readingMeasurement(AsyncWebServerRequest *req)
 {
-  String path = "/measurement/";
+  String route = "/measurement/";
   String res;
   // /measurement/12 => 12
   // res = req->url().indexOf(path) != -1 ? getMeasurementById(req, path) : getMeasurementtAll(req);
-  if (req->url().indexOf(path) != -1)
+  if (req->url().indexOf(route) != -1)
   {
-    res = readOneMeasurement(req, path);
+    res = readOneMeasurement(req, route);
   }
   /* else if (req->hasParam(PARAM_FILTER))
   {

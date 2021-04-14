@@ -52,9 +52,9 @@ String readSD(String filename)
   return data;
 }
 
-boolean deleteSD(String filename)
+String deleteSD(String filename)
 {
-  return SD.remove(filename);
+  return SD.remove(filename) == 1 ? filename : "";
 }
 
 // Encontrar archivos por el nombre
@@ -91,27 +91,31 @@ String findFileByName(String path, String prefix, byte numFile = 10)
 }
 
 // Lee una cadena continua de datos separados por ","
-String readManyFiles(String data, String separator = ",", int sizeMax = 10)
+String execManyFiles(callFunction sdFunc, String list, String separator = ",", int sizeMax = 10)
 {
-  const int lengthData = data.length();
+  const int lengthData = list.length();
   int position[sizeMax];
   int index = 0;
   String input;
   String output = "";
   if (lengthData <= 0)
   {
-    return output;
+    return "{}";
   }
   // INICIO DEL BUCLE
   position[0] = 0;
   for (byte i = 0; i < sizeMax; i++)
   {
-    position[i + 1] = data.indexOf(separator, index);
-    if (position[i + 1] == -1)
+    position[i + 1] = list.indexOf(separator, index);
+    if (position[i + 1] == -1) //Si al final no hay separador
     {
+      if (lengthData > 0) // Pero la cadena tiene información
+      {
+        return sdFunc(list);
+      }
       break;
     }
-    input = readSD(data.substring(index, position[i + 1]));
+    input = sdFunc(list.substring(index, position[i + 1]));
     if (input.startsWith("["))
     {
       input.remove(0, 1);
@@ -130,7 +134,6 @@ String printDirectory(File dir, int numTabs)
   String json = "";
   IDirectory folder;
   IFiles file;
-
   while (true)
   {
     File entry = dir.openNextFile();
@@ -139,12 +142,10 @@ String printDirectory(File dir, int numTabs)
       Serial.println("**END DIR**");
       break;
     }
-
     /*     for (uint8_t i = 0; i < numTabs; i++)
     {
       // Serial.print('\t');
     } */
-    // Serial.print(entry.name());
     if (entry.isDirectory())
     {
       Serial.println(entry.name());
@@ -153,12 +154,6 @@ String printDirectory(File dir, int numTabs)
       Serial.println("DIR: " + folder.name);
       folder.content = "[" + printDirectory(entry, numTabs + 1) + "]";
       json = json + "," + dirModel(folder);
-      /*       JsonObject dir = data.createNestedObject();
-      dir["name"] = entry.name();
-      dir["type"] = 1;
-      JsonArray content = dir.createNestedArray("content");
-      content.add(printDirectory(entry, numTabs + 1)) */
-      // Serial.println("/");
     }
     else
     {
@@ -167,12 +162,6 @@ String printDirectory(File dir, int numTabs)
       file.type = 0;
       Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + ajustUnitSize(file.size));
       json = json + "," + fileModel(file);
-      /*       JsonObject file = data.createNestedObject();
-      file["name"] = entry.name();
-      file["type"] = 0;
-      file["size"] = entry.size();
-      Serial.print("\t\t");
-      Serial.println(entry.size(), DEC); */
     }
   }
   json.remove(0, 1);

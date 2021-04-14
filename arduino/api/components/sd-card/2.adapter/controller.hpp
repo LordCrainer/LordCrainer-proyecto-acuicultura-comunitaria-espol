@@ -1,43 +1,49 @@
 #include "../3.use-case/index.hpp"
 
-void writingSD(AsyncWebServerRequest *request)
+void writingSD(AsyncWebServerRequest *req)
 {
-    String filename = getParameterByName(request, "filename");
-    String data = getParameterByName(request, "data");
+    String filename = getParameterByName(req, "filename");
+    String data = getParameterByName(req, "data");
     const boolean isWritten = writeSD(filename, data);
-    request->send(200, "application/json", data);
+    req->send(200, "application/json", data);
 }
 
-void readingSD(AsyncWebServerRequest *request)
+void readingSD(AsyncWebServerRequest *req)
 {
-    String filename = getParameterByName(request, "filename");
+    String filename = getParameterByName(req, "filename");
     String readedData = readSD(filename);
-    request->send(200, "application/json", readedData);
+    req->send(200, "application/json", readedData);
 }
 
-void appendSD(AsyncWebServerRequest *request)
+void appendSD(AsyncWebServerRequest *req)
 {
     String json;
     StaticJsonDocument<24> doc;
     doc["status"] = "OK";
     serializeJson(doc, json);
-    request->send(200, "application/json", json);
+    req->send(200, "application/json", json);
 }
 
-void directorySD(AsyncWebServerRequest *request)
+void directorySD(AsyncWebServerRequest *req)
 {
     String json;
     json = printDirectory(SD.open("/"), 0);
-    request->send(200, "application/json", json);
+    req->send(200, "application/json", json);
 }
 
-void deletingSD(AsyncWebServerRequest *request)
+void deletingSD(AsyncWebServerRequest *req)
 {
-    String json;
-    StaticJsonDocument<24> doc;
-    String filename = getParameterByName(request, "filename");
-    boolean isDeleted = deleteSD(filename);
-    doc["status"] = isDeleted;
-    serializeJson(doc, json);
-    request->send(200, "application/json", json);
+    // PARAMS
+    byte filemax = getParameterByName(req, "filemax").toInt();
+    String filename = getParameterByName(req, "filename");
+    //VALIDATION
+    filemax = filemax == 0 ? 10 : filemax;
+    // ACTIONS
+    String data = "[" + execManyFiles(deleteSD, filename, ",", filemax) + "]";
+    // WRAP
+    int capacity = 24 + data.length();
+    DynamicJsonDocument doc(capacity);
+    doc["data"] = data;
+    serializeJson(doc, data);
+    req->send(200, "application/json", data);
 }

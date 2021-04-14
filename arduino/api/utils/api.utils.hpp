@@ -6,14 +6,14 @@ void merge(JsonObject dest, JsonObjectConst src)
   }
 }
 
-void homeRequest(AsyncWebServerRequest *request)
+void homeRequest(AsyncWebServerRequest *req)
 {
-  request->send(200, "text/plain", "Hello, world");
+  req->send(200, "text/plain", "Hello, world");
 }
 
-void notFound(AsyncWebServerRequest *request)
+void notFound(AsyncWebServerRequest *req)
 {
-  request->send(404, "text/plain", "Not found");
+  req->send(404, "text/plain", "Not found");
 }
 
 String getBodyContent(uint8_t *data, size_t len)
@@ -26,10 +26,10 @@ String getBodyContent(uint8_t *data, size_t len)
   return content;
 }
 
-int getIdFromURL(AsyncWebServerRequest *request, String root)
+int getIdFromURL(AsyncWebServerRequest *req, String route)
 {
-  String string_id = request->url(); // /measurement/1
-  string_id.replace(root, "");       // "1"
+  String string_id = req->url(); // /measurement/1
+  string_id.replace(route, "");       // "1"
   int id = string_id.toInt();        //  1
   return id;
 }
@@ -57,32 +57,32 @@ String findById(String data, int id)
   return json;
 }
 
-void getHeaders(AsyncWebServerRequest *request)
+void getHeaders(AsyncWebServerRequest *req)
 {
-  int headers = request->headers();
+  int headers = req->headers();
   int i;
   for (i = 0; i < headers; i++)
   {
-    AsyncWebHeader *h = request->getHeader(i);
+    AsyncWebHeader *h = req->getHeader(i);
     Serial.printf("HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
   }
 }
 
-String getParameterByName(AsyncWebServerRequest *request, const char *param)
+String getParameterByName(AsyncWebServerRequest *req, const char *param)
 {
-  if (request->hasArg(param))
+  if (req->hasArg(param))
   {
-    return request->arg(param);
+    return req->arg(param);
   }
   return "";
 }
 
-void getAllParameters(AsyncWebServerRequest *request)
+void getAllParameters(AsyncWebServerRequest *req)
 {
-  int nParams = request->params();
+  int nParams = req->params();
   for (int i = 0; i < nParams; i++)
   {
-    AsyncWebParameter *p = request->getParam(i);
+    AsyncWebParameter *p = req->getParam(i);
 
     if (p->isFile())
     { //p->isPost() is also true
@@ -91,7 +91,7 @@ void getAllParameters(AsyncWebServerRequest *request)
     }
     Serial.printf("FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
   }
-  request->send(200, "application/json", {});
+  req->send(200, "application/json", {});
   //serialize(doc, json);
   //return json;
 }

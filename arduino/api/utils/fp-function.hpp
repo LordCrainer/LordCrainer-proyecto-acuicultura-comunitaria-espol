@@ -4,5 +4,5 @@
 //String = argument
 //
 // Ejemplo: String anyName(callFunction theFunctionAsParameter)
-typedef String (*sdCallFuncion)(String);
+typedef String (*callFunction)(String);
 
