@@ -16,8 +16,7 @@ String readOneMeasurement(AsyncWebServerRequest *req, String route)
   prefix = prefix == "" ? "P" + String(pool_id) + "_" : prefix;
   path = path == "" ? "/" : path;
   // ACTIONS
-  Serial.println("PREFIX: " + prefix);
-  String list = findFileByName(path, prefix);
+  String list = findFileByName(path, prefix, filemax);
   String data = "[" + execManyFiles(readSD, list, ",", filemax) + "]";
   return data;
 }
@@ -33,7 +32,7 @@ String readAllMeasurement(AsyncWebServerRequest *req)
   filemax = filemax == 0 ? 10 : filemax;
   prefix = prefix == "" ? "P" : prefix;
   // ACTIONS
-  String list = findFileByName("/", prefix);
+  String list = findFileByName("/", prefix, filemax);
   String data = "[" + execManyFiles(readSD, list, ",", filemax) + "]";
   return data;
 }

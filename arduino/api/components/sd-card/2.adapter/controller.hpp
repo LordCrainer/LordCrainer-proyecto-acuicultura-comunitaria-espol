@@ -38,12 +38,10 @@ void deletingSD(AsyncWebServerRequest *req)
     String filename = getParameterByName(req, "filename");
     //VALIDATION
     filemax = filemax == 0 ? 10 : filemax;
+    filename = filename == "" ? "" : filename + ",";
     // ACTIONS
-    String data = "[" + execManyFiles(deleteSD, filename, ",", filemax) + "]";
+    String data = execManyFiles(deleteSD, filename, ",", filemax);
     // WRAP
-    int capacity = 24 + data.length();
-    DynamicJsonDocument doc(capacity);
-    doc["data"] = data;
-    serializeJson(doc, data);
+    data = "{\"data\": \"" + data + "\"}";
     req->send(200, "application/json", data);
 }

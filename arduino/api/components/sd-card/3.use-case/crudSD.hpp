@@ -66,6 +66,7 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   File file = SD.open(path);
   String listFiles = "";
   byte index = 0;
+  Serial.println("Find File by name: " + String(numFile));
   while (true)
   {
     File entry = file.openNextFile();
@@ -75,14 +76,14 @@ String findFileByName(String path, String prefix, byte numFile = 10)
       Serial.println("**nomorefiles**");
       break;
     }
-    if (numFile == index + 1)
-    {
-      listFiles = filename + listFiles;
-      break;
-    }
+
     if (filename.startsWith(prefix))
     {
       listFiles = filename + "," + listFiles;
+      if (numFile == index + 1)
+      {
+        break;
+      }
       index++;
     }
   }
@@ -109,10 +110,10 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
     position[i + 1] = list.indexOf(separator, index);
     if (position[i + 1] == -1) //Si al final no hay separador
     {
-      if (lengthData > 0) // Pero la cadena tiene información
+      /*       if (lengthData > 0) // Pero la cadena tiene información
       {
         return sdFunc(list);
-      }
+      } */
       break;
     }
     input = sdFunc(list.substring(index, position[i + 1]));
@@ -122,6 +123,10 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
       input.remove(input.length() - 1, 1);
     }
     output = output + "," + input;
+    if (input == "")
+    {
+      output.remove(output.length() - 1, 1);
+    }
     index = position[i + 1] + 1;
   }
   output.remove(0, 1);
