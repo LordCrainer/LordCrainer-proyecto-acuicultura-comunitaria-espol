@@ -1,4 +1,7 @@
-// Modela los datos de un sensor a json
+/**
+	 * Sensor/domain: Modela la estructura IParams para serializar en un json
+     * @param data  Estructura IParams
+	 */
 String sensorModel(IParams data)
 {
     String json;
@@ -10,7 +13,10 @@ String sensorModel(IParams data)
     return json;
 }
 
-// Modela los datos de todos los sensores a json
+/**
+	 * Sensor/domain: Modela todas interfaces IParams serializandolos a json (Se escala manualmente)
+     * @param  data# Todos los parámetros tienen como estructura IParams
+	 */
 String modelAllSensor(IParams data1, IParams data2, IParams data3)
 {
     String Temp = sensorModel(data1);

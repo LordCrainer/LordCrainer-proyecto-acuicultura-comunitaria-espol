@@ -1,4 +1,6 @@
-// Device: Inicia el proceso de medición y guardado de los datos
+// Device/ue-case: Inicia el proceso de medición y guardado de los datos
+// Args:
+// AsyncWebServerRequest *request: Petición realizada por el cliente
 String startDevice(AsyncWebServerRequest *request)
 {
     // PARAMS

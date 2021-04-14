@@ -1,21 +1,15 @@
 #include "../3.use-case/index.hpp"
 
 const char *PARAM_FILTER = "filter";
-
+// Measurement/apdater: Leyendo las mediciones
 void readingMeasurement(AsyncWebServerRequest *req)
 {
   String route = "/measurement/";
   String res;
-  // /measurement/12 => 12
-  // res = req->url().indexOf(path) != -1 ? getMeasurementById(req, path) : getMeasurementtAll(req);
   if (req->url().indexOf(route) != -1)
   {
     res = readOneMeasurement(req, route);
   }
-  /* else if (req->hasParam(PARAM_FILTER))
-  {
-    
-  } */
   else
   {
     res = readAllMeasurement(req);

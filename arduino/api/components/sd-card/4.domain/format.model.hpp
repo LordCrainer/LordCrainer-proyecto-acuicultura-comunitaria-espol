@@ -1,3 +1,8 @@
+/**
+	 * sd-card/domain: Ajusta la unidad del espacio ocupado de un archivo
+	 * 
+	 * @param size    Tamaño del archivo
+	 */
 String ajustUnitSize(int size)
 {
     const float KB = 1000.0;

@@ -1,3 +1,8 @@
+/**
+ *  sd-card/use-case: Escribe en un archivo de la SD. Si no existe lo crea, si existe adjunta la información
+ *  @param  filename  Nombre del archivo
+ *  @param  data  Información a guardar
+ */
 boolean writeSD(String filename, String data)
 {
   File file;
@@ -11,6 +16,11 @@ boolean writeSD(String filename, String data)
   return false;
 }
 
+/**
+ *  sd-card/use-case: Crea un archivo nuevo, si existe sale de la función
+ *  @param  filename  Nombre del archivo
+ *  @param  data  Información a guardar
+ */
 boolean createSD(String filename, String data)
 {
   File file;
@@ -29,6 +39,10 @@ boolean createSD(String filename, String data)
   return false;
 }
 
+/**
+ *  sd-card/use-case: Lee la información de un archivo
+ *  @param  filename  Nombre del archivo
+ */
 String readSD(String filename)
 {
   File file;
@@ -52,15 +66,21 @@ String readSD(String filename)
   return data;
 }
 
+/**
+ *  sd-card/use-case: Borra el archivo seleccionado
+ *  @param  filename  Nombre del archivo
+ */
 String deleteSD(String filename)
 {
   return SD.remove(filename) == 1 ? filename : "";
 }
 
-// Encontrar archivos por el nombre
-// path: Ruta
-// prefix: Prefijo o caracteres iniciales
-// numFile: Cantidad de archivos a buscar (default = 10)
+/**
+ *  sd-card/use-case: Encuentra un archivo por las iniciales del nombre
+ *  @param  path  Ruta a buscar
+ *  @param  prefix  Prefijo del archivo a buscar
+ *  @param  numFile  Cantidad de archivos a buscar (default=10)
+ */
 String findFileByName(String path, String prefix, byte numFile = 10)
 {
   File file = SD.open(path);
@@ -90,11 +110,18 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   return listFiles;
 }
 
-// Lee una cadena continua de datos separados por ","
-String execManyFiles(callFunction sdFunc, String list, String separator = ",", int sizeMax = 10)
+
+/**
+ *  sd-card/use-case: Executa una función para toda una cadena continua de datos que se encuentre separados por algún caracter
+ *  @param  sdFunc  Llamada de la función a ejecutar
+ *  @param  list  Lista de valores
+ *  @param  separator  Caracter usado para separar la cadena
+ *  @param  filemax  Numero máximo de archivos a ejecutar
+ */
+String execManyFiles(callFunction sdFunc, String list, String separator = ",", int filemax = 10)
 {
   const int lengthData = list.length();
-  int position[sizeMax];
+  int position[filemax];
   int index = 0;
   String input;
   String output = "";
@@ -104,7 +131,7 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
   }
   // INICIO DEL BUCLE
   position[0] = 0;
-  for (byte i = 0; i < sizeMax; i++)
+  for (byte i = 0; i < filemax; i++)
   {
     position[i + 1] = list.indexOf(separator, index);
     if (position[i + 1] == -1) //Si al final no hay separador
@@ -132,7 +159,11 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
   return output;
 }
 
-// Obtiene e imprime todos los directorios, subdirectorios y archivos dentro del disposito de almacenamiento (SD CARD)
+/**
+ *  sd-card/use-case: Imprime y obtiene todos los archivos de un directorio
+ *  @param  dir  Necesita de una clase File para ser ejecutado
+ *  @param  numTabs  Número de tabulaciones por cada archivo dentro de un directorio
+ */
 String printDirectory(File dir, int numTabs)
 {
   String json = "";

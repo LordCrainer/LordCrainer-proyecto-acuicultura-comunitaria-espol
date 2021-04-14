@@ -45,6 +45,7 @@
 void setup()
 {
   // PRE
+  initSensorTemp();
   global_temp = getTemp();
   
   Serial.flush();

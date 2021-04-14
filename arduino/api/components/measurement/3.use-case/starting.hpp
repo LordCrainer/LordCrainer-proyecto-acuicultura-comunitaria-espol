@@ -1,4 +1,9 @@
-// Obtiene toda la metadata de una medición general.
+/**
+ * Measurement/use-case:    Inicia sólo un proceso de medición de todos los sensores
+ * 
+ * @param time  Captura el tiempo
+ * @param pool_id   Obtiene el número de la piscina a sensar 
+*/
 String startOneMeasurement(String time, byte pool_id)
 {
     IMeasurement measurement;
@@ -10,6 +15,12 @@ String startOneMeasurement(String time, byte pool_id)
     return measurementModel(measurement);
 }
 
+/**
+ * Measurement/use-case: Inicia varios procesos de medición acorde al número establecido, de todos los sensores
+ * @param time  Captura el tiempo
+ * @param pool_id   Obtiene el número de la piscina a sensar 
+ * @param numMed   Cantidad de mediciones a realizar 
+*/
 String startAllMeasurement(String time, const byte pool_id, const byte numMed)
 {
     String data;

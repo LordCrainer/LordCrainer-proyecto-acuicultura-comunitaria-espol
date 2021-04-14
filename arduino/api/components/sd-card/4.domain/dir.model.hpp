@@ -1,3 +1,7 @@
+/**
+ *  sd-card/domain: Modela la estructura IDirectory y lo serializa a json
+ *  @param  dir  Estructura IDirectory
+ */
 String dirModel(IDirectory dir)
 {
   int capacity = 50 + dir.name.length() + dir.content.length();

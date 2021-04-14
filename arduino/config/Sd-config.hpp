@@ -1,3 +1,7 @@
+// PIN
+const PROGMEM uint16_t PIN_SD = 15; // D8
+
+// INTERFACE
 struct IDirectory
 {
   String name;
@@ -12,11 +16,13 @@ struct IFiles
   int size;
 };
 
+// SETUP
+
 boolean initSD()
 {
-    if (SD.begin(PIN_SD))
-    {
-        return true;
-    }
-    return false;
+  if (SD.begin(PIN_SD))
+  {
+    return true;
+  }
+  return false;
 }

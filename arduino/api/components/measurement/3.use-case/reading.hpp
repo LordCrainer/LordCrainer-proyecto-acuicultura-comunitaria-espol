@@ -1,8 +1,11 @@
 #include "../4.domain/model-measurement.hpp"
 
-// Measurement/
-//  Lee únicamente los archivos de la piscina seleccionada y que coincida con un prefijo: "P1_" o "P10_"
-// Limitado a 10 archivos.
+/**
+ * Measurement/use-case: Lee unicamente los archivos que coincidad con un prefijo. Ejemplo: P1_, P2_
+ * 
+ * @param req  Peitición del cliente
+ * @param route   Ruta de la llamada
+*/
 String readOneMeasurement(AsyncWebServerRequest *req, String route)
 {
   // PARAMS
@@ -21,8 +24,11 @@ String readOneMeasurement(AsyncWebServerRequest *req, String route)
   return data;
 }
 
-// Measurement: Lee todos los archivos que tenga el prefijo "P".
-// Limitado a 10 archivos.
+/**
+ * Measurement/use-case: Lee todos los archivos que coincidan con un prefijo
+ * 
+ * @param req  Peitición del cliente
+*/
 String readAllMeasurement(AsyncWebServerRequest *req)
 {
   // PARAMS

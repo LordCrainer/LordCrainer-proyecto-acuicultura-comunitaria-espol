@@ -1,24 +1,16 @@
-#include "../3.application/index.hpp"
+#include "../3.use-case/index.hpp"
 
+// Device/adapter: Obteniendo toda la configuración del sistema
 void getAllConfig(AsyncWebServerRequest *req)
 {
-  String RESPONSE_END = allConfig();
+  String RESPONSE_END = allConfig("configuration.json");
   req->send(200, "application/json", RESPONSE_END);
 }
 
+// Device/adapter: Iniciando proceso de medición y captura de datos.
 void startingDevice(AsyncWebServerRequest *req)
 {
   String res;
-  // String iteration = getParameterByName(req, "iteration");
-  // byte pool_id = getParameterByName(req, "pool_id").toInt();
   res = startDevice(req);
-  /*   if (iteration == "")
-  {
-    res = startOneMeasurement("1517383146500", pool_id);
-  }
-  else
-  {
-    res = startDevice(req);
-  } */
   req->send(200, "application/json", res);
 }

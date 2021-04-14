@@ -1,3 +1,7 @@
+/**
+ *  sd-card/domain: Modela la estructura IFiles y lo serializa a json
+ *  @param  file  Estructura IFiles
+ */
 String fileModel(IFiles file)
 {
   int capacity = 50 + file.name.length();

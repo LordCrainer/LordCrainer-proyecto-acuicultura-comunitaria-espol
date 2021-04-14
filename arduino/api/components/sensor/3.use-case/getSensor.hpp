@@ -1,46 +1,28 @@
 // Definimos los pines para los sensores
 #include "../4.domain/sensor-model.hpp"
 
-#define PH_PIN A0
-
-#define D_OXY_PIN A0
-
-//Variables
-#define VOLT_REF 500  // mv
-#define ADC_RES 1024  // ADC Resolution
-#define CAL_VOLT 1600 //mv
-#define CAL_TEMP 25   //°C
-
-OneWire ourWire(TEMP_PIN);
-
-DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
-
-const uint16_t DO_TABLE[41] = {
-    14460, 14220, 13820, 13440, 13090, 12740, 12420, 12110, 11810, 11530,
-    11260, 11010, 10770, 10530, 10300, 10080, 9860, 9660, 9460, 9270,
-    9080, 8900, 8730, 8570, 8410, 8250, 8110, 7960, 7820, 7690,
-    7560, 7430, 7300, 7180, 7070, 6950, 6840, 6730, 6630, 6530, 6410};
-
-// uint8_t Temperaturet;
-// uint16_t ADC_Raw;
-// uint16_t ADC_Voltage;
-// uint16_t DO;
-// uint16_t V_saturation;
-// uint8_t READ_TEMP;
-
-int16_t readingOxygen(uint32_t volt, uint8_t temp)
+/**
+	 * Sensor/use-case: Permite ajustar el valor del Oxigeno disuelto
+   * @param volt  Voltaje medido
+   * @param temp  Temperatura actual del agua
+	 */
+int16_t ajustDO(uint32_t volt, uint8_t temp)
 {
   uint16_t volSalt = (uint32_t)CAL_VOLT + (uint32_t)35 * temp - (uint32_t)CAL_TEMP * 35;
   return (volt * DO_TABLE[temp] / volSalt);
 }
 
-void setup_prog()
+/**
+	 * Sensor/use-case: Iniciar el bus de datos
+	 */
+void initSensorTemp()
 {
-
   sensorTemp.begin();
 }
 
-// Medición de Temperatura
+/**
+	 * Sensor/use-case: Obtiene el valor de temperatura
+	 */
 IParams getTemp()
 {
   sensorTemp.requestTemperatures();
@@ -50,7 +32,9 @@ IParams getTemp()
   return params;
 }
 
-// Medicion PH
+/**
+	 * Sensor/use-case: Obtiene el valor de PH
+	 */
 IParams getPh()
 {
   IParams params;
@@ -70,7 +54,9 @@ IParams getPh()
   // Serial.println(ph, 2);
 }
 
-//Medicion Oxigeno Disuelto
+/**
+	 * Sensor/use-case: Obtiene el valor del Oxigeno disuelto
+	 */
 IParams getDOxygen()
 {
   IParams params;
@@ -81,12 +67,14 @@ IParams getDOxygen()
   //Serial.print("\tOxigeno Disuelto = ");
   //Serial.print();
   //Serial.println(" mg/L ");
-  params.value = float(readingOxygen(volt, temp) / 1000);
+  params.value = float(ajustDO(volt, temp) / 1000);
   return params;
   // delay(10000);
 }
 
-// Sensor: Captura los datos de todos los sensores
+/**
+	 * Sensor/use-case: Realiza un barrido de todo los sensores manualmente insertados
+	 */
 String getAllSensor()
 {
   IParams temp = global_temp;
