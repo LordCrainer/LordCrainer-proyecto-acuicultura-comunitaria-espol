@@ -62,7 +62,5 @@ void setup()
 void loop()
 {
   lastTime = getTempDelay(lastTime, 3000);
-  //lcdControlButton();
-  //lcdPrintMenu();
 }
 
