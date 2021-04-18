@@ -15,14 +15,22 @@ String sensorModel(IParams data)
 
 /**
 	 * Sensor/domain: Modela todas interfaces IParams serializandolos a json (Se escala manualmente)
-     * @param  data# Todos los parámetros tienen como estructura IParams
+     * @param  params# Todos los parámetros tienen como estructura IParams
 	 */
-String modelAllSensor(IParams data1, IParams data2, IParams data3)
+String modelAllSensor(IParams params[])
 {
-    String Temp = sensorModel(data1);
-    String PH = sensorModel(data2);
-    String DO = sensorModel(data3);
-    return Temp + "," + PH + "," + DO;
+    String data = "";
+    byte longitud = sizeof(params);
+    for (byte i = 0; i < longitud; i++)
+    {
+        data = data + "," + sensorModel(params[i]);
+    }
+    data.remove(0, 1);
+    return data;
+    // String Temp = sensorModel(data1);
+    // String PH = sensorModel(data2);
+    // String DO = sensorModel(data3);
+    // return Temp + "," + PH + "," + DO;
 }
 
 IParams initilizeSensor(String filename)

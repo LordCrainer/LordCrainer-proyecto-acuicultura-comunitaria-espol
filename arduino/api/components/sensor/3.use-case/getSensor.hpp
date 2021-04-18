@@ -76,12 +76,11 @@ IParams getDOxygen(IParams params)
 	 */
 String getAllSensor()
 {
-  IParams temp = GLOBAL_TEMP;
-  IParams ph = getPh(GLOBAL_PH);
   IParams DO;
   DO.value = 21;
   DO.name = "DO";
-  return modelAllSensor(temp, ph, DO);
+  IParams params[] = {GLOBAL_TEMP, getPh(GLOBAL_PH), DO};
+  return modelAllSensor(params);
 }
 
 unsigned long getTempDelay(unsigned long lastTime, unsigned long timerDelay)
