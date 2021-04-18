@@ -17,23 +17,6 @@ const uint16_t DO_TABLE[41] = {
     9080, 8900, 8730, 8570, 8410, 8250, 8110, 7960, 7820, 7690,
     7560, 7430, 7300, 7180, 7070, 6950, 6840, 6730, 6630, 6530, 6410};
 
-// INTERFACE
-struct IParams
-{
-    String name;
-    double value;
-    char alert[4] = "OK";
-    double max;
-    double min;
-};
-
 OneWire ourWire(TEMP_PIN);
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
-
-// INITILIZAR
-
-// VARIABLES GLOBAL
-IParams GLOBAL_TEMP;
-IParams GLOBAL_PH;
-IParams GLOBAL_DO;

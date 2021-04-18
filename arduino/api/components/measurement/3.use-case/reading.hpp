@@ -1,5 +1,3 @@
-#include "../4.domain/model-measurement.hpp"
-
 /**
  * Measurement/use-case: Lee unicamente los archivos que coincidad con un prefijo. Ejemplo: P1_, P2_
  * 

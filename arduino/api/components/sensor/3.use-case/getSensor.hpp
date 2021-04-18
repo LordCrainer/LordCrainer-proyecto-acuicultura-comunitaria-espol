@@ -1,6 +1,3 @@
-// Definimos los pines para los sensores
-#include "../4.domain/sensor-model.hpp"
-
 // *************** TEMPERATURE ***************
 double getValueTemp()
 {
