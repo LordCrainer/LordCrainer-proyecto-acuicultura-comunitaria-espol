@@ -1,15 +1,10 @@
 /**
  * Measurement/use-case:    Inicia sólo un proceso de medición de todos los sensores
  * 
- * @param time  Captura el tiempo
- * @param pool_id   Obtiene el número de la piscina a sensar 
+ * @param measurement  Interfaz de las mediciones
 */
-String startOneMeasurement(String time, byte pool_id)
+String startOneMeasurement(IMeasurement measurement)
 {
-    IMeasurement measurement;
-    measurement.device_id = "ABCD"; // getDeviceID
-    measurement.created_at = time;
-    measurement.pool_id = pool_id;
     measurement.params = "[" + getAllSensor() + "]";
     measurement.status = "OK";
     return measurementModel(measurement);
@@ -17,11 +12,10 @@ String startOneMeasurement(String time, byte pool_id)
 
 /**
  * Measurement/use-case: Inicia varios procesos de medición acorde al número establecido, de todos los sensores
- * @param time  Captura el tiempo
- * @param pool_id   Obtiene el número de la piscina a sensar 
+ * @param measurement  Interfaz de las mediciones
  * @param numMed   Cantidad de mediciones a realizar 
 */
-String startAllMeasurement(String time, const byte pool_id, const byte numMed)
+String startAllMeasurement(IMeasurement measurement, const byte numMed)
 {
     String data;
     String json;
@@ -33,7 +27,7 @@ String startAllMeasurement(String time, const byte pool_id, const byte numMed)
 
     for (byte i = 0; i < numMed; i++)
     {
-        data = startOneMeasurement(time, pool_id);
+        data = startOneMeasurement(measurement);
         if (i == lastIndex)
         {
             json = json + data;

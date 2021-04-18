@@ -43,14 +43,11 @@
 #include "router/router.hpp"
 
 void setup()
-{
-  // PRE
-  initSensorTemp();
-  global_temp = getTemp();
-  
+{ 
   Serial.flush();
-  initTime();
   // SETUP
+  initSensorTemp();
+  initTime();
   Serial.begin(115200);
   ConnectWiFi_STA();
   InitServer();

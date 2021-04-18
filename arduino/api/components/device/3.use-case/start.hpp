@@ -3,18 +3,21 @@
 // AsyncWebServerRequest *request: Petición realizada por el cliente
 String startDevice(AsyncWebServerRequest *request)
 {
+    IMeasurement med;
     // PARAMS
-    byte pool_id = getParameterByName(request, "pool_id").toInt();
+    med.created_at = getParameterByName(request, "time");
+    med.pool_id = getParameterByName(request, "pool_id").toInt();
     byte iteration = getParameterByName(request, "iteration").toInt();
-    String time = getParameterByName(request, "time");
     //VALIDATION
-    time = time == "" ? String(getTime().unixtime()) : time;
-    pool_id = pool_id == 0 ? 1 : pool_id;
+    String time = String(getTime().unixtime());
+    med.created_at = med.created_at == "" ? time : med.created_at;
+    med.pool_id = med.pool_id == 0 ? 1 : med.pool_id;
     iteration = iteration == 0 ? 10 : iteration;
-    Serial.println("START DEVICE - ITERATION: " + String(iteration));
+    // INICIALIZACIÓN
+    med.device_id = "ABCD"; //getDeviceID();
     // ACTIONS
-    String data = "[" + startAllMeasurement(time, pool_id, iteration) + "]";
-    String filename = setFilename("P", pool_id, time, "json");
+    String data = "[" + startAllMeasurement(med, iteration) + "]";
+    String filename = setFilename("P", med.pool_id, med.created_at, "json");
     const boolean isCreated = createSD(filename, data);
     return data;
 }

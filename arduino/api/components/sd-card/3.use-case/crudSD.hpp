@@ -110,7 +110,6 @@ String findFileByName(String path, String prefix, byte numFile = 10)
   return listFiles;
 }
 
-
 /**
  *  sd-card/use-case: Executa una función para toda una cadena continua de datos que se encuentre separados por algún caracter
  *  @param  sdFunc  Llamada de la función a ejecutar
@@ -164,39 +163,46 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
  *  @param  dir  Necesita de una clase File para ser ejecutado
  *  @param  numTabs  Número de tabulaciones por cada archivo dentro de un directorio
  */
-String printDirectory(File dir, int numTabs)
+String printDirectory(File dir, int numTabs, byte filemax = 10)
 {
   String json = "";
   IDirectory folder;
   IFiles file;
+  byte iteration = 0;
   while (true)
   {
     File entry = dir.openNextFile();
-    if (!entry)
+    if (filemax < iteration)
     {
-      Serial.println("**END DIR**");
       break;
-    }
-    /*     for (uint8_t i = 0; i < numTabs; i++)
+
+      if (!entry)
+      {
+        Serial.println("**END DIR**");
+        break;
+      }
+      /*     for (uint8_t i = 0; i < numTabs; i++)
     {
       // Serial.print('\t');
     } */
-    if (entry.isDirectory())
-    {
-      Serial.println(entry.name());
-      folder.name = entry.name();
-      folder.type = 1;
-      Serial.println("DIR: " + folder.name);
-      folder.content = "[" + printDirectory(entry, numTabs + 1) + "]";
-      json = json + "," + dirModel(folder);
-    }
-    else
-    {
-      file.name = entry.name();
-      file.size = entry.size();
-      file.type = 0;
-      Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + ajustUnitSize(file.size));
-      json = json + "," + fileModel(file);
+      if (entry.isDirectory())
+      {
+        Serial.println(entry.name());
+        folder.name = entry.name();
+        folder.type = 1;
+        Serial.println("DIR: " + folder.name);
+        folder.content = "[" + printDirectory(entry, numTabs + 1) + "]";
+        json = json + "," + dirModel(folder);
+      }
+      else
+      {
+        file.name = entry.name();
+        file.size = entry.size();
+        file.type = 0;
+        Serial.println("\tFILE: \t" + file.name + "\t\t\t\t\tSize: " + ajustUnitSize(file.size));
+        json = json + "," + fileModel(file);
+      }
+      iteration++;
     }
   }
   json.remove(0, 1);

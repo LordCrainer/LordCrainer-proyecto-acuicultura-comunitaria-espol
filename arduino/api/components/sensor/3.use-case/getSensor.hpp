@@ -12,12 +12,10 @@ int16_t ajustDO(uint32_t volt, uint8_t temp)
   return (volt * DO_TABLE[temp] / volSalt);
 }
 
-/**
-	 * Sensor/use-case: Iniciar el bus de datos
-	 */
-void initSensorTemp()
+double getValueTemp()
 {
-  sensorTemp.begin();
+  sensorTemp.requestTemperatures();
+  return sensorTemp.getTempCByIndex(0);
 }
 
 /**
@@ -27,31 +25,39 @@ IParams getTemp()
 {
   sensorTemp.requestTemperatures();
   IParams params;
+  params.max = 35;
+  params.min = 25;
   params.name = "Temperature";
-  params.value = sensorTemp.getTempCByIndex(0);
+  params.value = getValueTemp();
   return params;
+}
+
+/**
+	 * Sensor/use-case: Iniciar el bus de datos
+	 */
+void initSensorTemp()
+{
+  sensorTemp.begin();
+  GLOBAL_TEMP = getTemp();
 }
 
 /**
 	 * Sensor/use-case: Obtiene el valor de PH
 	 */
-IParams getPh()
+IParams getPh(byte iteration = 20)
 {
   IParams params;
   params.name = "PH";
   int ph = 0;
-  int prom = 0;
-  for (int i = 0; i < 20; i++)
+  double prom = 0;
+  for (int i = 0; i < iteration; i++)
   {
     ph = analogRead(PH_PIN);
     prom = prom + ph;
   }
-
-  prom = prom / 20;
+  prom = prom / iteration;
   params.value = (7 + ((prom - 605) * 3 / (-18))) / 10;
   return params;
-  // Serial.print("\tPH = ");
-  // Serial.println(ph, 2);
 }
 
 /**
@@ -61,15 +67,11 @@ IParams getDOxygen()
 {
   IParams params;
   params.name = "DO";
-  uint8_t temp = (uint8_t)global_temp.value;
+  uint8_t temp = (uint8_t)GLOBAL_TEMP.value;
   uint16_t oxyD = analogRead(D_OXY_PIN);
   uint32_t volt = uint32_t(VOLT_REF) * oxyD / ADC_RES;
-  //Serial.print("\tOxigeno Disuelto = ");
-  //Serial.print();
-  //Serial.println(" mg/L ");
   params.value = float(ajustDO(volt, temp) / 1000);
   return params;
-  // delay(10000);
 }
 
 /**
@@ -77,12 +79,9 @@ IParams getDOxygen()
 	 */
 String getAllSensor()
 {
-  IParams temp = global_temp;
-  IParams ph;
+  IParams temp = GLOBAL_TEMP;
+  IParams ph = getPh();
   IParams DO;
-  // // getPh();
-  ph.value = 7.0;
-  ph.name = "PH";
   DO.value = 21;
   DO.name = "DO";
   return modelAllSensor(temp, ph, DO);
@@ -92,7 +91,7 @@ unsigned long getTempDelay(unsigned long lastTime, unsigned long timerDelay)
 {
   if ((millis() - lastTime) > timerDelay)
   {
-    global_temp = getTemp();
+    GLOBAL_TEMP = getTemp();
     lastTime = millis();
   }
   return lastTime;

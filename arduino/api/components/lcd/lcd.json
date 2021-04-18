@@ -1,0 +1,35 @@
+{
+    "name": "||| MENU |||",
+    "id": 1,
+    "fila": 1,
+    "col": 4,
+    "opts": [
+        {
+            "name": "Medicion",
+            "id": 1,
+            "fila": 1,
+            "col": 4,
+            "opts": [
+                {
+                    "name": "Seleccionar Piscina",
+                    "id": 1,
+                    "fila": 1,
+                    "col": 4,
+                    "opts": []
+                },
+                {
+                    "name": "Iniciar",
+                    "id": 2,
+                    "fila": 1,
+                    "col": 4
+                }
+            ]
+        },
+        {
+            "name": "Configuracion",
+            "id": 2,
+            "fila": 1,
+            "col": 4
+        }
+    ]
+}

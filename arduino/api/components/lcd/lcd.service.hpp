@@ -5,10 +5,11 @@ int submenuCont = 1;
 int submenu1Cont = 1;
 //Definicion tipo de dato variables banderas
 boolean flagArriba, flagAbajo, flagOk, flagCancelar;
+ILCD_CHARACTER opts;
 
 void lcdSetCharUp()
 {
-  lcd.createChar(1, CHAR_UP);
+  lcd.createChar(1, opts.CHAR_UP);
   lcd.setCursor(10, 1);
   lcd.write((byte)1);
 }
@@ -250,7 +251,7 @@ void lcdPrintMenu() //Mostrar el menu atual
     { //Para ingresar al bucle cuando se presiona ok
       lcd.clear();
       while (flagOk)
-      {                 //Bucle para mantenerse en submenu lcdConfigTime
+      {                  //Bucle para mantenerse en submenu lcdConfigTime
         lcdConfigTime(); //Funcion lcdConfigTime de arranque
       }
     }

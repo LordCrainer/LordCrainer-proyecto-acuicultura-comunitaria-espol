@@ -7,7 +7,7 @@ const PROGMEM byte CAL_TEMP = 25;  //°C
 // PIN
 const PROGMEM byte TEMP_PIN = 0; // D3
 const PROGMEM byte D_OXY_PIN = A0;
-const PROGMEM byte PH_PIN = A0;
+const PROGMEM uint8_t PH_PIN = A0;
 
 // PARAMETROS
 
@@ -31,4 +31,7 @@ OneWire ourWire(TEMP_PIN);
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
 
-IParams global_temp;
+// VARIABLES GLOBAL 
+IParams GLOBAL_TEMP;
+IParams GLOBAL_PH;
+IParams GLOBAL_DO;

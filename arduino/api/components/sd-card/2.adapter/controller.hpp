@@ -27,7 +27,7 @@ void appendSD(AsyncWebServerRequest *req)
 void directorySD(AsyncWebServerRequest *req)
 {
     String json;
-    json = printDirectory(SD.open("/"), 0);
+    json = "[" + printDirectory(SD.open("/"), 0) + "]";
     req->send(200, "application/json", json);
 }
 
