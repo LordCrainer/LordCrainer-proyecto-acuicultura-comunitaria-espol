@@ -31,7 +31,9 @@ OneWire ourWire(TEMP_PIN);
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
 
-// VARIABLES GLOBAL 
+// INITILIZAR
+
+// VARIABLES GLOBAL
 IParams GLOBAL_TEMP;
 IParams GLOBAL_PH;
 IParams GLOBAL_DO;

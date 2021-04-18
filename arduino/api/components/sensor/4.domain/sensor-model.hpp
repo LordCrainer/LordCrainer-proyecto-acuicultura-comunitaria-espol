@@ -24,3 +24,16 @@ String modelAllSensor(IParams data1, IParams data2, IParams data3)
     String DO = sensorModel(data3);
     return Temp + "," + PH + "," + DO;
 }
+
+IParams initilizeSensor(String filename)
+{
+    IParams param;
+    String json;
+    StaticJsonDocument<50> doc;
+    json = readSD(filename);
+    deserializeJson(doc, json);
+    param.max = doc["max"].as<double>();
+    param.min = doc["min"].as<double>();
+    param.name = doc["name"].as<String>();
+    return param;
+}

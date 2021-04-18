@@ -15,7 +15,7 @@ String startOneMeasurement(IMeasurement measurement)
  * @param measurement  Interfaz de las mediciones
  * @param numMed   Cantidad de mediciones a realizar 
 */
-String startAllMeasurement(IMeasurement measurement, const byte numMed)
+String startAllMeasurement(IMeasurement measurement, const byte numMed = 10)
 {
     String data;
     String json;
