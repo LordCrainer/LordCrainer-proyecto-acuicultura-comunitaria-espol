@@ -20,3 +20,6 @@ const uint16_t DO_TABLE[41] = {
 OneWire ourWire(TEMP_PIN);
 
 DallasTemperature sensorTemp(&ourWire); // Se declara una variable para el sensor
+
+
+

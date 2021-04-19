@@ -29,8 +29,8 @@ String getBodyContent(uint8_t *data, size_t len)
 int getIdFromURL(AsyncWebServerRequest *req, String route)
 {
   String string_id = req->url(); // /measurement/1
-  string_id.replace(route, "");       // "1"
-  int id = string_id.toInt();        //  1
+  string_id.replace(route, "");  // "1"
+  int id = string_id.toInt();    //  1
   return id;
 }
 
@@ -68,13 +68,25 @@ void getHeaders(AsyncWebServerRequest *req)
   }
 }
 
-String getParameterByName(AsyncWebServerRequest *req, const char *param)
+String getParameterByName(AsyncWebServerRequest *req, String param)
 {
-  if (req->hasArg(param))
+  if (req->hasArg(param.c_str()))
   {
-    return req->arg(param);
+    return req->arg(param.c_str());
   }
   return "";
+}
+
+IObject *getParamsByName(AsyncWebServerRequest *req, String params[])
+{
+  byte size = sizeof(params);
+  IObject obj[size];
+  for (byte i = 0; i < size; i++)
+  {
+    obj[i].key = params[i];
+    obj[i].value = getParameterByName(req, params[i]);
+  }
+  return obj;
 }
 
 void getAllParameters(AsyncWebServerRequest *req)

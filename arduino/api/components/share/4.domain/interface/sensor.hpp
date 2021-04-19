@@ -1,9 +1,9 @@
 // INTERFACE
-struct IParams
+struct ISensor
 {
     double max;
     double min;
     String name;
     double value;
-    char alert[4] = "OK";
+    String alert = "OK";
 };

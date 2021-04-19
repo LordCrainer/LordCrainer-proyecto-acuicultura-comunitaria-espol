@@ -1,4 +1,4 @@
-String sensorStatus(IParams param)
+String sensorStatus(ISensor param)
 {
     String letter = param.name.substring(0, 1);
     if (param.value > param.max)

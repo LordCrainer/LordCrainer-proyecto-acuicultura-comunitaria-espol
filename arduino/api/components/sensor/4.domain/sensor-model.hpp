@@ -1,8 +1,8 @@
 /**
-	 * Sensor/domain: Modela la estructura IParams para serializar en un json
-     * @param data  Estructura IParams
+	 * Sensor/domain: Modela la estructura ISensor para serializar en un json
+     * @param data  Estructura ISensor
 	 */
-String sensorModel(IParams data)
+String sensorModel(ISensor data)
 {
     String json;
     StaticJsonDocument<50> doc;
@@ -14,10 +14,10 @@ String sensorModel(IParams data)
 }
 
 /**
-	 * Sensor/domain: Modela todas interfaces IParams serializandolos a json (Se escala manualmente)
-     * @param  params# Todos los parámetros tienen como estructura IParams
+	 * Sensor/domain: Modela todas interfaces ISensor serializandolos a json (Se escala manualmente)
+     * @param  params# Todos los parámetros tienen como estructura ISensor
 	 */
-String modelAllSensor(IParams params[])
+String modelAllSensor(ISensor params[])
 {
     String data = "";
     byte longitud = sizeof(params);
@@ -33,15 +33,18 @@ String modelAllSensor(IParams params[])
     // return Temp + "," + PH + "," + DO;
 }
 
-IParams initilizeSensor(String filename)
+ISensor initilizeSensor(String filename, ISensor sensor)
 {
-    IParams param;
     String json;
     StaticJsonDocument<50> doc;
     json = readSD(filename);
-    deserializeJson(doc, json);
-    param.max = doc["max"].as<double>();
-    param.min = doc["min"].as<double>();
-    param.name = doc["name"].as<String>();
-    return param;
+    DeserializationError err = deserializeJson(doc, json);
+    if (err)
+    {
+        return sensor;
+    }
+    sensor.max = doc["max"].as<double>();
+    sensor.min = doc["min"].as<double>();
+    sensor.name = doc["name"].as<String>();
+    return sensor;
 }

@@ -27,12 +27,12 @@
 #include "config/measurement-config.hpp"
 #include "config/lcd-config.hpp"
 // UTILS
+#include "api/components/share/2.adapter/index.hpp"
 #include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
 // COMPONENTES DEL API REST
-#include "api/components/share/2.adapter/index.hpp"
 #include "api/components/file-system/2.adapter/controller.hpp"
 #include "api/components/sd-card/2.adapter/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
@@ -47,7 +47,7 @@ void setup()
 { 
   Serial.flush();
   // SETUP
-  initSensorTemp();
+  initSensors();
   initTime();
   Serial.begin(115200);
   ConnectWiFi_STA();

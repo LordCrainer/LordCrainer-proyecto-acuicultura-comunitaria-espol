@@ -3,26 +3,26 @@
 // AsyncWebServerRequest *request: Petición realizada por el cliente
 String startDevice(AsyncWebServerRequest *request)
 {
-    IMeasurement med;
+    IMeasurement measure;
     // PARAMS
-    med.created_at = getParameterByName(request, "time");
-    med.pool_id = getParameterByName(request, "pool_id").toInt();
+    String timeParam = getParameterByName(request, "time");
+    byte id = getParameterByName(request, "pool_id").toInt();
     byte iteration = getParameterByName(request, "iteration").toInt();
 
-    //VALIDATION
+    // PRE ACTIONS
     String time = String(getTime().unixtime());
-    med.created_at = med.created_at == "" ? time : med.created_at;
-    med.pool_id = med.pool_id == 0 ? 1 : med.pool_id;
+    measure.device_id = "ABCD"; //getDeviceID();
+
+    //VALIDATION
+    measure.created_at = timeParam == "" ? time : timeParam;
+    measure.pool_id = id == 0 ? 1 : id;
     iteration = iteration == 0 ? 10 : iteration;
 
     // INICIALIZACIÓN
-    med.device_id = "ABCD"; //getDeviceID();
-    GLOBAL_TEMP = initilizeSensor("/config/temp");
-    GLOBAL_PH = initilizeSensor("/config/ph");
-    GLOBAL_DO = initilizeSensor("/config/do");
+    ISensor sensors[] = {GLOBAL_TEMP, GLOBAL_PH, GLOBAL_DO};
     // ACTIONS
-    String data = "[" + startAllMeasurement(med, iteration) + "]";
-    String filename = setFilename("P", med.pool_id, med.created_at, "json");
+    String data = "[" + startAllMeasurement(measure, sensors, iteration) + "]";
+    String filename = setFilename("P", measure.pool_id, measure.created_at, "json");
     const boolean isCreated = createSD(filename, data);
     return data;
 }
