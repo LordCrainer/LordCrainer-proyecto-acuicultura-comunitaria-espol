@@ -4,6 +4,7 @@
 # Descripción: Pasar de un jsonDocument a JSON
 Ejemplo: 
 String output;
+int sizeDoc // Usar el asistente de ArduinoJson
 DynamicJsonDocument doc(sizeDoc);
 doc["name"] = "COMUNITARIAS";
 doc["id"] = 10;
@@ -14,9 +15,12 @@ output => {"name": "COMUNITARIAS", "id": 10}
 ## Deserielize
 # Descripción: Pasar de un (String)JSON a jsonDocument
 Ejemplo: 
-String input = "{}";
+String input = "{"data": 10}"; // Puede ser de la SD
+int sizeDoc = input.length();
 DynamicJsonDocument doc(sizeDoc)
 deserilezejson(doc, input);
+
+output => {"data": 10}
 
 ### HERRAMIENTAS A USAR
 
@@ -45,7 +49,7 @@ deserilezejson(doc, input);
 - [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)
 - [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)
 
-###### NOTA: Si falta algún otra librería el Visual Code o el IDE de Arduino les mostrará el error
+###### NOTA: Si falta algún otra librería el Visual Code o el IDE de Arduino les mostrará algún error y tendrían que instalar desde el manejador del  Arduino IDE
 
 #### PASOS PARA USAR EL PROGRAMA
 
@@ -107,15 +111,35 @@ deserilezejson(doc, input);
   - config (Todas las configuraciones)
     - server
     - wifi-config
+  - router (rutas del api para comunicarse con el cliente)  
+  - utils (utilidades usadas en todo el proyecto)
+    - api.utils.hpp: Funciones para manejar partes del api
+    - json.utils.hpp
+    - time.utils.hpp
   - api
     - componentes | api-rest (Todas las funciones externas)
-      - device
-      - LCD
-      - measurement
-      - sd-card
-      - sensor
-    - utils (utilidades generales de la aplicacion)
-  - router (rutas del api)
+      - device/
+        - 2.adapter/ (Recibe las peticiones del cliente, las procesa y devuelve una respuesta)
+          - controller.hpp
+        - 3.use-case/ (Lógica de la aplicación, o las acciones que hace el componente)
+          - start.hpp (Inicia el proceso de censado y guardado de datos)
+      - LCD/
+      - measurement/
+      - sd-card/
+        - 2.adapter/
+          - controller.hpp
+        - 3.use-case/
+          - crudSD (Varias funciones que se puede hacer en una SD. Leer, escribir, borrar, etc)
+        - 4.domain/ (Lódigo del negocio, o como se estructurarán los datos finales)
+          - dirModel.hpp
+          - fileModel.hpp (Modela la estructura y lo convierte en json)
+          - filename.hpp (Establece el nombre final del archivo)
+      - sensor/
+      - share/ (Area del código con alcance a todos los componentes)
+        - 4.domain/
+          - interface/ (Guarda todas las estructuras de todos los componentes)
+            - measurement.hpp (structura para la medición) 
+
 
 ## FUNCIONAMIENTO DEL API REST
 
@@ -137,28 +161,31 @@ Es cuando una API usa como arquitectura REST para comunicar entre el cliente y s
 
 El Api Rest funciona de manera asíncrona y por eventos. Eso significa que toda petición hecha por el cliente será continuamente escuchada por servidor y luego verificada si coincide con la ruta o acción que permite el servidor, caso contrario deberá de responder con un mensaje de error o que no ha sido encontrada la petición del cliente.
 
+
 ### ARQUITECTURA
 
 El proyecto presenta una arquitectura en capas de manera jerárquica, cada capa tiene un fin específico dentro del proyecto y un flujo el cual se debe de respetar, esto significa que las capas superiores únicamente pueden acceder a las inferiores o comunicarse de manera adyacentes a ellas. Por ningún motivo una capa inferior puede acceder a una capa de nivel superior. En otras palabras, cuando se incluye o se usa una función del sistema se debe de considerar en que capa se encuentra. Las capas generales son:
-Las capas generales son: - INFRAESTRUCTURA - ADAPTADORES DE INTERFAZ - APLICACIÓN - DOMINIO
+Las capas generales son: - INFRAESTRUCTURA - ADAPTADORES DE INTERFAZ - CASOS DE USO - DOMINIO
 
 #### Infraestructura: Servidor y configuraciones
 
-      La infraestructura es la capa más externa de la arquitectura compuesta por frameworks, herramientas y base de datos, etc. Esta capa es la que se encuentra más cerca del cliente, en otras palabras, primero pasa por esta capa y luego por las demás.
+      La infraestructura es la capa más externa de la arquitectura compuesta por frameworks, herramientas y base de datos, etc (Detalles del sistema). Esta capa es la que se encuentra más cerca del cliente, en otras palabras, primero pasa por esta capa y luego por las demás.
       Ejemplo:
         - Server: Es el que se encarga de levantar el servidor.
         - Wifi-conf: Se encarga de cambiar el comportamiento del adaptador de wifi del equipo, para que trabaje como estación (Station) o punto de acceso (AP)
         - IniciarSD: Se encarga de establecer el inicio del SD
         - Iniciar LCD: Presenta la información de manera gráfica al usuario
 
-    Si comparamos en arduino, la infraestructura podría ser todos los procesos que se deben de ejecutar en primera instancia en el setup, antes que cualquier programa.
+    NOTA: Si comparamos en arduino, la infraestructura podría ser todos los procesos que se deben de ejecutar en primera instancia en el setup, antes que cualquier programa.
+    También estarían las configuraciones de todo el sistema.
 
+    OJO: Esta capa está implícito en el proyecto.
 #### Adaptador de interfaz
 
-    Se encarga de adaptar los datos que le llegan del cliente hacia la aplicación y viceversa. Esta capa antes pertenecía a la de infraestructura, pero se lo ha divido porque cumple una función intermedia entre la interacción con el usuario y la aplicación (api). Para este proyecto esta capa está utilizando dos responsabilidades diferentes, y son: el router y controlador
+    Se encarga de adaptar los datos que le llegan del cliente hacia los casos de uso y viceversa. Esta capa es la que recibe las peticiones hechas por el cliente y se le devuelve una respuesta.
 
     •	Router
-    Define las reglas de como el usuario debe de interactuar con el api, se divide en:
+      Define las reglas de como el usuario debe de interactuar con el api, se divide en:
         o	Ruta: Es la dirección o rama que trabajará el api: /ruta1, /ruta1/subruta2
         o	Método: Son los verbos del protocolo a usar, en este caso del Http. Estos pueden ser: get, post, patch, delete, entre otros.
         o	Request: Es la petición o datos que el cliente ha enviado al servidor (API), que a su vez es traslada hacia una función de controlador
@@ -170,18 +197,23 @@ Las capas generales son: - INFRAESTRUCTURA - ADAPTADORES DE INTERFAZ - APLICACI�
             *	Server.on(“/item”, HTTP_POST, *request, validationPool, createPool)
 
         NOTA: En el último ejemplo se agrega una función que valida la información que el cliente acaba de enviar, si no es correcta debería de acabar la petición, caso contrario el programa fluiría hacia la siguiente función. Pero es opcional dicha función.
-
+        OJO: No está dentro de una carpeta, sino que se ha colocado de manera general
 
     •	Controlador
         Esta subcapa se encarga de recibir las peticiones y datos del cliente, devolviendo siempre una respuesta al mismo, en esta respuesta puede ser un mensaje con el estado 200 OK, o un error 404, además que también se puede incluir el dato que el cliente ha solicitado. Aquí no debería de haber nada de la lógica del negocio o extensas funciones, por el contrario, su responsabilidad tiene que ser única.
-        Ejemplo:
+        Ejemplo de Responsabilidad única
+          - Si la función dice: readingMeasurement
+            Sólo leerá la información, y no hará otro proceso como borrar, crear o activar algo.
+
+        Ejemplo de los controladores:
             *	readingMeasurement: Devuelve las mediciones y un estado 200 (OK)
-            *	startDevice: Devuelve solamente un estado 202 (aceptado)
-            *	createdUser: devuelve sólo el estado 201 (creado)
+            *	startDevice: Devuelve los datos censados y el estado 202 (aceptado)
+            *	createdUser: Crea un usuario y sólo el estado 201 (creado)
 
-#### Aplicación o Servicio
+#### Casos de uso
 
-    Esta capa es donde están todas las reglas del negocio o las funciones generales de lo que hace el proyecto, también se le denomina: casos de usos. Su responsabilidad es la de ensamblar las diferentes funciones y servicios para resolver una solución en concreto. Hay que saber que sólo recibe datos, ejecuta varias funciones y devuelve más datos.
+    Esta capa es donde están todas las reglas del negocio o las funciones generales de lo que hace el proyecto. Su responsabilidad es la de ensamblar las diferentes funciones y servicios para resolver una solución en concreto. Hay que saber que sólo recibe datos, ejecuta varias funciones y devuelve más datos.
+
     Ejemplo:
     Si queremos que el API permita iniciar el proceso de medición de los parámetros de entrada (temperatura, ph, oxígeno) necesitamos ejecutar ciertas funciones de manera ordenada para satisfacer la solución, y estas pueden ser:
         -	Recibir el id de la piscina a censar.
@@ -194,50 +226,10 @@ Las capas generales son: - INFRAESTRUCTURA - ADAPTADORES DE INTERFAZ - APLICACI�
         -	Devolver una respuesta al cliente
 
      Como podemos notar, la aplicación deberá de ejecutar una serie de procesos o funciones para solucionar un caso en particular, cada una de estas funciones, por lo general, pertenecen a la misma capa.
-    Se recomienda que si el programa
-
-
-      SD_CARD
-      - Leerá la SD
-      - Guardará datos en los ficheros
-      - Borrará ficheros
-      - Creará un nuevo fichero
-
-      Measurement
-      - Recibe el Id de la piscina que se desea obtener
-      - Busca en la SD Card los datos de la piscina deseada.
-      - returna el valor
-
-      DEVICE
-      - start (opcional)
-         * Muestra el temporizador del tiempo antes de comenzar a sensar en la LCD
-         * Activa el sensado de todos los sensores
-         * Guarda los datos en la SD (tener cuidado del tiempo de sensado y el grabado de los datos)
-         * Envía una respuesta indicando que todo ha funcionado correctamente
 
 ### FLUJO DE LA PETICIÓN
 
-Cliente => Servidor (API REST) => Router => Controller => Service
-
-### DESCRIPCIÓN DE CADA CARPETA
-
-En la carpeta principal: Arduino
-
-- Estará todas carpetas y archivos principales
-
-  - arduino.ino => Es el archivo principal donde se llamará a todo el programa y librerías.
-  - env.example.h => Un ejemplo a seguir para usar las variables de entorno
-  - .env => Es el archivo donde se encuentran las variables propias de todo el sistema y son de caracter confidencial
-
-- Subcarpeta: API
-  - En esta carpeta se encuentra el código responsable de toda la API, manejo de librerías y periféricos.
-    - components: Está el código responsable de la actividad principal del proyecto: medición, sensado, sd card, lcd
-    - utils: Es la carpeta de utilidades que ayuda de manera general a la carpeta de componentes.
-- Subcarpeta: config
-  - Código responsable de la configuración del Wifi y Servidor
-- Subcarpeta: router
-  - Todas las rutas del api rest se encuentran alojadas en esta carpeta, junto a la funciones(controlador) que debe de ejecutar)
-
+Cliente (Celular) => Servidor (API REST) => Router => Controller => Casos de uso => Dominio
 ### BIBLIOGRAFÍA
 
 http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/
