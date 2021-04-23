@@ -1,25 +1,29 @@
 ### ARDUINO JSON
+Es una librería que permite codificar y decodificar los datos en formato JSON.
 
-## Serielize
-# Descripción: Pasar de un jsonDocument a JSON
-Ejemplo: 
-String output;
-int sizeDoc // Usar el asistente de ArduinoJson
-DynamicJsonDocument doc(sizeDoc);
-doc["name"] = "COMUNITARIAS";
-doc["id"] = 10;
-serielizeJson(doc, output);
+Página Oficial: https://arduinojson.org/
+Asistente:https://arduinojson.org/v6/assistant/
+### Serielize
+#### Descripción: 
+Pasar de un String a JSON
 
-output => {"name": "COMUNITARIAS", "id": 10}
+        String output;
+        int sizeDoc // Usar el asistente de ArduinoJson para saber el tamaño
+        DynamicJsonDocument doc(sizeDoc);
+        doc["name"] = "COMUNITARIAS";
+        doc["id"] = 10;
+        serielizeJson(doc, output);
+
+        // output => {"name": "COMUNITARIAS", "id": 10}
 
 ## Deserielize
-# Descripción: Pasar de un (String)JSON a jsonDocument
+### Descripción: Pasar de un (String)JSON a jsonDocument
 Ejemplo: 
 String input = "{"data": 10}"; // Puede ser de la SD
 int sizeDoc = input.length();
 DynamicJsonDocument doc(sizeDoc)
 deserilezejson(doc, input);
-
+*611 5 3 
 output => {"data": 10}
 
 ### HERRAMIENTAS A USAR
@@ -161,6 +165,8 @@ Es cuando una API usa como arquitectura REST para comunicar entre el cliente y s
 
 El Api Rest funciona de manera asíncrona y por eventos. Eso significa que toda petición hecha por el cliente será continuamente escuchada por servidor y luego verificada si coincide con la ruta o acción que permite el servidor, caso contrario deberá de responder con un mensaje de error o que no ha sido encontrada la petición del cliente.
 
+
+### 
 
 ### ARQUITECTURA
 

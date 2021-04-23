@@ -27,7 +27,7 @@
 #include "config/measurement-config.hpp"
 #include "config/lcd-config.hpp"
 // UTILS
-#include "api/components/share/2.adapter/index.hpp"
+#include "api/components/share/4.domain/index.hpp"
 #include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
