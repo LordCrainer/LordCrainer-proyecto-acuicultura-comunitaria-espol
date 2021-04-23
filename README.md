@@ -32,7 +32,7 @@
     - [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)
     - [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)
 
-**NOTA: Si falta alguna librería tanto el Visual Code como el IDE de Arduino les imprimirá por pantalla el error y tendrían que instalar desde el manejador del  Arduino IDE**
+> **NOTA: Si falta alguna librería tanto el Visual Code como el IDE de Arduino les imprimirá por pantalla el error y tendrían que instalar desde el manejador del  Arduino IDE**
 
 **AÑADIR EL ARCHIVO DE CONFIGURACIÓN DE LA EXTENSIÓN "ARDUINO"**
 
@@ -46,7 +46,7 @@ Se debe de generar el archivo de configuración de la extensión de Arduino en e
 - Abrir cualquier ejemplo, y se les abrirá una nueva ventana.
 - Copiar el archivo "c_cpp_properties.json" dentro del ./vscode del ejemplo, a la misma carpeta del proyecto.
 
-NOTA: El archivo c_cpp_properties.json, tiene que tener una configuración parecida al siguiente formato.
+> NOTA: El archivo c_cpp_properties.json, tiene que tener una configuración parecida al siguiente formato.
 
 ```json
 {
@@ -86,41 +86,44 @@ La variables de entorno son aquellas que deberían ser ocultas para las demás p
 - [Ejemplos usando ESP8266](https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_Server)
 
 #### Estructura del programa
-* arduino.ino   //Archivo principal del proyecto
-* env.h     //Variables de entorno
-* ***config/***   //Todas las configuraciones
-  * server
-  * wifi-config
-  * router //rutas del api para comunicarse con el cliente
-  * utils //utilidades usadas en todo el proyecto)
-  * api.utils.hpp //Funciones para manejar partes del api
-  * json.utils.hpp
-  * time.utils.hpp
-* ***router/***
-	* router.hpp  //Reglas o comandos que permite el API REST para comunicarse con el cliente
-* ***api/***
-	* ***components/***
-		* ***device/*** //Activa el dispositivo para una acción específica
-			* ***2.adapter/*** 
-				* controller.hpp //Recibe las peticiones del cliente, las procesa y devuelve una respuesta
-			* ***3.use-case/*** //Lógica de la aplicación, o las acciones que hace el componente
-				* start.hpp //Inicia el proceso de censado y guardado de datos
-		* ***LCD/***
-		* ***measurement/***  //Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
-		* ***sd-card/***
-			* ***2.adapter/***
-				* controller.hpp
-			* ***3.use-case/*** //Lógica de la aplicación, o las acciones que hace el componente
-				* crudSD //Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
-			* ***4.domain/*** //Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto. 
-				* dirModel.hpp
-				* fileModel.hpp //Modela la estructura y lo convierte en json
-				* filename.hpp //Establece el nombre final del archivo
-		* ***sensor/*** //Acciones para ejecutar o tratar la información de los sensores.
-		* ***share/*** //Area del código con alcance a todos los componentes
-			* ***4.domain/***
-				* ***interface/*** //Guarda todas las estructuras de todos los componentes
-					* measurement.hpp //structura para la medición
+```markdown 
+📄 arduino.ino                          ℹ Archivo principal del proyecto
+📄 env.h                                ℹ Variables de entorno
+📂 config/                              ℹ Todas las configuraciones
+|- 📄 server
+|- 📄 wifi-config
+|- 📄 router                            ℹ rutas del api para comunicarse con el cliente
+|- 📄 utils                             ℹ utilidades usadas en todo el proyecto)
+|- 📄 api.utils.hpp                     ℹ Funciones para manejar partes del api
+|- 📄 json.utils.hpp
+|- 📄 time.utils.hpp
+📂 router/
+|- 📄 router.hpp                        ℹ Reglas o comandos que permite el API REST para comunicarse con el cliente
+📂 api/
+|- 📂 components/
+   |- 📂 device/                        ℹ Activa el dispositivo para una acción específica
+      |- 📂 2.adapter/ 
+         |- 📄 controller.hpp           ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
+      |- 📂 3.use-case/                 ℹ Lógica de la aplicación, o las acciones que hace el componente
+         |- 📄 start.hpp                ℹ Inicia el proceso de censado y guardado de datos
+|- 📂 LCD/
+|- 📂 measurement/                      ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
+|- 📂 sd-card/
+    |- 📂 2.adapter/
+       |- 📄 controller.hpp
+    |- 📂 3.use-case/                   ℹ Lógica de la aplicación, o las acciones que hace el componente
+       |- 📄 crudSD                     ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+    |- 📂 4.domain/                     ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto. 
+       |- 📄 dirModel.hpp
+       |- 📄 fileModel.hpp              ℹ Modela la estructura y lo convierte en json
+       |- 📄 filename.hpp               ℹ Establece el nombre final del archivo
+|- 📂 sensor/                           ℹ Acciones para ejecutar o tratar la información de los sensores.
+|- 📂 share/                            ℹ Area del código con alcance a todos los componentes
+   |- 📂 4.domain/
+      |- 📂 interface/                  ℹ Guarda todas las estructuras de todos los componentes
+          |- 📄 measurement.hpp         ℹ structura para la medición
+```
+
 
 # API REST 
 ---
@@ -149,25 +152,25 @@ El proyecto presenta una arquitectura en capas de manera jerárquica, 
 
 Normalmente las capas que se trabajan serían las siguientes:
 
-> Infraestructura  👉🏿 Adaptadores de interfaz 👉🏿 Casos de uso 👉🏿 Dominio
+> Infraestructura  ➡ Adaptadores de interfaz ➡ Casos de uso ➡ Dominio
 
-La capa de infraestructura no se encuentra creada
-Para ser usada se debería de separar el componente "sd-card" de componentes y colocarlo la carpeta infraestructura. Así que de momento está implícita pero se le dará un breve explicación.
+> La capa de infraestructura no se encuentra creada.
+Para ser usada se debería de separar el componente "sd-card" de componentes y colocarlo en la carpeta infraestructura. Así que de momento está implícita pero se le dará un breve explicación.
 
 - **Infraestructura: Servidor y configuraciones**
 
     La infraestructura es la capa más externa de la arquitectura compuesta por frameworks, herramientas y base de datos, etc (Detalles del sistema). Esta capa es la que se encuentra más cerca del cliente, en otras palabras, primero pasa por esta capa y luego por las demás.
 
     Ejemplo:
-
-    - **Server**
-        Es el que se encarga de levantar el servidor.
-    - **Wifi-conf**
-        Se encarga de cambiar el comportamiento del adaptador de wifi del equipo, para que trabaje como estación (Station) o punto de acceso (AP)
-    - **IniciarSD**
-    - **Iniciar LCD**
-    Si comparamos en arduino, la infraestructura podría ser todos los procesos que se deben de ejecutar en primera instancia en el setup, antes que cualquier programa.
-
+```
+    Server      ➡ Es el que se encarga de levantar el servidor.
+    Wifi-conf   ➡ Se encarga de cambiar el comportamiento del adaptador de wifi del equipo,
+                   para que trabaje como estación (Station) o punto de acceso (AP)
+    initSD      ➡ Iniciar la sd-card. 
+    initLCD     ➡ Si comparamos en arduino la infraestructura podría ser todos los procesos
+                   que se deben de ejecutar en primera instancia en el setup, antes que cualquier
+                   programa.
+```
 - **Adaptador de interfaz**
 
     Se encarga de adaptar los datos que le llegan del cliente hacia los casos de uso y viceversa. Esta capa es la que recibe las peticiones hechas por el cliente y se le devuelve una respuesta.
