@@ -4,11 +4,6 @@
 1.2 [Configuraciones generales del proyecto](#12-configuraciones-generales-del-proyecto)
 2. [Estructura del proyecto](#2-estructura-del-proyecto)
 3. [API REST](#3-api-rest)
-4. [Testing And Overall Quality Practices (13) ](#4-testing-and-overall-quality-practices)
-5. [Going To Production Practices (19) ](#5-going-to-production-practices)
-6. [Security Practices (25)](#6-security-best-practices)
-7. [Performance Practices (2) (Work In Progress️ ✍️)](#7-draft-performance-best-practices)
-8. [Docker Practices (15)](#8-docker-best-practices)
 
 ---
 # `1. Primeros pasos`
@@ -43,10 +38,10 @@
         - Presionar F1 dentro del Visual Code para mostrar en la parte superior un menú de opciones
         - Escribir Arduino en el menú que aparece en la parte de arriba (> Arduino)
         - Observar que estén los comandos del Arduino (Arduino: Upload, Arduino: Verify, Arduino: Examples)
-<br/>
+        <br/>
+
     - **Configuración De La Extensión "ARduino"**
         Se debe de generar el archivo de configuración de la extensión de Arduino en el Visual Code (c_cpp_properties.json).
-<br/>
         - Aplastar F1 dentro del Visual Code
         - Escribir "Arduino" en el menú que aparece en la parte de arriba (>)
         - Seleccionar la opción que dice: "Arduino: Examples"
@@ -54,7 +49,7 @@
         - Abrir la carpeta dedicado a NodeMCU o ESP8266
         - Abrir cualquier ejemplo, y se les abrirá una nueva ventana.
         - Copiar el archivo "c_cpp_properties.json" dentro del ./vscode del ejemplo, a la misma carpeta del proyecto.
-<br/>
+
         > 📄 **NOTA:
          El archivo c_cpp_properties.json, debe de tener una configuración parecida al siguiente formato.**
 
@@ -85,7 +80,6 @@
             "version": 4
         }
         ```
-
 
     - **Agregar Las Variables De Entorno**
         La variables de entorno son aquellas que deberían ser ocultas para las demás personas, como ejemplo tenemos: La configuración de la red de un hogar para realizar pruebas
