@@ -1,7 +1,7 @@
 ## Tabla de Contenidos
 1. [Primeros pasos](#1-primeros-pasos)
-1.1 [Herramientas a usar](#11-herramientas-a-usar)
-1.2 [Configuraciones generales del proyecto](#12-configuraciones-generales-del-proyecto)
+    1.1 [Herramientas a usar](#11-herramientas-a-usar)
+    1.2 [Configuraciones generales del proyecto](#12-configuraciones-generales-del-proyecto)
 2. [Estructura del proyecto](#2-estructura-del-proyecto)
 3. [API REST](#3-api-rest)
 
