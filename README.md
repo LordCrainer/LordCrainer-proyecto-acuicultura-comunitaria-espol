@@ -10,12 +10,12 @@
 
 # `1. Primeros pasos`
 
-#### 1.1 Herramientas a usar
+## 1.1 Herramientas a usar
 
 - [IDE ARDUINO](https://www.arduino.cc/en/software)
 - [VISUAL CODE](https://code.visualstudio.com/)
 
-#### 1.2 Configuraciones generales del proyecto
+## 1.2 Configuraciones generales del proyecto
 
 - **Arduino**
 
@@ -96,7 +96,7 @@
 
 # `2. Estructura del Proyecto`
 
-#### 2.1 Arquitectura del programa
+## 2.1 Arquitectura del programa
 
 El proyecto presenta una arquitectura por capas de manera jerárquica para la parte del API REST (**`api/`**). Cada capa tiene un fin específico dentro del proyecto y un flujo el cual se debe de respetar, esto significa que las capas superiores únicamente pueden acceder a las inferiores o comunicarse de manera adyacentes a ellas. Por ningún motivo una capa inferior puede acceder a una capa de nivel superior. 
 En otras palabras, cuando se incluye o se usa una función del sistema se debe de considerar en que capa se encuentra.
@@ -114,7 +114,7 @@ Pero en esta ocasión la capa de infraestructura está omitida, así que el fluj
 Se dará una breve explicación de cada capa para conocer que función cumple en el proyecto,
 <br/>
 
-##### Capas de la infraestructura
+### Capas de la infraestructura
 
 - **☁ Infraestructura: Servidor y configuraciones**
 
@@ -205,7 +205,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 
 <br/>
 
-#### 2.2 Estructura del programa
+## 2.2 Estructura del programa
 
 ```markdown
 📄 arduino.ino........................ℹ Archivo principal del proyecto
@@ -245,7 +245,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 |--+--+--+--+-- 📄 measurement.hpp....ℹ structura para la medición
 ```
 
-#### 2.3 Flujo del programa
+## 2.3 Flujo del programa
 
 > <br/> 📱 Cliente (Celular) ➡ ☁ Servidor (API REST) ➡ 📋 Router ➡ 🗣 Controller ➡ 🛒 Casos de uso ➡ 🎁 Dominio
 > <br/>
@@ -294,22 +294,22 @@ Luego todos los datos se van retornando hasta el **controlador** que enviará la
 
 # 3. API REST
 
-#### 3.1 ¿Qué es una API? [VIDEO](https://www.youtube.com/watch?v=JD6VNRdGl98)👀
+## 3.1 ¿Qué es una API? [VIDEO](https://www.youtube.com/watch?v=JD6VNRdGl98)👀
 
 API es el acrónimo de Application Programming Interfaces, en español sería Interfaz de programación de aplicaciones. Es la agrupación de diferentes funciones ,bibliotecas, procesos y subrutinas que pueden ser integrados en otro software.
 
-#### 3.2 ¿Para qué sirve?
+## 3.2 ¿Para qué sirve?
 
 Permite que sus productos y servicios puedan comunicarse con otros de una manera sencilla. Las APIs permiten simplificar el diseño, brindan flexibilidad para ser usado en otros desarrollos, administración de los recursos y dan paso a que la innovación fluya al permitir usar alguna característica en particular. En este caso, las APIs nos ayuda en la comunicación entre los diferentes periféricos del dispositivo (NodeMCU) a otros dispositivo conectado en la red (celular).
 
 3.3 REST
 REST es un estilo de arquitectura basados en el protocolo HTTP que permite conectar vraios sistemas, como un servidor con un cliente. Para obtener o enviar los datos se puede usar cualquier formato, siendo los más usados XML, JSON.
 
-#### 3.4 API REST
+## 3.4 API REST
 
 Es cuando una API usa como arquitectura REST para comunicar entre el cliente y servidor. El cliente envía una petición hacia el servidor mediante algún verbo del http (get, post, put, patch, delete, etc), el servidor recoge esta peitición, realiza la acción correspondiente a la petición y luego devuelve una respuesta hacia el cliente, en algún tipo de formato, en este caso, JSON.
 
-#### 3.5 Principios de operación
+## 3.5 Principios de operación
 
 El servidor web trabaja de manera asíncrona, el cual se mantiene escuchando a la espera de alguna petición por parte del cliente. Tiene la capacidad de manejar varias conexiones al mismo tiempo.
 
@@ -326,11 +326,11 @@ Pasos que realiza el servidor
 - Gestiona los `Rewrites` y las aplica en la URL de la solicitud (tipo, url, parametros, versión http, etc)
 - Administra los `Handler (Controladores)` y los adjunta en la solicitud
 
-#### 3.6 DOCUMENTACIÓN DEL API REST
+## 3.6 DOCUMENTACIÓN DEL API REST
 
 # GRUPO SD CARD
 
-#### SD CARD: [**/directory_sd**]
+## SD CARD: [**/directory_sd**]
 
 Obtener todos los directorios y archivos [**GET**]
 
@@ -406,7 +406,7 @@ Obtener todos los directorios y archivos [**GET**]
     ]
     ```
 
-#### SD CARD: [/write_sd{?filename,data}]
+## SD CARD: [/write_sd{?filename,data}]
 
 **Crear un nuevo archivo [**POST**]**
 
@@ -424,7 +424,7 @@ Obtener todos los directorios y archivos [**GET**]
     }
     ```
 
-#### SD CARD: [/read_sd{?filename}]
+## SD CARD: [/read_sd{?filename}]
 
 **Lee un archivo [**GET**]**
 
@@ -440,7 +440,7 @@ Obtener todos los directorios y archivos [**GET**]
     }
     ```
 
-#### SD CARD: [/delete_sd{?filename, filemax}]
+## SD CARD: [/delete_sd{?filename, filemax}]
 
 **Elimina un archivo [**DELETE**]**
 
@@ -469,7 +469,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 # GRUPO DEVICE
 
-#### DEVICE: [/device/start{?pool_id,nMeditions,time}]
+## DEVICE: [/device/start{?pool_id,nMeditions,time}]
 
 **Inicia el proceso de captura y grabado de dos mediciones [**GET**]**
 
@@ -557,7 +557,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 # GRUPO MEASUREMENT
 
-#### MEASUREMENT: [/measurement{?filemax, prefix, path}]
+## MEASUREMENT: [/measurement{?filemax, prefix, path}]
 
 **Lee todas las mediciones [**GET**]**
 
@@ -694,7 +694,7 @@ Obtener todos los directorios y archivos [**GET**]
     ]
     ```
 
-#### MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
+## MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
 
 **Lee todas las mediciones pero de una piscina (pool_id) [**GET**]**
 
@@ -761,7 +761,7 @@ Es una librería que permite codificar y decodificar los datos en formato JSON.
 
 **Asistente:** [https://arduinojson.org/v6/assistant/](https://arduinojson.org/v6/assistant/)
 
-### **Serielize**
+### **4.1 Serielize**
 
 Es el proceso que genera documentos en formato JSON.
 
@@ -775,7 +775,7 @@ serielizeJson(doc, output);
 // output => {"name": "COMUNITARIAS", "id": 10}
 ```
 
-### **Deserielize**
+### **4.2 Deserielize**
 
 Extrae la información desde un documento de JSON.
 
