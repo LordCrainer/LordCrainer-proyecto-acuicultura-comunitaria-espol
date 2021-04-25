@@ -7,6 +7,7 @@
 3. [API REST](#3-api-rest)
 4. [ArduinoJson](#4-arduino-json)
 5. [Referencias](#5-referencias)
+<br/>
 
 # `1. Primeros pasos`
 
@@ -93,6 +94,7 @@
     - Renombrarlo a:  _.env_
     - Editar las variables acorde a sus preferencias.
     - [Ejemplos usando ESP8266](https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_Server)👀
+<br/>
 
 # `2. Estructura del Proyecto`
 
@@ -244,6 +246,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 |--+--+--+-- 📂 interface/............ℹ Guarda todas las estructuras de todos los componentes
 |--+--+--+--+-- 📄 measurement.hpp....ℹ structura para la medición
 ```
+<br/>
 
 ## 2.3 Flujo del programa
 
@@ -291,6 +294,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
     - Ruta: **/Arduino/api/sd-card/4.domain/file.model.hpp**
 
 Luego todos los datos se van retornando hasta el **controlador** que enviará la respuesta al cliente
+<br/>
 
 # 3. API REST
 
@@ -325,6 +329,7 @@ Pasos que realiza el servidor
 - Realiza un seguimiento de los clientes y limpia la memoria
 - Gestiona los `Rewrites` y las aplica en la URL de la solicitud (tipo, url, parametros, versión http, etc)
 - Administra los `Handler (Controladores)` y los adjunta en la solicitud
+<br/>
 
 ## 3.6 DOCUMENTACIÓN DEL API REST
 
@@ -405,6 +410,7 @@ Pasos que realiza el servidor
       }
     ]
     ```
+<br/>
 
 ## SD CARD: [/write_sd{?filename,data}]
 
@@ -439,6 +445,7 @@ Pasos que realiza el servidor
       "data": "OK"
     }
     ```
+<br/>
 
 ## SD CARD: [/delete_sd{?filename, filemax}]
 
@@ -466,10 +473,12 @@ Pasos que realiza el servidor
       "data": "data1.json,data2.json"
     }
     ```
+<br/>
 
 # GRUPO DEVICE
 
 ## DEVICE: [/device/start{?pool_id,nMeditions,time}]
+<br/>
 
 ### Inicia el proceso de captura y grabado de dos mediciones [**GET**] 
 
@@ -499,6 +508,7 @@ Pasos que realiza el servidor
       }
     ]
     ```
+<br/>
 
 ### Inicia el proceso de captura y grabado de dos mediciones, estableciendo el tiempo [**GET**] 
 
@@ -554,6 +564,7 @@ Pasos que realiza el servidor
       }
     ]
     ```
+<br/>
 
 # GRUPO MEASUREMENT
 
@@ -693,6 +704,7 @@ Pasos que realiza el servidor
       }
     ]
     ```
+<br/>
 
 ## MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
 
@@ -752,6 +764,7 @@ Pasos que realiza el servidor
       }
     ]
     ```
+<br/>
 
 # **4. Arduino Json**
 
@@ -793,6 +806,7 @@ Serial.println(err.c_str());
 String name = "COMUNITARIAS";
 byte id = 10;
 ```
+<br/>
 
 # **5. Referencias**
 
