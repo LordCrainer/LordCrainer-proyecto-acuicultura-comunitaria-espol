@@ -4,8 +4,9 @@
  *  @param  list  Lista de valores
  *  @param  separator  Caracter usado para separar la cadena
  *  @param  filemax  Numero máximo de archivos a ejecutar
+ *  @param  path  Ruta de los archivos (default: "/")
  */
-String execManyFiles(callFunction sdFunc, String list, String separator = ",", int filemax = 10)
+String execManyFiles(callFunction sdFunc, String list, String separator = ",", int filemax = 10, String path = "/")
 {
   const int lengthData = list.length();
   int position[filemax];
@@ -29,7 +30,7 @@ String execManyFiles(callFunction sdFunc, String list, String separator = ",", i
       } */
       break;
     }
-    input = sdFunc(list.substring(index, position[i + 1]));
+    input = sdFunc(path + list.substring(index, position[i + 1]));
     if (input.startsWith("["))
     {
       input.remove(0, 1);

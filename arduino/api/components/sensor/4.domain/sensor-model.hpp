@@ -20,7 +20,7 @@ String sensorModel(ISensor data)
 String modelAllSensor(ISensor params[])
 {
     String data = "";
-    byte longitud = sizeof(params);
+    byte longitud = sizeof(params) - 1;
     for (byte i = 0; i < longitud; i++)
     {
         data = data + "," + sensorModel(params[i]);

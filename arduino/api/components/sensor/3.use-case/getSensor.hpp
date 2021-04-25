@@ -84,12 +84,17 @@ ISensor getDOxygen(ISensor DO)
 }
 
 // *************** GENERAL ***************
+
+String getOneSensor(ISensor sensor)
+{
+  return sensorModel(sensor);
+}
 /**
 	 * Sensor/use-case: Realiza un barrido de todo los sensores manualmente insertados
 	 */
 String getAllSensor(ISensor sensors[])
 {
-  byte len = sizeof(sensors);
+  byte len = sizeof(sensors) - 1;
   ISensor DO;
   DO.value = 21;
   DO.name = "DO";
@@ -108,7 +113,6 @@ String getAllSensor(ISensor sensors[])
       sensors[i] = GLOBAL_TEMP;
     }
   }
-
   // ISensor params[] = {GLOBAL_TEMP, getPh(GLOBAL_PH), DO};
   return modelAllSensor(sensors);
 }

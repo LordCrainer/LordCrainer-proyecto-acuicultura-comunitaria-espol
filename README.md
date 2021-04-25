@@ -368,8 +368,8 @@ Obtener todos los directorios y archivos [**GET**]
 
 **Crear un nuevo archivo [**POST**]**
 - Parameters
-    - filename (string)
-    - data (string)
+    - filename (String)
+    - data (String)
 - Example
     - > **/write_sd?filename=data.json&data={"data": "OK"}**
 - Response: **200** (application/json)
@@ -382,7 +382,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 **Lee un archivo [**GET**]**
 - Parameters
-    - filename (string)
+    - filename (String)
 - Example
     - > **/read_sd?filename=data.json**
 - Response: **200** (application/json)
@@ -397,7 +397,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 **Elimina un archivo [**DELETE**]**
 - Parameters
-    - filename (string)
+    - filename (String)
 - Example
     - > **/delete_sd?filename=data.json**
 - Response: **200** (application/json)
@@ -420,6 +420,65 @@ Obtener todos los directorios y archivos [**GET**]
             "data": "data1.json,data2.json"
         }
 
+
+# GRUPO DEVICE
+
+#### DEVICE: [/device/start{?pool_id,nMeditions,time}]
+
+**Inicia el proceso de captura y grabado de dos mediciones [**GET**]**
+- Parameters
+    - pool_id (number)
+    - nMeditions (number)  // default: 10
+    - time (String)
+- Example
+    - > **/device/start?pool_id=1&nMeditions=2**
+- Response: **200** (application/json)
+  - body
+
+        [
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619285911000",
+                "status": "OK",
+                "params": null
+            },
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619285911000",
+                "status": "OK",
+                "params": null
+            }
+        ]
+
+
+**Inicia el proceso de captura y grabado de dos mediciones, estableciendo el tiempo [**GET**]**
+- Parameters
+    - pool_id (number)
+    - nMeditions (number)  // default: 10
+    - time (String)
+- Example
+    - > **/device/start?pool_id=1&nMeditions=2&time=1619000000001**
+- Response: **200** (application/json)
+  - body
+
+        [
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619000000001",
+                "status": "OK",
+                "params": null
+            },
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619000000001",
+                "status": "OK",
+                "params": null
+            }
+        ]
 ---
 
 ## **BIBLIOGRAFÍA**

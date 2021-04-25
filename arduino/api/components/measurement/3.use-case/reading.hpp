@@ -15,10 +15,10 @@ String readOneMeasurement(AsyncWebServerRequest *req, String route)
   pool_id = pool_id < 0 ? 1 : pool_id;
   filemax = filemax == 0 ? 10 : filemax;
   prefix = prefix == "" ? "P" + String(pool_id) + "_" : prefix;
-  path = path == "" ? "/" : path;
+  path = path == "" ? "/data/" : path;
   // ACTIONS
   String list = findFileByName(path, prefix, filemax);
-  String data = "[" + execManyFiles(readSD, list, ",", filemax) + "]";
+  String data = "[" + execManyFiles(readSD, list, ",", filemax, path) + "]";
   return data;
 }
 
@@ -36,7 +36,7 @@ String readAllMeasurement(AsyncWebServerRequest *req)
   filemax = filemax == 0 ? 10 : filemax;
   prefix = prefix == "" ? "P" : prefix;
   // ACTIONS
-  String list = findFileByName("/", prefix, filemax);
-  String data = "[" + execManyFiles(readSD, list, ",", filemax) + "]";
+  String list = findFileByName("/data", prefix, filemax);
+  String data = "[" + execManyFiles(readSD, list, ",", filemax, "/data") + "]";
   return data;
 }

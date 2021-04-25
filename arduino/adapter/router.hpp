@@ -30,6 +30,9 @@ void InitServer()
 	server.on("/device/start", HTTP_GET, startingDevice); // ?pool_id=1
 	server.on("/device/configuration", HTTP_GET, getAllConfig);
 
+	// SENSOR
+	server.on("/sensor/temp", HTTP_GET, gettingTempSensor);
+
 	// ERROR
 	server.onNotFound(notFound);
 	server.begin();
