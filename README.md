@@ -814,8 +814,8 @@ Serial.print(F("deserializeJson() failed with code "));
 Serial.println(err.c_str());
 }
 
-String name = "COMUNITARIAS";
-byte id = 10;
+String name = doc["name"];
+byte id = = doc["id"];
 ```
 <br/>
 

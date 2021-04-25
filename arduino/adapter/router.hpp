@@ -17,6 +17,7 @@ void InitServer()
 
 	// SD CARD
 	server.on("/write_sd", HTTP_POST, writingSD);
+	server.on("/write_sd", HTTP_GET, writingSD);
 	server.on("/read_sd", HTTP_GET, readingSD);
 	server.on("/append_sd", HTTP_POST, appendSD);
 	server.on("/directory_sd", HTTP_GET, directorySD);
