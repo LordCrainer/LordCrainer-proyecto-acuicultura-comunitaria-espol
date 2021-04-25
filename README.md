@@ -8,11 +8,7 @@
 4. [ArduinoJson](#4-arduino-json)
 5. [Referencias](#5-referencias)
 
----
-
 # `1. Primeros pasos`
-
----
 
 #### 1.1 Herramientas a usar
 
@@ -98,11 +94,7 @@
     - Editar las variables acorde a sus preferencias.
     - [Ejemplos usando ESP8266](https://github.com/luisllamasbinaburo/ESP8266-Examples/tree/master/22_API_REST_Server)👀
 
----
-
 # `2. Estructura del Proyecto`
-
----
 
 #### 2.1 Arquitectura del programa
 
@@ -184,21 +176,20 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 - **🛒 Casos de uso**
   En esta capa es donde están todas las reglas de la aplicación, o las funciones generales que realiza el proyecto. Su responsabilidad es la de ensamblar las diferentes funciones y servicios de dominio para resolver una solución en concreto. *Hay que saber que sólo recibe datos,ejecuta varias funciones y devuelve más datos.*
 
-      Ejemplo:
+  ```markdown
+  Ejemplo:
 
+  Si queremos que el API permita iniciar el proceso de medición de los parámetros de entrada (temperatura, ph, oxígeno)
+  necesitamos ejecutar ciertas funciones de manera ordenada para satisfacer la solución, y estas pueden ser:
+  _ Recibir el id de la piscina a censar.
+  _ Recibir la cantidad de iteraciones o mediciones que se desea realizar
+  _ Inicializar los sensores
+  _ Comenzar con el proceso de medición
+  _ Establecer el nombre del archivo a guardar
+  _ Crear un archivo con los datos medidos. \* Retornar la información
+  ```
 
-      >Si queremos que el API permita iniciar el proceso de medición de los parámetros de entrada (temperatura, ph, oxígeno) necesitamos ejecutar ciertas funciones de manera ordenada para satisfacer la solución, y estas pueden ser:
-
-      ```markdown
-          * Recibir el id de la piscina a censar.
-          * Recibir la cantidad de iteraciones o mediciones que se desea realizar
-          * Inicializar los sensores
-          * Comenzar con el proceso de medición
-          * Establecer el nombre del archivo a guardar
-          * Crear un archivo con los datos medidos.
-          * Retornar la información
-      ```
-      Como podemos notar, la aplicación deberá de ejecutar una serie de procesos o funciones para solucionar un caso en particular, cada una de estas funciones, por lo general, pertenecen a la misma capa (**Caso de uso**).
+  Como podemos notar, la aplicación deberá de ejecutar una serie de procesos o funciones para solucionar un caso en particular, cada una de estas funciones, por lo general, pertenecen a la misma capa (**Caso de uso**).
 
   <br/>
 
@@ -213,43 +204,45 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
     > Bajo mi conocimiento podré el siguiente ejemplo:
 
 <br/>
+
 #### 2.2 Estructura del programa
-```markdown 
-📄 arduino.ino                          ℹ Archivo principal del proyecto
-📄 env.h                                ℹ Variables de entorno
-📂 config/                              ℹ Todas las configuraciones
-|-- 📄 Server.hpp                        ℹ Servidor Web
+
+```markdown
+📄 arduino.ino ℹ Archivo principal del proyecto
+📄 env.h ℹ Variables de entorno
+📂 config/ ℹ Todas las configuraciones
+|-- 📄 Server.hpp ℹ Servidor Web
 |-- 📄 lcd-config.hpp
 |-- 📄 wifi-config
 📂 router/
-|-- 📄 router.hpp                        ℹ Reglas o comandos que permite el API REST para comunicarse con el cliente
+|-- 📄 router.hpp ℹ Reglas o comandos que permite el API REST para comunicarse con el cliente
 📂 api/
-|-- 📂 utils                             ℹ utilidades usadas en todo el proyecto)
-    |-- 📄 api.utils.hpp                 ℹ Funciones para manejar partes del api
-    |-- 📄 json.utils.hpp
-    |-- 📄 time.utils.hpp
+|-- 📂 utils ℹ utilidades usadas en todo el proyecto)
+|-- 📄 api.utils.hpp ℹ Funciones para manejar partes del api
+|-- 📄 json.utils.hpp
+|-- 📄 time.utils.hpp
 |-- 📂 components/
-    |-- 📂 device/                       ℹ Activa el dispositivo para una acción específica
-        |-- 📂 2.adapter/ 
-            |-- 📄 controller.hpp        ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
-        |-- 📂 3.use-case/               ℹ Lógica de la aplicación, o las acciones que hace el componente
-            |-- 📄 start.hpp             ℹ Inicia el proceso de censado y guardado de datos
-    |-- 📁 LCD/
-    |-- 📁 measurement/                  ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
-    |-- 📂 sd-card/
-        |-- 📂 2.adapter/
-            |-- 📄 controller.hpp
-        |-- 📂 3.use-case/               ℹ Lógica de la aplicación, o las acciones que hace el componente
-            |-- 📄 crudSD                ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
-        |-- 📂 4.domain/                 ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto. 
-            |-- 📄 dirModel.hpp
-            |-- 📄 fileModel.hpp         ℹ Modela la estructura y lo convierte en json
-            |-- 📄 filename.hpp          ℹ Establece el nombre final del archivo
-    |-- 📁 sensor/                       ℹ Acciones para ejecutar o tratar la información de los sensores.
-    |-- 📂 share/                        ℹ Area del código con alcance a todos los componentes
-        |-- 📂 4.domain/
-            |-- 📂 interface/            ℹ Guarda todas las estructuras de todos los componentes
-                |-- 📄 measurement.hpp   ℹ structura para la medición
+|-- 📂 device/ ℹ Activa el dispositivo para una acción específica
+|-- 📂 2.adapter/ 
+|-- 📄 controller.hpp ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
+|-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
+|-- 📄 start.hpp  ℹ Inicia el proceso de censado y guardado de datos
+|-- 📁 LCD/
+|-- 📁 measurement/ ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
+|-- 📂 sd-card/
+|-- 📂 2.adapter/
+|-- 📄 controller.hpp
+|-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
+|-- 📄 crudSD ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+|-- 📂 4.domain/ ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
+|-- 📄 dirModel.hpp
+|-- 📄 fileModel.hpp ℹ Modela la estructura y lo convierte en json
+|-- 📄 filename.hpp ℹ Establece el nombre final del archivo
+|-- 📁 sensor/ ℹ Acciones para ejecutar o tratar la información de los sensores.
+|-- 📂 share/ ℹ Area del código con alcance a todos los componentes
+|-- 📂 4.domain/
+|-- 📂 interface/ ℹ Guarda todas las estructuras de todos los componentes
+|-- 📄 measurement.hpp ℹ structura para la medición
 ```
 
 #### 2.3 Flujo del programa
@@ -293,11 +286,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 
 Luego todos los datos se van retornando hasta el **controlador** que enviará la respuesta al cliente
 
----
-
 # 3. API REST
-
----
 
 #### 3.1 ¿Qué es una API? [VIDEO](https://www.youtube.com/watch?v=JD6VNRdGl98)👀
 
@@ -318,7 +307,7 @@ Es cuando una API usa como arquitectura REST para comunicar entre el�
 
 El servidor web trabaja de manera asíncrona, el cual se mantiene escuchando a la espera de alguna petición por parte del cliente. Tiene la capacidad de manejar varias conexiones al mismo tiempo.
 
-> <br/>En perspectiva es como las interrucciones en un microcontrolador, que se mantienen a la espera de una acción. Y puede salir de un código secuencial en cualquier momento, incluso de un delay.
+> <br/>En perspectiva es como las interrucciones en un microcontrolador, que se mantienen a la espera de una acción. Y pueden salir de un código secuencial en cualquier momento, incluso de un delay.
 > <br/>
 
 Es importante aclarar que el servidor no se ejecuta dentro del void loop(), dado que estaría trabajando de manera "paralela" por es importante evitar el uso de funciones dentro del servidor, que puedad provocar que el equipo se quede en stand by, como: delay, yield, entre otros parecidos.
@@ -338,412 +327,423 @@ Pasos que realiza el servidor
 #### SD CARD: [**/directory_sd**]
 
 Obtener todos los directorios y archivos [**GET**]
+
 - Response: **200** (application/json)
 
   - body
-
-        [
-            {
-                "name": "System Volume Information",
-                "type": 1,
-                "content": [
-                    {
-                        "name": "IndexerVolumeGuid",
-                        "type": 0,
-                        "size": 76
-                    },
-                    {
-                        "name": "WPSettings.dat",
-                        "type": 0,
-                        "size": 12
-                    }
-                ]
-            },
-            {
-                "name": "config",
-                "type": 1,
-                "content": [
-                    {
-                        "name": "sensor",
-                        "type": 1,
-                        "content": [
-                            {
-                                "name": "temp.json",
-                                "type": 0,
-                                "size": 45
-                            },
-                            {
-                                "name": "ph.json",
-                                "type": 0,
-                                "size": 40
-                            },
-                            {
-                                "name": "do.json",
-                                "type": 0,
-                                "size": 38
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "data",
-                "type": 1,
-                "content": [
-                    {
-                        "name": "P2_1619314606000.json",
-                        "type": 0,
-                        "size": 357
-                    },
-                    {
-                        "name": "P1_1619314616000.json",
-                        "type": 0,
-                        "size": 355
-                    },
-                    {
-                        "name": "P2_1619308071000.json",
-                        "type": 0,
-                        "size": 360
-                    }
-                ]
-            }
+    ```json
+    [
+      {
+        "name": "System Volume Information",
+        "type": 1,
+        "content": [
+          {
+            "name": "IndexerVolumeGuid",
+            "type": 0,
+            "size": 76
+          },
+          {
+            "name": "WPSettings.dat",
+            "type": 0,
+            "size": 12
+          }
         ]
+      },
+      {
+        "name": "config",
+        "type": 1,
+        "content": [
+          {
+            "name": "sensor",
+            "type": 1,
+            "content": [
+              {
+                "name": "temp.json",
+                "type": 0,
+                "size": 45
+              },
+              {
+                "name": "ph.json",
+                "type": 0,
+                "size": 40
+              },
+              {
+                "name": "do.json",
+                "type": 0,
+                "size": 38
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "data",
+        "type": 1,
+        "content": [
+          {
+            "name": "P2_1619314606000.json",
+            "type": 0,
+            "size": 357
+          },
+          {
+            "name": "P1_1619314616000.json",
+            "type": 0,
+            "size": 355
+          },
+          {
+            "name": "P2_1619308071000.json",
+            "type": 0,
+            "size": 360
+          }
+        ]
+      }
+    ]
+    ```
 
 #### SD CARD: [/write_sd{?filename,data}]
 
 **Crear un nuevo archivo [**POST**]**
-- Parameters
-    - filename (String)
-    - data (String)
-- Example
-    - > **/write_sd?filename=data.json&data={"data": "OK"}**
-- Response: **200** (application/json)
-  - body
 
-        {
-            "data": "OK"
-        }
+- Parameters
+  - filename (String)
+  - data (String)
+- Example
+  - > **/write_sd?filename=data.json&data={"data": "OK"}**
+- Response: **200** (application/json)
+
+  - body
+    ```json
+    {
+      "data": "OK"
+    }
+    ```
+
 #### SD CARD: [/read_sd{?filename}]
 
 **Lee un archivo [**GET**]**
+
 - Parameters
-    - filename (String)
+  - filename (String)
 - Example
-    - > **/read_sd?filename=data.json**
+  - > **/read_sd?filename=data.json**
 - Response: **200** (application/json)
   - body
-
-        {
-            "data": "OK"
-        }
-
+    ```json
+    {
+      "data": "OK"
+    }
+    ```
 
 #### SD CARD: [/delete_sd{?filename, filemax}]
 
 **Elimina un archivo [**DELETE**]**
+
 - Parameters
-    - filename (String)
+  - filename (String)
 - Example
-    - > **/delete_sd?filename=data.json**
+  - > **/delete_sd?filename=data.json**
 - Response: **200** (application/json)
   - body
-
-        {
-            "data": "data.json"
-        }
-
-**Elimina múltiples archivos [**DELETE**]**
+    `json { "data": "data.json" } `
+    **Elimina múltiples archivos [**DELETE**]**
 - Parameters
-    - filename (Array[String])
-    - filemax (number)  // default: 10
+  - filename (Array[String])
+  - filemax (number) // default: 10
 - Example
-    - > **/delete_sd?filename=data1.json,data2.json,data3.json&filemax=2**
+  - > **/delete_sd?filename=data1.json,data2.json,data3.json&filemax=2**
 - Response: **200** (application/json)
   - body
-
-        {
-            "data": "data1.json,data2.json"
-        }
-
+    ```json
+    {
+      "data": "data1.json,data2.json"
+    }
+    ```
 
 # GRUPO DEVICE
 
 #### DEVICE: [/device/start{?pool_id,nMeditions,time}]
 
 **Inicia el proceso de captura y grabado de dos mediciones [**GET**]**
+
 - Parameters
-    - pool_id (number)
-    - nMeditions (number)  // default: 10
-    - time (String)
+  - pool_id (number)
+  - nMeditions (number) // default: 10
+  - time (String)
 - Example
-    - > **/device/start?pool_id=1&nMeditions=2**
+  - > **/device/start?pool_id=1&nMeditions=2**
 - Response: **200** (application/json)
   - body
-
-        [
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619285911000",
-                "status": "OK",
-                "params": null
-            },
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619285911000",
-                "status": "OK",
-                "params": null
-            }
-        ]
-
+    ```json
+    [
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619285911000",
+        "status": "OK",
+        "params": null
+      },
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619285911000",
+        "status": "OK",
+        "params": null
+      }
+    ]
+    ```
 
 **Inicia el proceso de captura y grabado de dos mediciones, estableciendo el tiempo [**GET**]**
+
 - Parameters
-    - pool_id (number)
-    - nMeditions (number)  // default: 10
-    - time (String)
+  - pool_id (number)
+  - nMeditions (number) // default: 10
+  - time (String)
 - Example
-    - > **/device/start?pool_id=1&nMeditions=2&time=1619000000001**
+  - > **/device/start?pool_id=1&nMeditions=2&time=1619000000001**
 - Response: **200** (application/json)
   - body
-
-        [
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619000000001",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.875,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.7075,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619000000001",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.875,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.7075,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            }
+    ```json
+    [
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619000000001",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.875,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.7075,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
         ]
+      },
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619000000001",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.875,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.7075,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      }
+    ]
+    ```
 
 # GRUPO MEASUREMENT
 
 #### MEASUREMENT: [/measurement{?filemax, prefix, path}]
 
 **Lee todas las mediciones [**GET**]**
+
 - Parameters
-    - filemax (number) // default: 10
-    - prefix (String) // default: P_
-    - path (String) // default: /data/
+  - filemax (number) // default: 10
+  - prefix (String) // default: P\_
+  - path (String) // default: /data/
 - Example
-    - > **/measurement**
+  - > **/measurement**
 - Response: **200** (application/json)
   - body
-
-        [
-            {
-                "pool_id": 2,
-                "device_id": "ABCD",
-                "created_at": "1619308071000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.70167,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 2,
-                "device_id": "ABCD",
-                "created_at": "1619308071000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.6975,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619314616000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.705,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619314616000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.7,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 2,
-                "device_id": "ABCD",
-                "created_at": "1619314606000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.70667,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 2,
-                "device_id": "ABCD",
-                "created_at": "1619314606000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.7,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            }
+    ```json
+    [
+      {
+        "pool_id": 2,
+        "device_id": "ABCD",
+        "created_at": "1619308071000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.70167,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
         ]
+      },
+      {
+        "pool_id": 2,
+        "device_id": "ABCD",
+        "created_at": "1619308071000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.6975,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      },
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619314616000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.705,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      },
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619314616000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.7,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      },
+      {
+        "pool_id": 2,
+        "device_id": "ABCD",
+        "created_at": "1619314606000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.70667,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      },
+      {
+        "pool_id": 2,
+        "device_id": "ABCD",
+        "created_at": "1619314606000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.7,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      }
+    ]
+    ```
 
 #### MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
+
 **Lee todas las mediciones pero de una piscina (pool_id) [**GET**]**
+
 - Parameters
-    - filemax (number) // default: 10
-    - prefix (String) // default: P{id}_
-    - path (String) // default: /data/
+  - filemax (number) // default: 10
+  - prefix (String) // default: P{id}\_
+  - path (String) // default: /data/
 - Example
-    - > **/measurement/1?filemax=3**
+  - > **/measurement/1?filemax=3**
 - Response: **200** (application/json)
+
   - body
 
-        [
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619314616000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.705,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            },
-            {
-                "pool_id": 1,
-                "device_id": "ABCD",
-                "created_at": "1619314616000",
-                "status": "OK",
-                "params": [
-                    {
-                        "value": 31.75,
-                        "name": "Temperature"
-                    },
-                    {
-                        "value": 10.7,
-                        "name": "PH"
-                    },
-                    {
-                        "value": 21,
-                        "name": "DO"
-                    }
-                ]
-            }
+    ```json
+    [
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619314616000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.705,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
         ]
-        
-
----
+      },
+      {
+        "pool_id": 1,
+        "device_id": "ABCD",
+        "created_at": "1619314616000",
+        "status": "OK",
+        "params": [
+          {
+            "value": 31.75,
+            "name": "Temperature"
+          },
+          {
+            "value": 10.7,
+            "name": "PH"
+          },
+          {
+            "value": 21,
+            "name": "DO"
+          }
+        ]
+      }
+    ]
+    ```
 
 # **4. Arduino Json**
 
@@ -785,9 +785,8 @@ Serial.println(err.c_str());
 String name = "COMUNITARIAS";
 byte id = 10;
 ```
----
+
 ## **5. Referencias**
----
 
 [http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/](http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/)
 
