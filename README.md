@@ -265,7 +265,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 
 * **📋 Router**
 
-  - De la ruta se dirije al **`controller`** que ejecutará sóla una función (**`use*case`**)
+  - De la ruta se dirije al **`controller`** que ejecutará sóla una función (**`use-case`**)
   - **Ruta:** Arduino/router/router.hpp **`server.on("/directory_sd", HTTP_GET, directorySD)`**
     <br/>
 
