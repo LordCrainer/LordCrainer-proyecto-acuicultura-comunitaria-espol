@@ -101,7 +101,7 @@
 ## 2.1 Estructura del programa
 
 ```markdown
-📄 arduino.ino........................ℹ Archivo principal del proyecto
+📄 arduino.ino........................ℹ **Archivo principal del proyecto**
 📄 env.h..............................ℹ Variables de entorno
 📂 config/............................ℹ Todas las configuraciones
 |-- 📄 lcd-config.hpp
