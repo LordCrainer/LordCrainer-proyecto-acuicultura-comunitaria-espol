@@ -100,18 +100,13 @@
 
 ## 2.1 Arquitectura del programa
 
-El proyecto presenta una arquitectura por capas de manera jerárquica para la parte del API REST (**`api/`**). Cada capa tiene un fin específico dentro del proyecto y un flujo el cual se debe de respetar, esto significa que las capas superiores únicamente pueden acceder a las inferiores o comunicarse de manera adyacentes a ellas. Por ningún motivo una capa inferior puede acceder a una capa de nivel superior. 
+El proyecto presenta una arquitectura por capas de manera jerárquica a nivel general como en cada componente usado.
+Cada capa tiene un fin específico dentro del proyecto y un flujo el cual se debe de respetar, esto significa que las capas superiores únicamente pueden acceder a las inferiores o comunicarse de manera adyacentes a ellas. Por ningún motivo una capa inferior puede acceder a una capa de nivel superior. 
 En otras palabras, cuando se incluye o se usa una función del sistema se debe de considerar en que capa se encuentra.
 
-Normalmente las capas que se trabajan serían las siguientes:
+Las capas a trabajar serían las siguientes:
 
-> ☁ Infraestructura ➡ 🔗 Adaptadores de interfaz ➡ 🛒 Casos de uso ➡ 🎁 Dominio
-
-La capa más externa sería la de Infraestructura y la más interna la de dominio
-
-Pero en esta ocasión la capa de infraestructura está omitida, así que el flujo sería el siguiente:
-
-> 🔗 Adaptadores de interfaz ➡ 🛒 Casos de uso ➡ 🎁 Dominio
+>  Infraestructura☁ ➡ Adaptadores de interfaz🔗  ➡ Casos de uso🛒 ➡ Dominio🎁
 
 Se dará una breve explicación de cada capa para conocer que función cumple en el proyecto,
 <br/>
@@ -124,7 +119,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
   Ejemplos:
 
   - `Server.hpp` ➡ Activa el servidor
-  - `sd-card.hpp` ➡ Funciones para manejar la base de datos
+  - `sd-card.repository.hpp` ➡ Funciones para manejar la base de datos
     <br/>
     > Se les denomina detalles del sistema por el hecho de que no deberían ser significativos a la hora de hacer pruebas (**testing**) de funcionamiento. Además de que pueden ser fácilmente sustituido por alguna otra alternativa.
     > Con respecto a la base de datos, se puede usar tanto la **SD-CARD** como el **sistema de archivos** (**FS**) del dispositivo.
@@ -213,33 +208,47 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 📄 arduino.ino........................ℹ Archivo principal del proyecto
 📄 env.h..............................ℹ Variables de entorno
 📂 config/............................ℹ Todas las configuraciones
-|-- 📄 Server.hpp.....................ℹ Servidor Web
 |-- 📄 lcd-config.hpp
 |-- 📄 wifi-config
-📂 router/
-|-- 📄 router.hpp.....................ℹ Reglas o comandos que permite el API REST para comunicarse con el cliente
+
+📂 Infraestructure/
+|--📂 bd/............................ℹ Contiene a la base de datos a usar
+|--+-- 📄 sd-card.repository.hpp......ℹ Funciones básicas de una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+|--📂 server/
+|--+-- 📄 Server.hpp.....................ℹ Servidor Web
+
+📂 adapter/............................ℹ Adaptador de interfaz.
+|-- 📄 router.hpp.....................ℹ Reglas o políticas que permite el API REST para comunicarse con el cliente.
+
 📂 api/
 |-- 📂 utils..........................ℹ utilidades usadas en todo el proyecto)
 |--+-- 📄 api.utils.hpp...............ℹ Funciones para manejar partes del api
 |--+-- 📄 json.utils.hpp
 |--+-- 📄 time.utils.hpp
+
 |-- 📂 components/
 |--+-- 📂 device/.....................ℹ Activa el dispositivo para una acción específica
 |--+--+-- 📂 2.adapter/ 
 |--+--+--+-- 📄 controller.hpp........ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
+
 |--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
 |--+--+--+-- 📄 start.hpp.............ℹ Inicia el proceso de censado y guardado de datos
+
 |--+-- 📁 LCD/
 |--+-- 📁 measurement/................ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
 |--+-- 📂 sd-card/
 |--+--+-- 📂 2.adapter/
 |--+--+--+-- 📄 controller.hpp
+
 |--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
-|--+--+--+-- 📄 crudSD................ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+|--+--+--+-- 📄 execFiles.hpp.........ℹ Ejecuta funciones para manejar archivos
+|--+--+--+-- 📄 printDirectory.hpp....ℹ Imprime y muestra los directorios y carpetas.
+
 |--+--+-- 📂 4.domain/................ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
 |--+--+--+-- 📄 dirModel.hpp
 |--+--+--+-- 📄 fileModel.hpp.........ℹ Modela la estructura y lo convierte en json
 |--+--+--+-- 📄 filename.hpp..........ℹ Establece el nombre final del archivo
+
 |--+-- 📁 sensor/.....................ℹ Acciones para ejecutar o tratar la información de los sensores.
 |--+-- 📂 share/......................ℹ Area del código con alcance a todos los componentes
 |--+--+-- 📂 4.domain/
