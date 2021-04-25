@@ -5,6 +5,8 @@
    <br/>1.2 [Configuraciones generales del proyecto](#12-configuraciones-generales-del-proyecto)
 2. [Estructura del proyecto](#2-estructura-del-proyecto)
 3. [API REST](#3-api-rest)
+4. [ArduinoJson](#4-arduino-json)
+5. [Referencias](#5-referencias)
 
 ---
 
@@ -340,29 +342,72 @@ Obtener todos los directorios y archivos [**GET**]
 
   - body
 
-          [
-              {
-                  "name": "System Volume Information",
-                  "type": 1,
-                  "content": [
-                      {
-                          "name": "IndexerVolumeGuid",
-                          "type": 0,
-                          "size": 76
-                      },
-                      {
-                          "name": "WPSettings.dat",
-                          "type": 0,
-                          "size": 12
-                      }
-                  ]
-              },
-              {
-                  "name": "P1_1619285911000.json",
-                  "type": 0,
-                  "size": 181
-              }
-          ]
+        [
+            {
+                "name": "System Volume Information",
+                "type": 1,
+                "content": [
+                    {
+                        "name": "IndexerVolumeGuid",
+                        "type": 0,
+                        "size": 76
+                    },
+                    {
+                        "name": "WPSettings.dat",
+                        "type": 0,
+                        "size": 12
+                    }
+                ]
+            },
+            {
+                "name": "config",
+                "type": 1,
+                "content": [
+                    {
+                        "name": "sensor",
+                        "type": 1,
+                        "content": [
+                            {
+                                "name": "temp.json",
+                                "type": 0,
+                                "size": 45
+                            },
+                            {
+                                "name": "ph.json",
+                                "type": 0,
+                                "size": 40
+                            },
+                            {
+                                "name": "do.json",
+                                "type": 0,
+                                "size": 38
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "data",
+                "type": 1,
+                "content": [
+                    {
+                        "name": "P2_1619314606000.json",
+                        "type": 0,
+                        "size": 357
+                    },
+                    {
+                        "name": "P1_1619314616000.json",
+                        "type": 0,
+                        "size": 355
+                    },
+                    {
+                        "name": "P2_1619308071000.json",
+                        "type": 0,
+                        "size": 360
+                    }
+                ]
+            }
+        ]
 
 #### SD CARD: [/write_sd{?filename,data}]
 
@@ -469,33 +514,238 @@ Obtener todos los directorios y archivos [**GET**]
                 "device_id": "ABCD",
                 "created_at": "1619000000001",
                 "status": "OK",
-                "params": null
+                "params": [
+                    {
+                        "value": 31.875,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.7075,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
             },
             {
                 "pool_id": 1,
                 "device_id": "ABCD",
                 "created_at": "1619000000001",
                 "status": "OK",
-                "params": null
+                "params": [
+                    {
+                        "value": 31.875,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.7075,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
             }
         ]
+
+# GRUPO MEASUREMENT
+
+#### MEASUREMENT: [/measurement{?filemax, prefix, path}]
+
+**Lee todas las mediciones [**GET**]**
+- Parameters
+    - filemax (number) // default: 10
+    - prefix (String) // default: P_
+    - path (String) // default: /data/
+- Example
+    - > **/measurement**
+- Response: **200** (application/json)
+  - body
+
+        [
+            {
+                "pool_id": 2,
+                "device_id": "ABCD",
+                "created_at": "1619308071000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.70167,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 2,
+                "device_id": "ABCD",
+                "created_at": "1619308071000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.6975,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619314616000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.705,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619314616000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.7,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 2,
+                "device_id": "ABCD",
+                "created_at": "1619314606000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.70667,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 2,
+                "device_id": "ABCD",
+                "created_at": "1619314606000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.7,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            }
+        ]
+
+#### MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
+**Lee todas las mediciones pero de una piscina (pool_id) [**GET**]**
+- Parameters
+    - filemax (number) // default: 10
+    - prefix (String) // default: P{id}_
+    - path (String) // default: /data/
+- Example
+    - > **/measurement/1?filemax=3**
+- Response: **200** (application/json)
+  - body
+
+        [
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619314616000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.705,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            },
+            {
+                "pool_id": 1,
+                "device_id": "ABCD",
+                "created_at": "1619314616000",
+                "status": "OK",
+                "params": [
+                    {
+                        "value": 31.75,
+                        "name": "Temperature"
+                    },
+                    {
+                        "value": 10.7,
+                        "name": "PH"
+                    },
+                    {
+                        "value": 21,
+                        "name": "DO"
+                    }
+                ]
+            }
+        ]
+        
+
 ---
 
-## **BIBLIOGRAFÍA**
-
----
-
-[http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/](http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/)
-
-[http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/](http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/)
-
-[https://medium.com/@BryanSBarrios/arquitectura-limpia-para-el-resto-de-nosotros-440a4fba4d92](https://medium.com/@BryanSBarrios/arquitectura-limpia-para-el-resto-de-nosotros-440a4fba4d92)
-
-[https://github.com/jbuget/nodejs-clean-architecture-app](https://github.com/jbuget/nodejs-clean-architecture-app)
-
-[https://github.com/royib/clean-architecture-node/blob/master/src/frameworks/persistance/InMemory/InMemoryStudentRepository.js](https://github.com/royib/clean-architecture-node/blob/master/src/frameworks/persistance/InMemory/InMemoryStudentRepository.js)
-
-# **ARDUINO JSON**
+# **4. Arduino Json**
 
 Es una librería que permite codificar y decodificar los datos en formato JSON.
 
@@ -535,3 +785,16 @@ Serial.println(err.c_str());
 String name = "COMUNITARIAS";
 byte id = 10;
 ```
+---
+## **5. Referencias**
+---
+
+[http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/](http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/)
+
+[http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/](http://aitorrm.github.io/t%C3%A9cnicas%20y%20metodolog%C3%ADas/arquitectura_software_limpia/)
+
+[https://medium.com/@BryanSBarrios/arquitectura-limpia-para-el-resto-de-nosotros-440a4fba4d92](https://medium.com/@BryanSBarrios/arquitectura-limpia-para-el-resto-de-nosotros-440a4fba4d92)
+
+[https://github.com/jbuget/nodejs-clean-architecture-app](https://github.com/jbuget/nodejs-clean-architecture-app)
+
+[https://github.com/royib/clean-architecture-node/blob/master/src/frameworks/persistance/InMemory/InMemoryStudentRepository.js](https://github.com/royib/clean-architecture-node/blob/master/src/frameworks/persistance/InMemory/InMemoryStudentRepository.js)

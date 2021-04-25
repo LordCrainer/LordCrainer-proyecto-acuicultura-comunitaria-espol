@@ -32,11 +32,13 @@ String readAllMeasurement(AsyncWebServerRequest *req)
   // PARAMS
   byte filemax = getParameterByName(req, "filemax").toInt();
   String prefix = getParameterByName(req, "prefix");
+  String path = getParameterByName(req, "path");
   // VALIDATION
   filemax = filemax == 0 ? 10 : filemax;
   prefix = prefix == "" ? "P" : prefix;
+  path = path == "" ? "/data/" : path;
   // ACTIONS
-  String list = findFileByName("/data", prefix, filemax);
-  String data = "[" + execManyFiles(readSD, list, ",", filemax, "/data") + "]";
+  String list = findFileByName(path, prefix, filemax);
+  String data = "[" + execManyFiles(readSD, list, ",", filemax, path) + "]";
   return data;
 }
