@@ -30,9 +30,9 @@ void initSensors()
   GLOBAL_DO.max = 200;
   GLOBAL_DO.min = 100;
   sensorTemp.begin();
-  GLOBAL_TEMP = initilizeSensor("/config/sensor/temp", GLOBAL_TEMP);
-  GLOBAL_PH = initilizeSensor("/config/sensor/ph", GLOBAL_PH);
-  GLOBAL_DO = initilizeSensor("/config/sensor/do", GLOBAL_DO);
+  GLOBAL_TEMP = initilizeSensor("/config/sensor/temp.json", GLOBAL_TEMP);
+  GLOBAL_PH = initilizeSensor("/config/sensor/ph.json", GLOBAL_PH);
+  GLOBAL_DO = initilizeSensor("/config/sensor/do.json", GLOBAL_DO);
 }
 
 // *************** PH ***************

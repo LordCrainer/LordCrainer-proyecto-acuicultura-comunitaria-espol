@@ -10,7 +10,7 @@ String startDevice(AsyncWebServerRequest *request)
     byte iteration = getParameterByName(request, "iteration").toInt();
 
     // PRE ACTIONS
-    String time = String(getTime().unixtime());
+    String time = getTimeUnix();
     measure.device_id = "ABCD"; //getDeviceID();
 
     //VALIDATION
@@ -23,6 +23,7 @@ String startDevice(AsyncWebServerRequest *request)
     // ACTIONS
     String data = "[" + startAllMeasurement(measure, sensors, iteration) + "]";
     String filename = setFilename("P", measure.pool_id, measure.created_at, "json");
-    const boolean isCreated = createSD(filename, data);
+    String destiny = "/data/" + filename;
+    const boolean isCreated = createSD(destiny, data);
     return data;
 }

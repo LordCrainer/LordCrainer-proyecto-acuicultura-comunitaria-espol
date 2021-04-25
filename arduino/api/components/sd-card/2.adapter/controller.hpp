@@ -26,8 +26,7 @@ void appendSD(AsyncWebServerRequest *req)
 
 void directorySD(AsyncWebServerRequest *req)
 {
-    String json;
-    json = "[" + printDirectory(SD.open("/"), 0) + "]";
+    String json = "[" + printDirectory(SD.open("/"), 0) + "]";
     req->send(200, "application/json", json);
 }
 
@@ -43,5 +42,5 @@ void deletingSD(AsyncWebServerRequest *req)
     String data = execManyFiles(deleteSD, filename, ",", filemax);
     // WRAP
     data = "{\"data\": \"" + data + "\"}";
-    req->send(200, "application/json", data);
+    req->send(204, "application/json", data);
 }

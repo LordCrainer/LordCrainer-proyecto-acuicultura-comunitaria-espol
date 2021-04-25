@@ -2,3 +2,4 @@
 #include "dir.model.hpp"
 #include "format.model.hpp"
 #include "filename.hpp"
+#include "find.service.hpp"

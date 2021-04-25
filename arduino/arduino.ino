@@ -19,21 +19,25 @@
 #include "env.h" // Variable de entorno
 
 // CONFIGURACIONES GENERALES
-#include "config/Server.hpp"
 #include "config/wifi-config.h" // Sustituir con datos de vuestra red
 #include "config/Sd-config.hpp"
 #include "config/time-config.hpp"
 #include "config/sensor-config.hpp"
 #include "config/measurement-config.hpp"
 #include "config/lcd-config.hpp"
+
+// INFRAESTRUCTURA
+#include "Infraestructure/server/Server.hpp"
+#include "Infraestructure/bd/sd-card.repository.hpp"
+
 // UTILS
 #include "api/components/share/4.domain/index.hpp"
 #include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
 #include "api/utils/json.utils.hpp"
+
 // COMPONENTES DEL API REST
-#include "api/components/file-system/2.adapter/controller.hpp"
 #include "api/components/sd-card/2.adapter/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
 #include "api/components/sensor/2.adapter/controller.hpp"
@@ -41,7 +45,7 @@
 #include "api/components/device/2.adapter/controller.hpp"
 
 // RUTAS DEL API-REST
-#include "router/router.hpp"
+#include "adapter/router.hpp"
 
 void setup()
 { 
