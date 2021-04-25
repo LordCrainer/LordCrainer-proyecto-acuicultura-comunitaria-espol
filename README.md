@@ -251,22 +251,27 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 > <br/>
 
 - **💻 Cliente**
-  _ Envía la petición desde un equipo hacia el servidor
-  _ La petición es la siguiente:
-  _ **Type:** GET
-  _ **URL:** http://IP_NODEMCU/directory_sd`
-  <br/>
 
-- **☁ Servidor (API REST)** \* El servidor escucha la petición y buscará en **`router.hpp`** la que coincide
-  <br/>
+  - Envía la petición desde un equipo hacia el servidor
+  - La petición es la siguiente:
+  - **Type:** GET
+  - **URL:** http://IP_NODEMCU/directory_sd`
+    <br/>
 
-- **📋 Router**
-  _ De la ruta se dirije al **`controller`** que ejecutará sóla una función (**`use-case`**)
-  _ **Ruta:** Arduino/router/router.hpp \* **`server.on("/directory_sd", HTTP_GET, directorySD)`**
-  <br/>
+* **☁ Servidor (API REST)**
 
-- **🗣 Controller**
-  - Dentro del controller se redirije hacia la función **`directorySD`**, el cual sólo debería de ejecutar un proceso (**`printDirectory`**) y devolver una respuesta al cliente. \* **Ruta:** Arduino/api/sd-card/4.adapter/controller.hpp
+  - El servidor escucha la petición y buscará en **`router.hpp`** la que coincide
+    <br/>
+
+* **📋 Router**
+
+  - De la ruta se dirije al **`controller`** que ejecutará sóla una función (**`use*case`**)
+  - **Ruta:** Arduino/router/router.hpp **`server.on("/directory_sd", HTTP_GET, directorySD)`**
+    <br/>
+
+* **🗣 Controller**
+  - Dentro del controller se redirije hacia la función **`directorySD`**, el cual sólo debería de ejecutar un proceso (**`printDirectory`**) y devolver una respuesta al cliente.
+  * **Ruta:** Arduino/api/sd-card/4.adapter/controller.hpp
     <br/>
     > _La función devuelve una seria de objetos anidados ("{},{}") por una ",". Por eso se debe de encerrar en corchetes_
 
