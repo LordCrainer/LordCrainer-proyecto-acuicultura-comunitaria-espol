@@ -451,7 +451,9 @@ Obtener todos los directorios y archivos [**GET**]
 - Response: **200** (application/json)
   - body
     `json { "data": "data.json" } `
-    **Elimina múltiples archivos [**DELETE**]**
+
+**Elimina múltiples archivos [**DELETE**]**
+
 - Parameters
   - filename (Array[String])
   - filemax (number) // default: 10
