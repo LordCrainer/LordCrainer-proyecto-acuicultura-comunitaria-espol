@@ -278,16 +278,17 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 <br/>
 
 - **🛒 Casos de Uso**
-  - La función **`printDirectory`** entrará en un ciclo continuo hasta que no encuentre más datos, dentro del bucle preguntará si es un directorio o es un archivo. Para cada caso irá al dominio a modelarlos para devolver un archivo en formato "JSON" y luego concatenarlo. \* Ruta: **`/Arduino/api/sd-card/3.use-case/crudSD.hpp`**
+  - La función **`printDirectory`** entrará en un ciclo continuo hasta que no encuentre más datos, dentro del bucle preguntará si es un directorio o es un archivo. Para cada caso irá al dominio a modelarlos para devolver un archivo en formato "JSON" y luego concatenarlo.
+  * Ruta: **`/Arduino/api/sd-card/3.use-case/crudSD.hpp`**
     <br/>
     > _La función tiene la responsabilidad única de buscar directorio y archivos para ser devueltos, no cumple otra función externa o ajena a su responsabilidad._
 
 <br/>
 
 - **🎁 Dominio**
-  - En este caso el Caso de uso, solo necesita modelar los datos para dos modelos diferentes. Por eso que se dirije a `dir.model.hpp` para los directorios y a `file.model.hpp` para los archivos.
-    - Ruta: `/Arduino/api/sd-card/4.domain/dir.model.hpp`
-    - Ruta: `/Arduino/api/sd-card/4.domain/file.model.hpp`
+  - En este caso el Caso de uso, solo necesita modelar los datos para dos modelos diferentes. Por eso que se dirije a _dir.model.hpp_ para los directorios y a _file.model.hpp_ para los archivos.
+    - Ruta: **/Arduino/api/sd-card/4.domain/dir.model.hpp**
+    - Ruta: **/Arduino/api/sd-card/4.domain/file.model.hpp**
 
 Luego todos los datos se van retornando hasta el **controlador** que enviará la respuesta al cliente
 
