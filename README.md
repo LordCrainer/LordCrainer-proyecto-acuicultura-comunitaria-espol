@@ -98,7 +98,62 @@
 
 # `2. Estructura del Proyecto`
 
-## 2.1 Arquitectura del programa
+## 2.1 Estructura del programa
+
+```markdown
+📄 arduino.ino........................ℹ Archivo principal del proyecto
+📄 env.h..............................ℹ Variables de entorno
+📂 config/............................ℹ Todas las configuraciones
+|-- 📄 lcd-config.hpp
+|-- 📄 wifi-config
+
+📂 Infraestructure/
+|--📂 bd/............................ℹ Contiene a la base de datos a usar
+|--+-- 📄 sd-card.repository.hpp......ℹ Funciones básicas de una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+|--📂 server/
+|--+-- 📄 Server.hpp.....................ℹ Servidor Web
+
+📂 adapter/............................ℹ Adaptador de interfaz.
+|-- 📄 router.hpp.....................ℹ Reglas o políticas que permite el API REST para comunicarse con el cliente.
+
+📂 api/
+|-- 📂 utils..........................ℹ utilidades usadas en todo el proyecto)
+|--+-- 📄 api.utils.hpp...............ℹ Funciones para manejar partes del api
+|--+-- 📄 json.utils.hpp
+|--+-- 📄 time.utils.hpp
+
+|-- 📂 components/
+|--+-- 📂 device/.....................ℹ Activa el dispositivo para una acción específica
+|--+--+-- 📂 2.adapter/ 
+|--+--+--+-- 📄 controller.hpp........ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
+
+|--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
+|--+--+--+-- 📄 start.hpp.............ℹ Inicia el proceso de censado y guardado de datos
+
+|--+-- 📁 LCD/
+|--+-- 📁 measurement/................ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
+|--+-- 📂 sd-card/
+|--+--+-- 📂 2.adapter/
+|--+--+--+-- 📄 controller.hpp
+
+|--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
+|--+--+--+-- 📄 execFiles.hpp.........ℹ Ejecuta funciones para manejar archivos
+|--+--+--+-- 📄 printDirectory.hpp....ℹ Imprime y muestra los directorios y carpetas.
+
+|--+--+-- 📂 4.domain/................ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
+|--+--+--+-- 📄 dirModel.hpp
+|--+--+--+-- 📄 fileModel.hpp.........ℹ Modela la estructura y lo convierte en json
+|--+--+--+-- 📄 filename.hpp..........ℹ Establece el nombre final del archivo
+
+|--+-- 📁 sensor/.....................ℹ Acciones para ejecutar o tratar la información de los sensores.
+|--+-- 📂 share/......................ℹ Area del código con alcance a todos los componentes
+|--+--+-- 📂 4.domain/
+|--+--+--+-- 📂 interface/............ℹ Guarda todas las estructuras de todos los componentes
+|--+--+--+--+-- 📄 measurement.hpp....ℹ structura para la medición
+```
+<br/>
+
+## 2.2 Arquitectura del programa
 
 El proyecto presenta una arquitectura por capas de manera jerárquica a nivel general como en cada componente usado.
 Cada capa tiene un fin específico dentro del proyecto y un flujo el cual se debe de respetar, esto significa que las capas superiores únicamente pueden acceder a las inferiores o comunicarse de manera adyacentes a ellas. Por ningún motivo una capa inferior puede acceder a una capa de nivel superior. 
@@ -202,60 +257,7 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 
 <br/>
 
-## 2.2 Estructura del programa
 
-```markdown
-📄 arduino.ino........................ℹ Archivo principal del proyecto
-📄 env.h..............................ℹ Variables de entorno
-📂 config/............................ℹ Todas las configuraciones
-|-- 📄 lcd-config.hpp
-|-- 📄 wifi-config
-
-📂 Infraestructure/
-|--📂 bd/............................ℹ Contiene a la base de datos a usar
-|--+-- 📄 sd-card.repository.hpp......ℹ Funciones básicas de una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
-|--📂 server/
-|--+-- 📄 Server.hpp.....................ℹ Servidor Web
-
-📂 adapter/............................ℹ Adaptador de interfaz.
-|-- 📄 router.hpp.....................ℹ Reglas o políticas que permite el API REST para comunicarse con el cliente.
-
-📂 api/
-|-- 📂 utils..........................ℹ utilidades usadas en todo el proyecto)
-|--+-- 📄 api.utils.hpp...............ℹ Funciones para manejar partes del api
-|--+-- 📄 json.utils.hpp
-|--+-- 📄 time.utils.hpp
-
-|-- 📂 components/
-|--+-- 📂 device/.....................ℹ Activa el dispositivo para una acción específica
-|--+--+-- 📂 2.adapter/ 
-|--+--+--+-- 📄 controller.hpp........ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
-
-|--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
-|--+--+--+-- 📄 start.hpp.............ℹ Inicia el proceso de censado y guardado de datos
-
-|--+-- 📁 LCD/
-|--+-- 📁 measurement/................ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
-|--+-- 📂 sd-card/
-|--+--+-- 📂 2.adapter/
-|--+--+--+-- 📄 controller.hpp
-
-|--+--+-- 📂 3.use-case/..............ℹ Lógica de la aplicación, o las acciones que hace el componente
-|--+--+--+-- 📄 execFiles.hpp.........ℹ Ejecuta funciones para manejar archivos
-|--+--+--+-- 📄 printDirectory.hpp....ℹ Imprime y muestra los directorios y carpetas.
-
-|--+--+-- 📂 4.domain/................ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
-|--+--+--+-- 📄 dirModel.hpp
-|--+--+--+-- 📄 fileModel.hpp.........ℹ Modela la estructura y lo convierte en json
-|--+--+--+-- 📄 filename.hpp..........ℹ Establece el nombre final del archivo
-
-|--+-- 📁 sensor/.....................ℹ Acciones para ejecutar o tratar la información de los sensores.
-|--+-- 📂 share/......................ℹ Area del código con alcance a todos los componentes
-|--+--+-- 📂 4.domain/
-|--+--+--+-- 📂 interface/............ℹ Guarda todas las estructuras de todos los componentes
-|--+--+--+--+-- 📄 measurement.hpp....ℹ structura para la medición
-```
-<br/>
 
 ## 2.3 Flujo del programa
 
