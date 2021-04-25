@@ -50,7 +50,6 @@
   - **Configuración De La Extensión "ARduino"**
   
     Se debe de generar el archivo de configuración de la extensión de Arduino en el Visual Code (c_cpp_properties.json).
-
     - Aplastar F1 dentro del Visual Code
     - Escribir "Arduino" en el menú que aparece en la parte de arriba (>)
     - Seleccionar la opción que dice: "Arduino: Examples"
