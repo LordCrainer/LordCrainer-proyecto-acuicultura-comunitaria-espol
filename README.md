@@ -218,31 +218,31 @@ Se dará una breve explicación de cada capa para conocer que función cumple en
 |-- 📄 router.hpp ℹ Reglas o comandos que permite el API REST para comunicarse con el cliente
 📂 api/
 |-- 📂 utils ℹ utilidades usadas en todo el proyecto)
-|-- 📄 api.utils.hpp ℹ Funciones para manejar partes del api
-|-- 📄 json.utils.hpp
-|-- 📄 time.utils.hpp
+|--+-- 📄 api.utils.hpp ℹ Funciones para manejar partes del api
+|--+-- 📄 json.utils.hpp
+|--+-- 📄 time.utils.hpp
 |-- 📂 components/
-|-- 📂 device/ ℹ Activa el dispositivo para una acción específica
-|-- 📂 2.adapter/ 
-|-- 📄 controller.hpp ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
-|-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
-|-- 📄 start.hpp  ℹ Inicia el proceso de censado y guardado de datos
-|-- 📁 LCD/
-|-- 📁 measurement/ ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
-|-- 📂 sd-card/
-|-- 📂 2.adapter/
-|-- 📄 controller.hpp
-|-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
-|-- 📄 crudSD ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
-|-- 📂 4.domain/ ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
-|-- 📄 dirModel.hpp
-|-- 📄 fileModel.hpp ℹ Modela la estructura y lo convierte en json
-|-- 📄 filename.hpp ℹ Establece el nombre final del archivo
-|-- 📁 sensor/ ℹ Acciones para ejecutar o tratar la información de los sensores.
-|-- 📂 share/ ℹ Area del código con alcance a todos los componentes
-|-- 📂 4.domain/
-|-- 📂 interface/ ℹ Guarda todas las estructuras de todos los componentes
-|-- 📄 measurement.hpp ℹ structura para la medición
+|--+-- 📂 device/ ℹ Activa el dispositivo para una acción específica
+|--+--+-- 📂 2.adapter/ 
+|--+--+--+-- 📄 controller.hpp ℹ Recibe las peticiones del cliente, las procesa y devuelve una respuesta
+|--+--+-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
+|--+--+--+-- 📄 start.hpp  ℹ Inicia el proceso de censado y guardado de datos
+|--+-- 📁 LCD/
+|--+-- 📁 measurement/ ℹ Todo lo relacionado con mediciones o censado (lectura, tratamiento de los datos, etc)
+|--+-- 📂 sd-card/
+|--+--+-- 📂 2.adapter/
+|--+--+--+-- 📄 controller.hpp
+|--+--+-- 📂 3.use-case/ ℹ Lógica de la aplicación, o las acciones que hace el componente
+|--+--+--+-- 📄 crudSD ℹ Funciones que puede hacer una SD. (Leer, escribir, borrar, mostrar directorios y archivos, etc)
+|--+--+-- 📂 4.domain/ ℹ Es la lódigo del negocio, para tratar los datos u objetos que maneja el proyecto.
+|--+--+--+-- 📄 dirModel.hpp
+|--+--+--+-- 📄 fileModel.hpp ℹ Modela la estructura y lo convierte en json
+|--+--+--+-- 📄 filename.hpp ℹ Establece el nombre final del archivo
+|--+-- 📁 sensor/ ℹ Acciones para ejecutar o tratar la información de los sensores.
+|--+-- 📂 share/ ℹ Area del código con alcance a todos los componentes
+|--+--+-- 📂 4.domain/
+|--+--+--+-- 📂 interface/ ℹ Guarda todas las estructuras de todos los componentes
+|--+--+--+--+-- 📄 measurement.hpp ℹ structura para la medición
 ```
 
 #### 2.3 Flujo del programa
