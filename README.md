@@ -48,6 +48,7 @@
       <br/>
 
   - **Configuración De La Extensión "ARduino"**
+  
     Se debe de generar el archivo de configuración de la extensión de Arduino en el Visual Code (c_cpp_properties.json).
 
     - Aplastar F1 dentro del Visual Code
