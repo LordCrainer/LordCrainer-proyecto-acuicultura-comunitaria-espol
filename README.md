@@ -332,7 +332,7 @@ Pasos que realiza el servidor
 
 ## SD CARD: [**/directory_sd**]
 
-Obtener todos los directorios y archivos [**GET**]
+###  Obtener todos los directorios y archivos [**GET**]
 
 - Response: **200** (application/json)
 
@@ -408,7 +408,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## SD CARD: [/write_sd{?filename,data}]
 
-**Crear un nuevo archivo [**POST**]**
+### Crear un nuevo archivo [**POST**] 
 
 - Parameters
   - filename (String)
@@ -426,7 +426,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## SD CARD: [/read_sd{?filename}]
 
-**Lee un archivo [**GET**]**
+### Lee un archivo [**GET**] 
 
 - Parameters
   - filename (String)
@@ -442,7 +442,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## SD CARD: [/delete_sd{?filename, filemax}]
 
-**Elimina un archivo [**DELETE**]**
+### Elimina un archivo [**DELETE**] 
 
 - Parameters
   - filename (String)
@@ -452,7 +452,7 @@ Obtener todos los directorios y archivos [**GET**]
   - body
     `json { "data": "data.json" } `
 
-**Elimina múltiples archivos [**DELETE**]**
+### Elimina múltiples archivos [**DELETE**] 
 
 - Parameters
   - filename (Array[String])
@@ -471,7 +471,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## DEVICE: [/device/start{?pool_id,nMeditions,time}]
 
-**Inicia el proceso de captura y grabado de dos mediciones [**GET**]**
+### Inicia el proceso de captura y grabado de dos mediciones [**GET**] 
 
 - Parameters
   - pool_id (number)
@@ -500,7 +500,7 @@ Obtener todos los directorios y archivos [**GET**]
     ]
     ```
 
-**Inicia el proceso de captura y grabado de dos mediciones, estableciendo el tiempo [**GET**]**
+### Inicia el proceso de captura y grabado de dos mediciones, estableciendo el tiempo [**GET**] 
 
 - Parameters
   - pool_id (number)
@@ -559,7 +559,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## MEASUREMENT: [/measurement{?filemax, prefix, path}]
 
-**Lee todas las mediciones [**GET**]**
+### Lee todas las mediciones [**GET**]
 
 - Parameters
   - filemax (number) // default: 10
@@ -696,7 +696,7 @@ Obtener todos los directorios y archivos [**GET**]
 
 ## MEASUREMENT: [/measurement/{id}{?filemax, prefix, path}]
 
-**Lee todas las mediciones pero de una piscina (pool_id) [**GET**]**
+### Lee todas las mediciones pero de una piscina (pool_id) [**GET**]
 
 - Parameters
   - filemax (number) // default: 10
