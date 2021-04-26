@@ -346,8 +346,10 @@ Pasos que realiza el servidor
 
 # GRUPO SD CARD
 
-## SD CARD: [**/directory_sd**]
+## SD CARD: [**/directory_sd{?path}**]
 
+* Parameters
+  * path (String) // default: "/"
 ###  Obtener todos los directorios y archivos [**GET**]
 
 - Response: **200** (application/json)
@@ -398,6 +400,38 @@ Pasos que realiza el servidor
           }
         ]
       },
+      {
+        "name": "data",
+        "type": 1,
+        "content": [
+          {
+            "name": "P2_1619314606000.json",
+            "type": 0,
+            "size": 357
+          },
+          {
+            "name": "P1_1619314616000.json",
+            "type": 0,
+            "size": 355
+          },
+          {
+            "name": "P2_1619308071000.json",
+            "type": 0,
+            "size": 360
+          }
+        ]
+      }
+    ]
+    ```
+<br/>
+
+###  Obtener todos los directorios y archivos de una ruta específica [**GET**]
+
+- Response: **200** (application/json)
+
+  - body
+    ```json
+    [
       {
         "name": "data",
         "type": 1,

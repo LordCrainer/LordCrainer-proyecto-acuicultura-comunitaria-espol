@@ -78,7 +78,7 @@ void deleteRequest(AsyncWebServerRequest *req)
   int id = getIdFromURL(req, "/measurement/");
   String json;
   String message = String("DELETED ") + id + " SUCESSFULLY";
-  json = objectToJsonDynamic("message", message, 50);
+  json = objToJson("message", message, 50);
   Serial.println(json);
   req->send(200, "application/json", json);
 }

@@ -3,7 +3,7 @@
  *  @param  dir  Necesita de una clase File para ser ejecutado
  *  @param  numTabs  Número de tabulaciones por cada archivo dentro de un directorio
  */
-String printDirectory(File dir, int numTabs, byte filemax = 10)
+String printDirectory(File dir, int numTabs = 0, byte filemax = 10)
 {
   String json = "";
   IDirectory folder;
@@ -14,6 +14,7 @@ String printDirectory(File dir, int numTabs, byte filemax = 10)
     File entry = dir.openNextFile();
     if (filemax < iteration)
     {
+      Serial.println("**END DIR**");
       break;
     }
 
@@ -22,10 +23,6 @@ String printDirectory(File dir, int numTabs, byte filemax = 10)
       Serial.println("**END DIR**");
       break;
     }
-    /*     for (uint8_t i = 0; i < numTabs; i++)
-    {
-      // Serial.print('\t');
-    } */
     if (entry.isDirectory())
     {
       folder.name = entry.name();

@@ -48,3 +48,14 @@ ISensor initilizeSensor(String filename, ISensor sensor)
     sensor.name = doc["name"].as<String>();
     return sensor;
 }
+
+/**
+	 * Sensor/use-case: Iniciar el bus de datos
+	 */
+void initSensors() //ISensor sensors[]
+{
+    sensorTemp.begin();
+    GLOBAL_TEMP = initilizeSensor("/config/sensor/temp.json", GLOBAL_TEMP);
+    GLOBAL_PH = initilizeSensor("/config/sensor/ph.json", GLOBAL_PH);
+    GLOBAL_DO = initilizeSensor("/config/sensor/do.json", GLOBAL_DO);
+}

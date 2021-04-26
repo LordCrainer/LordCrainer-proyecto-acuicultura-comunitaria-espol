@@ -17,16 +17,17 @@ void readingSD(AsyncWebServerRequest *req)
 
 void appendSD(AsyncWebServerRequest *req)
 {
-    String json;
-    StaticJsonDocument<24> doc;
-    doc["status"] = "OK";
-    serializeJson(doc, json);
+    String json = objToJson("status", "OK", 24);
     req->send(200, "application/json", json);
 }
 
 void directorySD(AsyncWebServerRequest *req)
 {
-    String json = "[" + printDirectory(SD.open("/"), 0) + "]";
+    String path = getParameterByName(req, "path");
+    //Validation
+    path = path = "" ? "/" : path;
+    //Actions
+    String json = "[" + printDirectory(SD.open(path), 0) + "]";
     req->send(200, "application/json", json);
 }
 
@@ -41,6 +42,7 @@ void deletingSD(AsyncWebServerRequest *req)
     // ACTIONS
     String data = execManyFiles(deleteSD, filename, ",", filemax);
     // WRAP
-    data = "{\"data\": \"" + data + "\"}";
+    data = objToJson("data", data);
+    // data = "{\"data\": \"" + data + "\"}";
     req->send(204, "application/json", data);
 }

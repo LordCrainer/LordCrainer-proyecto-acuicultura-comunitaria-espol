@@ -48,7 +48,7 @@
 #include "adapter/router.hpp"
 
 void setup()
-{ 
+{
   Serial.flush();
   // SETUP
   initSensors();
@@ -65,4 +65,3 @@ void loop()
 {
   lastTime = getTempDelay(lastTime, 3000);
 }
-

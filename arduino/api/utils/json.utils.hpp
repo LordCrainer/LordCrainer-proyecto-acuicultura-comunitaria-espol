@@ -1,6 +1,6 @@
 
 // Convertir un
-String objectToJsonDynamic(String key, String value, int sizeDoc = 1024)
+String objToJson(String key, String value, int sizeDoc = 1024)
 {
     String json;
     DynamicJsonDocument doc(sizeDoc);
@@ -9,11 +9,12 @@ String objectToJsonDynamic(String key, String value, int sizeDoc = 1024)
     return json;
 }
 
-String JsonToTextDynamic(String json, int sizeDoc = 1024)
+String jsonToString(String json, String key, int sizeDoc = 1024)
 {
     DynamicJsonDocument doc(sizeDoc);
     deserializeJson(doc, json);
-    return json;
+    String value = doc[key];
+    return value;
 }
 
 String serializedToArray(String data)
