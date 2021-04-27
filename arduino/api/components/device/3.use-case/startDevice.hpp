@@ -19,6 +19,8 @@ String startDevice(AsyncWebServerRequest *request)
     nMeditions = nMeditions == 0 ? 10 : nMeditions;
 
     // INICIALIZACIÓN
+    GLOBAL_DO.value = 21;
+    GLOBAL_DO.name = "DO";
     ISensor sensors[] = {GLOBAL_TEMP, GLOBAL_PH, GLOBAL_DO};
     // ACTIONS
     String data = "[" + startAllMeasurement(measure, sensors, nMeditions) + "]";

@@ -15,14 +15,3 @@ double getValuePH(const uint8_t pin, byte iteration)
     prom = prom / iteration;
     return (7 + ((prom - 605) * 3 / (-18))) / 10;
 }
-
-/**
-	 * Sensor/use-case: Obtiene los datos generales del sensor PH
-     * @param ph 
-	 */
-ISensor getPh(ISensor ph, byte iteration = 20)
-{
-    ph.value = getValuePH(PH_PIN, iteration);
-    ph.alert = sensorStatus(ph);
-    return ph;
-}

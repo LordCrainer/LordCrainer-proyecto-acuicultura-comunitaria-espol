@@ -32,7 +32,7 @@ void InitServer()
 	server.on("/device/configuration", HTTP_GET, getAllConfig);
 
 	// SENSOR
-	server.on("/sensor/temp", HTTP_GET, gettingTempSensor);
+	server.on("/sensor/temp", HTTP_GET, gettingSensor);
 
 	// ERROR
 	server.onNotFound(notFound);

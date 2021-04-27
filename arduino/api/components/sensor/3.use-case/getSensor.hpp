@@ -2,34 +2,22 @@
 
 String getOneSensor(ISensor sensor)
 {
-  return sensorModel(sensor);
+  return sensorModel(execOneSensor(sensor));
 }
 /**
 	 * Sensor/use-case: Realiza un barrido de todo los sensores manualmente insertados
 	 */
-String getAllSensor(ISensor sensors[])
+String getManySensor(ISensor sensors[])
 {
   byte len = sizeof(sensors) - 1;
-  ISensor DO;
-  DO.value = 21;
-  DO.name = "DO";
+  String data;
   for (byte i = 0; i < len; i++)
   {
-    if (sensors[i].name == GLOBAL_PH.name)
-    {
-      sensors[i] = getPh(GLOBAL_PH);
-    }
-    if (sensors[i].name == GLOBAL_DO.name)
-    {
-      sensors[i] = DO;
-    }
-    if (sensors[i].name == GLOBAL_TEMP.name)
-    {
-      sensors[i] = GLOBAL_TEMP;
-    }
+    data = data + "," + getOneSensor(sensors[i]);
   }
-  // ISensor params[] = {GLOBAL_TEMP, getPh(GLOBAL_PH), DO};
-  return modelAllSensor(sensors);
+  // modelAllSensor(sensors);
+  data.remove(0, 1);
+  return data;
 }
 
 unsigned long getTempDelay(unsigned long lastTime, unsigned long timerDelay)

@@ -1,7 +1,9 @@
 #include "../3.use-case/index.hpp"
 
-void gettingTempSensor(AsyncWebServerRequest *req)
+void gettingSensor(AsyncWebServerRequest *req)
 {
-    String json = getOneSensor(GLOBAL_TEMP);
+    ISensor sensor;
+    sensor.name = getParameterByName(req, "sensor");
+    String json = getOneSensor(sensor);
     req->send(200, "application/json", json);
 }
