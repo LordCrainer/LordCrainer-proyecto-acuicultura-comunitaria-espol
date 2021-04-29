@@ -6,3 +6,10 @@
 // Ejemplo: String anyName(callFunction theFunctionAsParameter)
 typedef String (*callFunction)(String);
 
+void mergeObjs(JsonObject dest, JsonObjectConst src)
+{
+    for (auto kvp : src)
+    {
+        dest[kvp.key()] = kvp.value();
+    }
+}

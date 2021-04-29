@@ -31,13 +31,13 @@
 #include "Infraestructure/bd/sd-card.repository.hpp"
 
 // UTILS
-#include "api/components/share/4.domain/index.hpp"
 #include "api/utils/json.utils.hpp"
 #include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
 
 // COMPONENTES DEL API REST
+#include "api/components/share/2.adapter/controller.hpp"
 #include "api/components/sd-card/2.adapter/controller.hpp"
 #include "api/components/lcd/lcd.service.hpp"
 #include "api/components/sensor/2.adapter/controller.hpp"
