@@ -5,7 +5,7 @@ void writingSD(AsyncWebServerRequest *req)
     String filename = getParameterByName(req, "filename");
     String data = getParameterByName(req, "data");
     const boolean isWritten = writeSD(filename, data);
-    req->send(200, "application/json", data);
+    req->send(201, "application/json", data);
 }
 
 void readingSD(AsyncWebServerRequest *req)
@@ -46,3 +46,12 @@ void deletingSD(AsyncWebServerRequest *req)
     // data = "{\"data\": \"" + data + "\"}";
     req->send(204, "application/json", data);
 }
+
+void overwrittingSD(AsyncWebServerRequest *req)
+{
+    String filename = getParameterByName(req, "filename");
+    String data = getParameterByName(req, "data");
+    const boolean isOverWritten = overwriteSD(filename, data);
+    req->send(201, "application/json", data);
+}
+

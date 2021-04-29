@@ -13,7 +13,8 @@ void homeRequest(AsyncWebServerRequest *req)
 
 void notFound(AsyncWebServerRequest *req)
 {
-  req->send(404, "text/plain", "Not found");
+  String json = objToJson("message", "Page (route) not found");
+  req->send(404, "application/json", json);
 }
 
 String getBodyContent(uint8_t *data, size_t len)
@@ -32,29 +33,6 @@ int getIdFromURL(AsyncWebServerRequest *req, String route)
   string_id.replace(route, "");  // "1"
   int id = string_id.toInt();    //  1
   return id;
-}
-
-String findById(String data, int id)
-{
-  const size_t capacity = 4 * JSON_ARRAY_SIZE(3) + 9 * JSON_OBJECT_SIZE(3) + 3 * JSON_OBJECT_SIZE(4);
-  String json;
-
-  DynamicJsonDocument doc(capacity);
-  DynamicJsonDocument doc1(capacity);
-
-  deserializeJson(doc, data);
-
-  int length = doc.size();
-  Serial.println(length);
-
-  for (int i = 0; i < length; i++)
-  {
-    JsonObject root_0 = doc[i];
-    if (root_0["pool_id"] == id)
-      doc1.add(doc[i]);
-  }
-  serializeJson(doc1, json);
-  return json;
 }
 
 void getHeaders(AsyncWebServerRequest *req)
@@ -77,17 +55,18 @@ String getParameterByName(AsyncWebServerRequest *req, String param)
   return "";
 }
 
-IObject *getParamsByName(AsyncWebServerRequest *req, String params[])
+/* IObject *getParamsByName(AsyncWebServerRequest *req, String params[])
 {
   byte size = sizeof(params);
   IObject obj[size];
   for (byte i = 0; i < size; i++)
   {
-    obj[i].key = params[i];
-    obj[i].value = getParameterByName(req, params[i]);
+    obj[params[i]] = getParameterByName(req, params[i]);
+    //obj[i].key = params[i];
+    //obj[i].value = getParameterByName(req, params[i]);
   }
   return obj;
-}
+} */
 
 void getAllParameters(AsyncWebServerRequest *req)
 {
@@ -107,3 +86,26 @@ void getAllParameters(AsyncWebServerRequest *req)
   //serialize(doc, json);
   //return json;
 }
+
+/* String findById(String data, int id)
+{
+  const size_t capacity = 4 * JSON_ARRAY_SIZE(3) + 9 * JSON_OBJECT_SIZE(3) + 3 * JSON_OBJECT_SIZE(4);
+  String json;
+
+  DynamicJsonDocument doc(capacity);
+  DynamicJsonDocument doc1(capacity);
+
+  deserializeJson(doc, data);
+
+  int length = doc.size();
+  Serial.println(length);
+
+  for (int i = 0; i < length; i++)
+  {
+    JsonObject root_0 = doc[i];
+    if (root_0["pool_id"] == id)
+      doc1.add(doc[i]);
+  }
+  serializeJson(doc1, json);
+  return json;
+} */

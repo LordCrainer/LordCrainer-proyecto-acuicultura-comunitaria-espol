@@ -32,10 +32,10 @@
 
 // UTILS
 #include "api/components/share/4.domain/index.hpp"
+#include "api/utils/json.utils.hpp"
 #include "api/utils/time.utils.hpp"
 #include "api/utils/fp-function.hpp"
 #include "api/utils/api.utils.hpp"
-#include "api/utils/json.utils.hpp"
 
 // COMPONENTES DEL API REST
 #include "api/components/sd-card/2.adapter/controller.hpp"
@@ -63,5 +63,5 @@ void setup()
 
 void loop()
 {
-  lastTime = getTempDelay(lastTime, 3000);
+  lastTime = getTemperatureWithDelay(lastTime, 3000);
 }

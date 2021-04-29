@@ -74,3 +74,12 @@ String deleteSD(String filename)
 {
   return SD.remove(filename) == 1 ? filename : "";
 }
+
+boolean overwriteSD(String filename, String data)
+{
+  // Necesito primero eliminar el archivo
+  deleteSD(filename);
+  // Luego necesito crear o escribir
+  boolean isCreated = createSD(filename, data);
+  return isCreated;
+}

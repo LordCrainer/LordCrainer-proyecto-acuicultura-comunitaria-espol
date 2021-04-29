@@ -5,7 +5,7 @@
 */
 String startOneMeasurement(IMeasurement measurement, ISensor sensors[])
 {
-    measurement.params = "[" + getManySensor(sensors) + "]";
+    measurement.params = "[" + getSomeSensors(sensors) + "]";
     measurement.status = "OK";
     return measurementModel(measurement);
 }

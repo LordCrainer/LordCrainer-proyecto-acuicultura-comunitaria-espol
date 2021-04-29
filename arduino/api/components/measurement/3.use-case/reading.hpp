@@ -12,7 +12,7 @@ String readOneMeasurement(AsyncWebServerRequest *req, String route)
   String path = getParameterByName(req, "path");
   byte pool_id = getIdFromURL(req, route);
   // VALIDATION
-  pool_id = pool_id < 0 ? 1 : pool_id;
+  pool_id = pool_id <= 0 ? 1 : pool_id;
   filemax = filemax == 0 ? 10 : filemax;
   prefix = prefix == "" ? "P" + String(pool_id) + "_" : prefix;
   path = path == "" ? "/data/" : path;
