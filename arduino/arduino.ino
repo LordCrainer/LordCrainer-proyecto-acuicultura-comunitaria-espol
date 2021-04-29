@@ -1,25 +1,28 @@
 #include <Arduino.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <OneWire.h>
+#include <FS.h>
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #define ARDUINOJSON_USE_LONG_LONG 1
-#include <SPI.h>
-#include "SD.h"
+#include <ArduinoJson.h>
+
 #include <SoftwareSerial.h>
 #include <ESP8266WiFi.h>
 #include <ESPAsyncWebServer.h>
-#include <FS.h>
-#include <ArduinoJson.h>
-#include <Wire.h>
-#include <OneWire.h>
+
+#include "SD.h" // #include "LittleFS.h"
 #include <DallasTemperature.h>
 #include <LiquidCrystal_I2C.h>
-#include "LittleFS.h"
 #include "RTClib.h"
 
+// ******** ARCHIVOS DEL PROGRAMA ********
+
 // VARIABLES DE ENTORNO
-#include "env.h" // Variable de entorno
+#include "env.h" // Variable de entorno como: red wifi
 
 // CONFIGURACIONES GENERALES
-#include "config/wifi-config.h" // Sustituir con datos de vuestra red
+#include "config/wifi-config.h" 
 #include "config/Sd-config.hpp"
 #include "config/time-config.hpp"
 #include "config/sensor-config.hpp"
@@ -30,11 +33,8 @@
 #include "Infraestructure/server/Server.hpp"
 #include "Infraestructure/bd/sd-card.repository.hpp"
 
-// UTILS
-#include "api/utils/json.utils.hpp"
-#include "api/utils/time.utils.hpp"
-#include "api/utils/fp-function.hpp"
-#include "api/utils/api.utils.hpp"
+// UTILIDADES PARA EL API REST
+#include "api/utils/index.hpp"
 
 // COMPONENTES DEL API REST
 #include "api/components/share/2.adapter/controller.hpp"
@@ -57,8 +57,8 @@ void setup()
   ConnectWiFi_STA();
   InitServer();
   initLCD("INICIANDO...");
-  boolean isActived = initSD();
-  Serial.println("\nESTADO DEL SD: " + String(isActived));
+  boolean isActived = initSD() ? true: false;
+  Serial.println("\nSTATUS SD: " + String(isActived));
 }
 
 void loop()
