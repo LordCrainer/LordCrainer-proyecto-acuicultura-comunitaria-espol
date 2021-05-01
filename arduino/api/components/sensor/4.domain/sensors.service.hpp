@@ -1,6 +1,11 @@
 String sensorStatus(ISensor param)
 {
+    if (param.max == NULL || param.min == NULL)
+    {
+        return "FAIL";
+    }
     String letter = param.name.substring(0, 1);
+    letter.toUpperCase();
     if (param.value > param.max)
     {
         return "SL" + letter;
@@ -49,7 +54,7 @@ ISensor getTemp(ISensor temp)
 ISensor execOneSensor(ISensor sensor)
 {
     sensor.name.toLowerCase();
-    Serial.println("Sensor/domain/exec: " + sensor.name);
+
     if (sensor.name.startsWith("ph"))
     {
         return getPh(GLOBAL_PH);
@@ -60,6 +65,7 @@ ISensor execOneSensor(ISensor sensor)
     }
     if (sensor.name.startsWith("temperature"))
     {
+        Serial.println("Sensor/domain/exec: " + GLOBAL_TEMP.name);
         return GLOBAL_TEMP;
     }
     sensor.alert = "Unknown";
