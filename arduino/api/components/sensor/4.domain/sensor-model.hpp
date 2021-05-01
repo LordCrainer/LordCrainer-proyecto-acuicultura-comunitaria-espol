@@ -41,13 +41,12 @@ ISensor initilizeSensor(String filename, ISensor sensor)
     String json;
     StaticJsonDocument<50> doc;
     json = readSD(filename);
-    Serial.println("SENSOR/DOMAIN/INITSENSOR_1: " + json);
     DeserializationError err = deserializeJson(doc, json);
-    if (err)
+    /*     if (err)
     {
         Serial.println("Sensor/Domain/initSensor: ERROR=>" + String(err.c_str()));
         return sensor;
-    }
+    } */
     sensor.max = doc["max"].as<double>();
     sensor.min = doc["min"].as<double>();
     sensor.name = doc["name"].as<String>();
