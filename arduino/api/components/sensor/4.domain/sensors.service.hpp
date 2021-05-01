@@ -1,25 +1,3 @@
-String sensorStatus(ISensor param)
-{
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.name));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.max));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.min));
-    if (param.max == NULL || param.min == NULL)
-    {
-        return "FAIL";
-    }
-    String letter = param.name.substring(0, 1);
-    letter.toUpperCase();
-    if (param.value > param.max)
-    {
-        return "SL" + letter;
-    }
-    if (param.value < param.min)
-    {
-        return "BL" + letter;
-    }
-    return "OK";
-}
-
 /**
 	 * Sensor/domain/sensors: Obtiene los datos del sensor de Oxígeno disuelto
 	 */
@@ -73,4 +51,27 @@ ISensor execOneSensor(ISensor sensor)
     }
     sensor.alert = "Unknown";
     return sensor;
+}
+
+String sensorStatus(ISensor param)
+{
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.name));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.max));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.min));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.value));
+    if (param.max == NULL || param.min == NULL)
+    {
+        return "FAIL";
+    }
+    String letter = param.name.substring(0, 1);
+    letter.toUpperCase();
+    if (param.value > param.max)
+    {
+        return "SL" + letter;
+    }
+    if (param.value < param.min)
+    {
+        return "BL" + letter;
+    }
+    return "OK";
 }

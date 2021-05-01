@@ -5,12 +5,13 @@
 String sensorModel(ISensor data)
 {
     String json;
-    StaticJsonDocument<50> doc;
-    JsonObject obj = doc.as<JsonObject>();
+    StaticJsonDocument<100> doc;
+    // JsonObject obj = doc.as<JsonObject>();
     doc["value"] = data.value;
     doc["name"] = data.name;
     doc["alert"] = data.alert;
     Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.name);
+    Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.alert);
     serializeJson(doc, json);
     Serial.println("SENSOR/DOMAIN/MODEL_2 " + json);
     return json;
@@ -50,10 +51,7 @@ ISensor initilizeSensor(String filename, ISensor sensor)
     sensor.max = doc["max"].as<double>();
     sensor.min = doc["min"].as<double>();
     sensor.name = doc["name"].as<String>();
-    Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + sensor.name);
-    Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + String(sensor.max));
-    Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + String(sensor.min));
-    return sensor;
+    S return sensor;
 }
 
 /**
@@ -63,8 +61,14 @@ void initSensors() //ISensor sensors[]
 {
     sensorTemp.begin();
     GLOBAL_TEMP.name = "temperature";
+    GLOBAL_TEMP.max = 36;
+    GLOBAL_TEMP.min = 31;
     GLOBAL_PH.name = "ph";
+    GLOBAL_TEMP.max = 8.52;
+    GLOBAL_TEMP.min = 6.52;
     GLOBAL_DO.name = "do";
+    GLOBAL_TEMP.max = 150;
+    GLOBAL_TEMP.min = 120;
     GLOBAL_TEMP = initilizeSensor("/config/sensor/temp.json", GLOBAL_TEMP);
     GLOBAL_PH = initilizeSensor("/config/sensor/ph.json", GLOBAL_PH);
     GLOBAL_DO = initilizeSensor("/config/sensor/do.json", GLOBAL_DO);
