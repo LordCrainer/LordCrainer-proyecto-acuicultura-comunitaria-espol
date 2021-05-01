@@ -10,7 +10,7 @@ String sensorModel(ISensor data)
     doc["value"] = data.value;
     doc["name"] = data.name;
     doc["alert"] = data.alert;
-    Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.name;
+    Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.name);
     serializeJson(doc, json);
     Serial.println("SENSOR/DOMAIN/MODEL_2 " + json);
     return json;
@@ -59,7 +59,7 @@ ISensor initilizeSensor(String filename, ISensor sensor)
 void initSensors() //ISensor sensors[]
 {
     sensorTemp.begin();
-    GLOBAL_TEMP.nane = "temperature";
+    GLOBAL_TEMP.name = "temperature";
     GLOBAL_PH.name = "ph";
     GLOBAL_DO.name = "do";
     GLOBAL_TEMP = initilizeSensor("/config/sensor/temp.json", GLOBAL_TEMP);
