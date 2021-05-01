@@ -5,7 +5,9 @@
 */
 String getOneSensor(ISensor sensor)
 {
-  return sensorModel(execOneSensor(sensor));
+  String data = sensorModel(execOneSensor(sensor));
+  Serial.println("SENSOR/USE-CASE: " + data);
+  return
 }
 /**
 	 * Sensor/use-case: Realiza un barrido de todo los sensores manualmente insertados

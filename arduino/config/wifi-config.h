@@ -15,8 +15,7 @@ void ConnectWiFi_STA(bool useStaticIP = false)
     Serial.print('.');
   }
 
-  Serial.println("");
-  Serial.print("MODE STATION ON - SSID:\t");
+  Serial.println("\nMODE STATION ON - SSID:\t");
   Serial.println(SSID_STA);
   Serial.print("IP address:\t");
   Serial.println(WiFi.localIP());
@@ -34,8 +33,7 @@ void ConnectWiFi_AP(bool useStaticIP = false)
   if (useStaticIP)
     WiFi.softAPConfig(ip, gateway, subnet);
 
-  Serial.println("");
-  Serial.print("MODE ACCESS-POINT ON - SSID:\t");
+  Serial.print("\nMODE ACCESS-POINT ON - SSID:\t");
   Serial.println(SSID_AP);
   Serial.print("IP address:\t");
   Serial.println(WiFi.softAPIP());
