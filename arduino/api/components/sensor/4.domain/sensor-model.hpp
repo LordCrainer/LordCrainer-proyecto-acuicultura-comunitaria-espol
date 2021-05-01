@@ -49,7 +49,7 @@ ISensor initilizeSensor(String filename, ISensor sensor)
     sensor.max = doc["max"].as<double>();
     sensor.min = doc["min"].as<double>();
     sensor.name = doc["name"].as<String>();
-    Serial.println("SENSOR/DOMAIN/INITSENSOR " + json);
+    Serial.println("SENSOR/DOMAIN/INITSENSOR " + sensor.name);
     return sensor;
 }
 
