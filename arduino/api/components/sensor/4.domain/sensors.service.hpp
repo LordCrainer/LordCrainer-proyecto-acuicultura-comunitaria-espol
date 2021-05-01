@@ -8,7 +8,6 @@ ISensor getDOxygen(ISensor sensor)
     uint32_t volt = uint32_t(VOLT_REF) * oxyD / ADC_RES;
     sensor.value = float(ajustDO(volt, temp) / 1000);
     sensor.alert = sensorStatus(sensor);
-    Serial.println(sensor.alert)
     return sensor;
 }
 
@@ -20,7 +19,6 @@ ISensor getPh(ISensor sensor, byte iteration = 20)
 {
     sensor.value = getValuePH(PH_PIN, iteration);
     sensor.alert = sensorStatus(sensor);
-    Serial.println(sensor.alert)
     return sensor;
 }
 
