@@ -40,8 +40,7 @@ ISensor initilizeSensor(String filename, ISensor sensor)
 {
     String json;
     json = readSD(filename);
-    int sizeDoc = json.length();
-    DynamicJsonDocument doc(sizeDoc);
+    StaticJsonDocument<100> doc;
     DeserializationError err = deserializeJson(doc, json);
     if (err)
     {
