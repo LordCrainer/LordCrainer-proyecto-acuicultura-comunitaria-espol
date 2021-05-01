@@ -2,7 +2,7 @@
 String measurementModel(IMeasurement data)
 {
     String json;
-    DynamicJsonDocument doc(192);
+    DynamicJsonDocument doc(224);
     doc["pool_id"] = data.pool_id;
     doc["device_id"] = data.device_id;
     doc["created_at"] = data.created_at;
