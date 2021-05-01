@@ -48,16 +48,19 @@ ISensor getTemp(ISensor temp)
 
 ISensor execOneSensor(ISensor sensor)
 {
-    if (sensor.name == "PH")
+    sensor.name.toLowerCase();
+    if (name.startsWith("ph"))
     {
         return getPh(GLOBAL_PH);
     }
-    if (sensor.name == "DO")
+    if (name.startsWith("do"))
     {
         return GLOBAL_DO; // getDOxygen(GLOBAL_DO)
     }
-    if (sensor.name == "Temperature")
+    if (name.startsWith("temp"))
     {
         return GLOBAL_TEMP;
     }
+    sensor.alert = "Unknown";
+    return sensor;
 }

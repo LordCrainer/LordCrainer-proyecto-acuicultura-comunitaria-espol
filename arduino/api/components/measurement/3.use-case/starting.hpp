@@ -24,15 +24,9 @@ String startAllMeasurement(IMeasurement med, ISensor sensors[], const byte numMe
     {
         return "";
     }
-
     for (byte i = 0; i < numMed; i++)
     {
         data = startOneMeasurement(med, sensors);
-        /*         if (i == lastIndex)
-        {
-            json = json + data;
-            break;
-        } */
         json = json + "," + data;
     }
     json.remove(0, 1);
