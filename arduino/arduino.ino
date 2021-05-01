@@ -51,7 +51,7 @@ void setup()
   boolean isActived = initSD() ? true: false;
   // SETUP
   initTime();
-  ConnectWiFi_STA();
+  ConnectWiFi_AP();
   InitServer();
   initLCD("INICIANDO...");
   Serial.println("\nSTATUS SD: " + String(isActived));
