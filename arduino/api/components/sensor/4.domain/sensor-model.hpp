@@ -45,7 +45,7 @@ ISensor initilizeSensor(String filename, ISensor sensor)
     DeserializationError err = deserializeJson(doc, json);
     if (err)
     {
-        Serial.println("Sensor/Domain/initSensor: ERROR=>" + err);
+        Serial.println("Sensor/Domain/initSensor: ERROR=>" + String(err.c_str()));
         return sensor;
     }
     sensor.max = doc["max"].as<double>();
