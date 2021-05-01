@@ -48,6 +48,7 @@ ISensor getTemp(ISensor temp)
 
 ISensor execOneSensor(ISensor sensor)
 {
+    String name;
     sensor.name.toLowerCase();
     if (name.startsWith("ph"))
     {
