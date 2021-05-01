@@ -46,7 +46,6 @@ ISensor execOneSensor(ISensor sensor)
     }
     if (sensor.name.startsWith("temperature"))
     {
-        Serial.println("Sensor/domain/exec: " + GLOBAL_TEMP.name);
         return GLOBAL_TEMP;
     }
     sensor.alert = "Unknown";
