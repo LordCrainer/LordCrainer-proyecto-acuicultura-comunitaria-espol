@@ -15,6 +15,7 @@
 #include "RTClib.h"
 
 // ******** ARCHIVOS DEL PROGRAMA ********
+
 // VARIABLES DE ENTORNO
 #include "env.h" // Variable de entorno como: red wifi
 
