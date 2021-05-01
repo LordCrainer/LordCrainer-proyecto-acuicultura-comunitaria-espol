@@ -24,7 +24,7 @@ void InitServer()
 	server.on("/overwrite_sd", HTTP_POST, overwrittingSD);
 
 	server.on("/overwrite_sd", HTTP_GET, overwrittingSD);
-	server.on("/write_sd", HTTP_GET, writingSD);	
+	server.on("/write_sd", HTTP_GET, writingSD);
 	server.on("/delete_sd", HTTP_GET, deletingSD);
 
 	// MEASUREMENT
@@ -40,5 +40,5 @@ void InitServer()
 	// ERROR
 	server.onNotFound(notFound);
 	server.begin();
-	Serial.println("HTTP server started");
+	Serial.println("Servidor escuchando en el puerto:\t" + String(port));
 }
