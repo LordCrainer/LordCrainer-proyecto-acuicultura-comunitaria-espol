@@ -39,18 +39,21 @@ String modelAllSensor(ISensor params[])
 ISensor initilizeSensor(String filename, ISensor sensor)
 {
     String json;
-    StaticJsonDocument<50> doc;
     json = readSD(filename);
+    int sizeDoc = json.length();
+    StaticJsonDocument<int> doc;
     DeserializationError err = deserializeJson(doc, json);
-    /*     if (err)
+    if (err)
     {
         Serial.println("Sensor/Domain/initSensor: ERROR=>" + String(err.c_str()));
         return sensor;
-    } */
+    }
     sensor.max = doc["max"].as<double>();
     sensor.min = doc["min"].as<double>();
     sensor.name = doc["name"].as<String>();
     Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + sensor.name);
+    Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + sensor.max);
+    Serial.println("SENSOR/DOMAIN/INITSENSOR_2: " + sensor.min);
     return sensor;
 }
 
