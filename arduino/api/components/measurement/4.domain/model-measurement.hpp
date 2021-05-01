@@ -7,7 +7,9 @@ String measurementModel(IMeasurement data)
     doc["device_id"] = data.device_id;
     doc["created_at"] = data.created_at;
     doc["status"] = data.status;
+    Serial.println("MEASUREMENT/DOMAIN/Measurement/Serielized: " + serialized(data.params));
     doc["params"] = serialized(data.params);
     serializeJson(doc, json);
+    Serial.println("MEASUREMENT/DOMAIN/Measurement/json: " + json);
     return json;
 }

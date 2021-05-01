@@ -18,7 +18,6 @@ String getSomeSensors(ISensor sensors[])
   for (byte i = 0; i < len; i++)
   {
     data = data + "," + getOneSensor(sensors[i]);
-    Serial.println("SENSOR/USE-CASE/GETSOMESENSOR: " + data);
   }
   // modelAllSensor(sensors);
   data.remove(0, 1);
