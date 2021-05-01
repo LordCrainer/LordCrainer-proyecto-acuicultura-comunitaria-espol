@@ -31,7 +31,6 @@ ISensor getTemp(ISensor sensor)
 {
     sensor.value = getValueTemp();
     sensor.alert = sensorStatus(sensor);
-    Serial.println(sensor.alert)
     return sensor;
 }
 

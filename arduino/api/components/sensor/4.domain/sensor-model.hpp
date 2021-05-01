@@ -10,10 +10,7 @@ String sensorModel(ISensor data)
     doc["value"] = data.value;
     doc["name"] = data.name;
     doc["alert"] = data.alert;
-    Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.name);
-    Serial.println("SENSOR/DOMAIN/MODEL_1 " + data.alert);
     serializeJson(doc, json);
-    Serial.println("SENSOR/DOMAIN/MODEL_2 " + json);
     return json;
 }
 
@@ -39,10 +36,6 @@ String modelAllSensor(ISensor params[])
 
 String sensorStatus(ISensor param)
 {
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.name));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.max));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.min));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.value));
     String letter = param.name.substring(0, 1);
     letter.toUpperCase();
     if (!param.value)
