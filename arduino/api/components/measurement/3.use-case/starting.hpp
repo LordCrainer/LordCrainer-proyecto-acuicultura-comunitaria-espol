@@ -6,7 +6,6 @@
 String startOneMeasurement(IMeasurement measurement, ISensor sensors[])
 {
     measurement.params = "[" + getSomeSensors(sensors) + "]";
-    Serial.println("MEASUREMENT/USE-CASE/STARTONE: " + measurement.params);
     measurement.status = "OK";
     return measurementModel(measurement);
 }
