@@ -48,13 +48,13 @@ void setup()
 {
   Serial.flush();
   Serial.begin(115200);
+  boolean isActived = initSD() ? true: false;
   // SETUP
   initSensors();
   initTime();
   ConnectWiFi_STA();
   InitServer();
   initLCD("INICIANDO...");
-  boolean isActived = initSD() ? true: false;
   Serial.println("\nSTATUS SD: " + String(isActived));
 }
 
