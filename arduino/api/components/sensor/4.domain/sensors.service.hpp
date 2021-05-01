@@ -40,7 +40,7 @@ ISensor execOneSensor(ISensor sensor)
     {
         return getPh(GLOBAL_PH);
     }
-    if (sensor.name.startsWith("do"))
+    if (sensor.name.startsWith("oxygen"))
     {
         return GLOBAL_DO; // getDOxygen(GLOBAL_DO)
     }
