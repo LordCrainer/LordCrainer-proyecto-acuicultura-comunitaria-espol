@@ -1,5 +1,8 @@
 String sensorStatus(ISensor param)
 {
+    Serial.println("SENSOR/DOMAIN/STATUS: " + param.name);
+    Serial.println("SENSOR/DOMAIN/STATUS: " + param.max);
+    Serial.println("SENSOR/DOMAIN/STATUS: " + param.min);
     if (param.max == NULL || param.min == NULL)
     {
         return "FAIL";
