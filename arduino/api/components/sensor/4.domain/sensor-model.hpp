@@ -6,11 +6,12 @@ String sensorModel(ISensor data)
 {
     String json;
     StaticJsonDocument<50> doc;
-    // JsonObject obj = doc.as<JsonObject>();
+    JsonObject obj = doc.as<JsonObject>();
     doc["value"] = data.value;
     doc["name"] = data.name;
     doc["alert"] = data.alert;
     serializeJson(doc, json);
+    Serial.println("SENSOR/DOMAIN/MODEL " + json);
     return json;
 }
 

@@ -49,7 +49,7 @@ ISensor getTemp(ISensor temp)
 ISensor execOneSensor(ISensor sensor)
 {
     sensor.name.toLowerCase();
-    Serial.println("Sensor/domain: " + sensor.name);
+    Serial.println("Sensor/domain/exec: " + sensor.name);
     if (sensor.name.startsWith("ph"))
     {
         return getPh(GLOBAL_PH);
@@ -58,7 +58,7 @@ ISensor execOneSensor(ISensor sensor)
     {
         return GLOBAL_DO; // getDOxygen(GLOBAL_DO)
     }
-    if (sensor.name.startsWith("temp"))
+    if (sensor.name.startsWith("temperature"))
     {
         return GLOBAL_TEMP;
     }

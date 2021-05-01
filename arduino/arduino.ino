@@ -47,10 +47,10 @@
 void setup()
 {
   Serial.flush();
+  Serial.begin(115200);
   // SETUP
   initSensors();
   initTime();
-  Serial.begin(115200);
   ConnectWiFi_STA();
   InitServer();
   initLCD("INICIANDO...");
