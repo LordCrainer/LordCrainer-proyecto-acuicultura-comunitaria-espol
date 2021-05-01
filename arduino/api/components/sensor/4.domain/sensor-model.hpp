@@ -37,39 +37,33 @@ String modelAllSensor(ISensor params[])
     // return Temp + "," + PH + "," + DO;
 }
 
-ISensor initilizeSensor(String filename, ISensor sensor)
+String sensorStatus(ISensor param)
 {
-    String json;
-    json = readSD(filename);
-    StaticJsonDocument<100> doc;
-    DeserializationError err = deserializeJson(doc, json);
-    if (err)
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.name));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.max));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.min));
+    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.value));
+    String letter = param.name.substring(0, 1);
+    letter.toUpperCase();
+    if (!param.value)
     {
-        Serial.println("Sensor/Domain/initSensor: ERROR=>" + String(err.c_str()));
-        return sensor;
+        return "NOT VALUE";
     }
-    sensor.max = doc["max"].as<double>();
-    sensor.min = doc["min"].as<double>();
-    sensor.name = doc["name"].as<String>();
-    S return sensor;
-}
-
-/**
-	 * Sensor/use-case: Iniciar el bus de datos
-	 */
-void initSensors() //ISensor sensors[]
-{
-    sensorTemp.begin();
-    GLOBAL_TEMP.name = "temperature";
-    GLOBAL_TEMP.max = 36;
-    GLOBAL_TEMP.min = 31;
-    GLOBAL_PH.name = "ph";
-    GLOBAL_TEMP.max = 8.52;
-    GLOBAL_TEMP.min = 6.52;
-    GLOBAL_DO.name = "do";
-    GLOBAL_TEMP.max = 150;
-    GLOBAL_TEMP.min = 120;
-    GLOBAL_TEMP = initilizeSensor("/config/sensor/temp.json", GLOBAL_TEMP);
-    GLOBAL_PH = initilizeSensor("/config/sensor/ph.json", GLOBAL_PH);
-    GLOBAL_DO = initilizeSensor("/config/sensor/do.json", GLOBAL_DO);
+    if (param.max == NULL || param.min == NULL)
+    {
+        return "MAX OR MIN NULL";
+    }
+    if (param.min == param.max)
+    {
+        return "MAX & MIN ARE EQUAL";
+    }
+    if (param.value > param.max)
+    {
+        return "SL" + letter;
+    }
+    if (param.value < param.min)
+    {
+        return "BL" + letter;
+    }
+    return "OK";
 }

@@ -53,25 +53,19 @@ ISensor execOneSensor(ISensor sensor)
     return sensor;
 }
 
-String sensorStatus(ISensor param)
+ISensor initilizeSensor(String filename, ISensor sensor)
 {
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.name));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.max));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.min));
-    Serial.println("SENSOR/DOMAIN/STATUS: " + String(param.value));
-    if (param.max == NULL || param.min == NULL)
+    String json;
+    json = readSD(filename);
+    StaticJsonDocument<100> doc;
+    DeserializationError err = deserializeJson(doc, json);
+    if (err)
     {
-        return "FAIL";
+        Serial.println("Sensor/Domain/initSensor: ERROR=>" + String(err.c_str()));
+        return sensor;
     }
-    String letter = param.name.substring(0, 1);
-    letter.toUpperCase();
-    if (param.value > param.max)
-    {
-        return "SL" + letter;
-    }
-    if (param.value < param.min)
-    {
-        return "BL" + letter;
-    }
-    return "OK";
+    sensor.max = doc["max"].as<double>();
+    sensor.min = doc["min"].as<double>();
+    sensor.name = doc["name"].as<String>();
+    return sensor;
 }
