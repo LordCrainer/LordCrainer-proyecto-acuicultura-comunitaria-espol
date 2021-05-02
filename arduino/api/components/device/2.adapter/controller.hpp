@@ -11,6 +11,7 @@ void getAllConfig(AsyncWebServerRequest *req)
 void startingDevice(AsyncWebServerRequest *req)
 {
   String res;
+  Serial.println("STARTING DEVICE");
   res = startDevice(req);
   req->send(200, "application/json", res);
 }
