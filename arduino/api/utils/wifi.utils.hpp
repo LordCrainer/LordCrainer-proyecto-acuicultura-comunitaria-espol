@@ -1,7 +1,16 @@
+void setConfigWifi(String filename)
+{
+    String data = "{\"mode\": \"STA\", \"staticIp\":false}";
+    writeSD("/config/wifi/config.json", data);
+}
+
 void initWifiMode(String mode = "STA", boolean useStaticIP = false)
 {
     String config = readSD("/config/wifi/config.json");
-
+    if (config == "")
+    {
+        setConfigWifi("/config/wifi/config.json");
+    }
     mode = jsonToString(config, "mode", 25);
     String staticIp = jsonToString(config, "staticIp", 25);
 

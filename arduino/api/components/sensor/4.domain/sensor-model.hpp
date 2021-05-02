@@ -2,14 +2,14 @@
 	 * Sensor/domain: Modela la estructura ISensor para serializar en un json
      * @param data  Estructura ISensor
 	 */
-String sensorModel(ISensor data)
+String sensorModel(ISensor sensor)
 {
     String json;
     StaticJsonDocument<100> doc;
     // JsonObject obj = doc.as<JsonObject>();
-    doc["value"] = data.value;
-    doc["name"] = data.name;
-    doc["alert"] = data.alert;
+    doc["value"] = sensor.value;
+    doc["name"] = sensor.name;
+    doc["alert"] = sensor.alert;
     serializeJson(doc, json);
     return json;
 }
@@ -36,9 +36,7 @@ String modelAllSensor(ISensor params[])
 
 String sensorStatus(ISensor param)
 {
-    String letter = param.name.substring(0, 1);
-    letter.toUpperCase();
-    if (!param.value)
+    if (param.value == NULL)
     {
         return "NOT VALUE";
     }
@@ -48,15 +46,15 @@ String sensorStatus(ISensor param)
     }
     if (param.min == param.max)
     {
-        return "MAX & MIN ARE EQUAL";
+        return "EQUAL MAX & MIN";
     }
     if (param.value > param.max)
     {
-        return "SL" + letter;
+        return "OVER";
     }
     if (param.value < param.min)
     {
-        return "BL" + letter;
+        return "UNDER";
     }
     return "OK";
 }

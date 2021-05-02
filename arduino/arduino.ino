@@ -19,7 +19,7 @@
 #include "env.h" // Variable de entorno como: red wifi
 
 // CONFIGURACIONES GENERALES
-#include "config/wifi-config.h" 
+#include "config/wifi-config.h"
 #include "config/Sd-config.hpp"
 #include "config/time-config.hpp"
 #include "config/sensor-config.hpp"
@@ -48,10 +48,11 @@ void setup()
 {
   Serial.flush();
   Serial.begin(115200);
-  boolean isActived = initSD() ? true: false;
+  boolean isActived = initSD() ? true : false;
   // SETUP
   initTime();
-  ConnectWiFi_AP();
+  initWifiMode();
+  // ConnectWiFi_AP();
   InitServer();
   initLCD("INICIANDO...");
   Serial.println("\nSTATUS SD: " + String(isActived));

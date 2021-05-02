@@ -21,7 +21,7 @@ String startDevice(AsyncWebServerRequest *request)
     // INICIALIZACIÓN
     GLOBAL_DO.value = 21;
     GLOBAL_DO.name = "DO";
-    ISensor sensors[] = {GLOBAL_TEMP, GLOBAL_PH, GLOBAL_DO};
+    ISensor sensors[] = {GLOBAL_TEMP, GLOBAL_DO, GLOBAL_PH};
     // ACTIONS
     String data = "[" + startAllMeasurement(measure, sensors, nMeditions) + "]";
     String filename = setFilename("P", measure.pool_id, measure.created_at, "json");

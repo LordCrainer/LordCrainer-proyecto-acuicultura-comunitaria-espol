@@ -6,8 +6,6 @@ void readingMeasurement(AsyncWebServerRequest *req)
 {
   String route = "/measurement/";
   String res;
-  deleteSD("M_notification.json");
-  writeSD("M_notification.json", objToJson("meassage", "READING MEASUREMENT"));
   if (req->url().indexOf(route) != -1)
   {
     res = readOneMeasurement(req, route);
