@@ -72,8 +72,8 @@ String readSD(String filename)
  */
 String deleteSD(String filename)
 {
-  String eliminado = objToJson("mensaje", "ARCHIVO ELIMINADO: " + filename + "\n");
-  String noExiste = objToJson("mensaje", "ARCHIVO NO EXISTE: " + filename + "\n");
+  String eliminado = "ARCHIVO " + filename + " ELIMINADO";
+  String noExiste = "ARCHIVO " + filename + " NO EXISTE";
   return SD.remove(filename) == 1 ? eliminado : noExiste;
 }
 
