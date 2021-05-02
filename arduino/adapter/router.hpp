@@ -20,7 +20,7 @@ void InitServer()
 	server.on("/read_sd", HTTP_GET, readingSD);
 	server.on("/append_sd", HTTP_POST, appendSD);
 	server.on("/directory_sd", HTTP_GET, directorySD);
-	server.on("/delete_sd", HTTP_DELETE, deletingSD);
+	// server.on("/delete_sd", HTTP_DELETE, deletingSD);
 	server.on("/overwrite_sd", HTTP_POST, overwrittingSD);
 
 	server.on("/overwrite_sd", HTTP_GET, overwrittingSD);
