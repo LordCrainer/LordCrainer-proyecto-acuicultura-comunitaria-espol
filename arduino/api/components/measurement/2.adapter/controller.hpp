@@ -6,6 +6,7 @@ void readingMeasurement(AsyncWebServerRequest *req)
 {
   String route = "/measurement/";
   String res;
+  Serial.println("READING MEASUREMENT");
   if (req->url().indexOf(route) != -1)
   {
     res = readOneMeasurement(req, route);
