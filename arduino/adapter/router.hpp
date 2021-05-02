@@ -23,9 +23,9 @@ void InitServer()
 	// server.on("/delete_sd", HTTP_DELETE, deletingSD);
 	server.on("/overwrite_sd", HTTP_POST, overwrittingSD);
 
+	server.on("/delete_sd", HTTP_GET, deletingSD);
 	server.on("/overwrite_sd", HTTP_GET, overwrittingSD);
 	server.on("/write_sd", HTTP_GET, writingSD);
-	server.on("/delete_sd", HTTP_GET, deletingSD);
 
 	// MEASUREMENT
 	server.on("/measurement", HTTP_GET, readingMeasurement); //  /measurement?pool_id=1
